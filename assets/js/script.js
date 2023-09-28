@@ -9,11 +9,7 @@ const options = {
 	}
 };
 
-
-
-
-
-
+let quoteSection = document.querySelector('#quote');
 
 fetch(catUrl, options)
     .then(function (response) {
@@ -22,6 +18,14 @@ fetch(catUrl, options)
     .then(function (data) {
         document.querySelector('#quote').innerHTML = data.value
         console.log(data);
+
+        //testing to see if we can replace chuck norris' name
+        let cnQuote = data.value;
+        console.log(cnQuote);
+        let pkmnQuote = cnQuote.replace('Chuck Norris', 'Bulbasaur');
+        console.log(pkmnQuote);
+
+        //only problem is if chuck norris' name is used in possessive because of how apostrophe works.
     })
 
 
@@ -35,3 +39,24 @@ fetch(catUrl, options)
 //     "url": "https://api.chucknorris.io/jokes/uSeGCOlOQaORN_f4wtsLNg",
 //     "value": "The color brown exists because Chuck Norris scared the shit out of while."
 // }
+
+
+// POKEMON FETCH
+// so if using pokemon name with chuck norris fact, take user's input as name and .replace chuck norris
+
+let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/';
+//this endpoint simply lists all pokemon
+//https://pokeapi.co/api/v2/pokemon/{name} would pull up details on that specific pokemon
+//would need function to pass in the name of particular pokemon
+
+fetch(pokeUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+    })
+
+    function getPokemonName () {
+        
+    };
