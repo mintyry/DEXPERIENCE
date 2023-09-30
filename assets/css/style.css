@@ -1,25 +1,28 @@
 /* CSS TODO List:  */
 /*  */
 
-
 * {
     /* outline: 1px dashed blue;    */
-    outline: 2px solid red;   
+    outline: 2px solid red;
 }
 
 #brand {
-    flex-basis: 20%;
-}
-#search {
-    margin-left: 10%;
+    flex-basis: 10%;
 }
 
-#search-button, #random {
+#search {
+    flex-basis: 40%;
+}
+
+#search-button,
+#random {
     flex-basis: 50%;
 }
 
 @media (max-width: 340px) {
-    #search-button, #random {
+
+    #search-button,
+    #random {
         flex-basis: 100%;
     }
 }
