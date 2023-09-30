@@ -6,11 +6,16 @@
     outline: 2px solid red;   
 }
 
-#brand {
-    flex-basis: 20%;
-}
+/* #brand {
+    flex-basis: 16%;
+    margin-right: auto;
+} */
 #search {
-    margin-left: 10%;
+    margin: auto;
+}
+
+#brand, #empty-right {
+    flex: 1;
 }
 
 #search-button, #random {
