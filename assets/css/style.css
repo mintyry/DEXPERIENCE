@@ -3,26 +3,22 @@
 
 * {
     /* outline: 1px dashed blue;    */
-    outline: 2px solid red;
+    outline: 2px solid red;   
 }
 
 #brand {
-    flex-basis: 10%;
+    flex-basis: 20%;
 }
-
 #search {
-    flex-basis: 40%;
+    margin-left: 10%;
 }
 
-#search-button,
-#random {
+#search-button, #random {
     flex-basis: 50%;
 }
 
 @media (max-width: 340px) {
-
-    #search-button,
-    #random {
+    #search-button, #random {
         flex-basis: 100%;
     }
 }
