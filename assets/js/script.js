@@ -47,7 +47,7 @@ const options = {
 // Pokemon API Section
 let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/bulbasaur'; //Pokemon API
 const stat = document.querySelector('#stat-container');
-
+function pokeTest () {
 fetch(pokeUrl)
     .then(function (response) {
         return response.json();
@@ -57,20 +57,22 @@ fetch(pokeUrl)
         console.log(data);
         console.log(data.results[0].url);
     })
+};
 
-    function pokeStat(data) {
-        let statCardHTML = 
-        `<div>
-            <p>${data.name}</p>
-            <p>${data.type[0].name} ${data.type[1].name}</p>
-            <p>${data.height}</p>
-            <p>${data.weight}</p>
-            <p>${data.abilities[0].name} ${data.abilities[1].name}</p>
-            <p>${data.game_indices[0].version.name}</p>
-        </div>`
-        document.querySelector('#stat-container').setHTML(statCardHTML);
-    }
-    pokeStat();
+
+    // function pokeStat(data) {
+    //     let statCardHTML = 
+    //     `<div>
+    //         <p>${data.name}</p>
+    //         <p>${data.type[0].name} ${data.type[1].name}</p>
+    //         <p>${data.height}</p>
+    //         <p>${data.weight}</p>
+    //         <p>${data.abilities[0].name} ${data.abilities[1].name}</p>
+    //         <p>${data.game_indices[0].version.name}</p>
+    //     </div>`
+    //     document.querySelector('#stat-container').setHTML(statCardHTML);
+    // }
+    // pokeStat();
 // Note's for pokemon api section
 // POKEMON FETCH
 // so if using pokemon name with chuck norris fact, take user's input as name and .replace chuck norris
