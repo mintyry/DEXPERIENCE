@@ -11,82 +11,85 @@
 </head>
 
 <body>
-    <!-- HTML TODO List: -->
 
-    <!-- Header for the Application -->
+    <!-- Header/nav bar container for the Application; holds brand/name of app along with search bar and buttons -->
     <nav class="navbar is-flex" role="navigation" aria-label="main navigation">
-        <!-- <div class="navbar-brand has-text-centered is-one-quarter"> -->
-        <h1 id="brand">Pokedex Facts</h1>
-        <!-- </div> -->
-        <!-- Search bar for user input -->
 
+        <!-- brand name -->
+        <!-- TODO: h1 is touching edge of viewport. if we add padding, it pushes the perfectly centered form. Find a solution -->
+        <h1 id="brand">Pokedex Facts</h1>
+
+        <!-- Form holds search box along with search and randomize buttons -->
         <form id="search" class="is-flex is-flex-wrap-wrap">
             <input id="search-bar" class="input is-half" type="text" placeholder="Look for Pokémon">
             <button id="search-button" class="button is-primary" type="submit">Search</button>
             <button id="random" class="button is-primary is-light">Randomize</button>
         </form>
+        <!-- empty div to hold search form in center -->
         <div id="empty-right"></div>
 
     </nav>
 
-    <div class="columns is-flex-wrap-nowrap is-centered">
-        <div class="column">
+    <!-- this is the main container, holding three columns: left buttons, center cards, right buttons-->
+    <main class="columns is-flex-wrap-nowrap is-centered">
+
+        <!-- left side buttons holding search history -->
+        <!-- TODO: buttons are touching the left side of the viewport; have it touch the center card -->
+        <div id="search-history"
+            class="column is-flex is-flex-direction-column is-justify-content-space-around is-align-content-end">
+            <button>test</button>
+            <button>test</button>
             <button>test</button>
         </div>
 
-
+        <!-- center card of whole page, will hold pokemon stats, img, and did you know fact; is-8 is sizing of the center -->
         <div class="column is-8">
-            <!-- Overall Page Container -->
-            <div class="container is-flex-wrap">
 
-                <!-- Card container for Pokemon stat -->
-                <div id="stat-container is-full" class="card">
-                    <div class="card-content">
-                        <div class="content">
-                            Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi
-                            porta
-                            gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes,
-                            nascetur
-                            ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
-                        </div>
+            <!-- Card container for Pokemon stats -->
+            <div id="stat-container is-full" class="card">
+                <div class="card-content">
+                    <div class="content">
+                        Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi
+                        porta
+                        gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes,
+                        nascetur
+                        ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
                     </div>
                 </div>
+            </div>
 
-                <!-- container for image of pokemon -->
-                <!-- for test, made image 128x128. When we see actual sprites, we can change -->
-                <div id="img-container" class="card is-flex is-justify-content-center">
-                    <figure class="image is-128x128 is-full">
-                        <img class="is-rounded" src="./assets/images/MAKE_A_WISH,_61023.png">
-                    </figure>
-                </div>
-
-                <!-- Card Container for the Pokemon Img
-        <div id="img-container" class="card">
-            <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+            <!-- container for image of pokemon -->
+            <!-- for test, made image 128x128. When we see actual sprites, we can change -->
+            <div id="img-container" class="card is-flex is-justify-content-center">
+                <figure class="image is-128x128 is-full">
+                    <img class="is-rounded" src="./assets/images/MAKE_A_WISH,_61023.png">
                 </figure>
             </div>
-        </div> -->
 
-                <!-- Card Container for the Pokemon Fact -->
-                <div id="fact-container is-full" class="card">
-                    <div class="card-content">
-                        <div class="content">
-                            Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi
-                            porta
-                            gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes,
-                            nascetur
-                            ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
-                        </div>
+            <!-- Card Container for the 'Did you know' Pokemon Fact -->
+            <div id="fact-container is-full" class="card">
+                <div class="card-content">
+                    <div class="content">
+                        Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi
+                        porta
+                        gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes,
+                        nascetur
+                        ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- right side buttons holding other features -->
+        <!-- TODO: buttons are touching the right side of the viewport; have it touch the center card -->
+        <div id="other-features"
+            class="column is-flex is-flex-direction-column is-justify-content-space-around is-align-content-end">
+            <button>test</button>
+            <button>test</button>
+            <button>test</button>
+        </div>
 
-        <div class="column">Column 3</div>
-    </div>
+    </main>
 
 
 
