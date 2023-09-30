@@ -1,7 +1,25 @@
 /* CSS TODO List:  */
 /*  */
 
-
 * {
-    outline: 1px dashed blue;   
+    /* outline: 1px dashed blue;    */
+    outline: 2px solid red;   
+}
+
+#search {
+    margin: auto;
+}
+
+#brand, #empty-right {
+    flex: 1;
+}
+
+#search-button, #random {
+    flex-basis: 50%;
+}
+
+@media (max-width: 340px) {
+    #search-button, #random {
+        flex-basis: 100%;
+    }
 }
