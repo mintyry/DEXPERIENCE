@@ -36,14 +36,15 @@
         <!-- left side buttons holding search history -->
         <!-- TODO: buttons are touching the left side of the viewport; have it touch the center card -->
         <div id="search-history"
-            class="column is-flex is-flex-direction-column is-justify-content-space-around is-align-content-end p-0 ml-6">
-            <button>test</button>
-            <button>test</button>
-            <button>test</button>
+            class="column is-flex is-flex-direction-column is-justify-content-space-between is-align-items-flex-end px-0 py-5">
+            <button class="side-btn">test</button>
+            <button class="side-btn">test</button>
+            <button class="side-btn">test</button>
+        </div>
         </div>
 
         <!-- center column holding stat -->
-        <div class="column is-4 p-6">
+        <div class="column p-5">
             <div id="stat-container" class="card is-full">
                 <!-- pokemon stat should fill this from js -->
             </div>
@@ -51,15 +52,32 @@
 
         <!-- right column holding feature buttons -->
         <div id="other-features"
-            class="column is-flex is-flex-direction-column is-justify-content-space-around is-align-content-end p-0 mr-6">
-            <button>test</button>
-            <button>test</button>
-            <button>test</button>
+            class="column is-flex is-flex-direction-column is-justify-content-space-around is-align-content-end p-0">
+            <button class="side-btn">test</button>
+            <button class="side-btn">test</button>
+            <button class="side-btn">test</button>
         </div>
 
 
     </main>
 
+    <div id="img-container" class="card is-flex is-justify-content-center">
+        <figure class="image is-128x128 is-full">
+            <img class="is-rounded" src="./assets/images/MAKE_A_WISH,_61023.png">
+        </figure>
+    </div>
+
+    <div id="norris-container" class="is-centered mx-6">
+        <div class="card-content">
+            <div class="content">
+                Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi
+                porta
+                gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes,
+                nascetur
+                ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
+            </div>
+        </div>
+    </div>
 
 
 

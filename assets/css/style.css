@@ -17,6 +17,7 @@ main {
 
 #search {
     margin: auto;
+    outline: 2px solid peru;
 }
 
 #brand, #empty-right {
@@ -27,8 +28,16 @@ main {
     flex-basis: 50%;
 }
 
-@media (max-width: 340px) {
+.side-btn {
+    width: 20%;
+}
+
+/* #btn-format {
+    outline: 2px solid peru;
+} */
+
+/* @media (max-width: 340px) {
     #search-button, #random {
         flex-basis: 100%;
     }
-}
+} */

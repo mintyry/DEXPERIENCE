@@ -67,7 +67,7 @@ function gamesList() {
         let statCardHTML =
             `<div>
                 <p>Name: ${data.name}</p>
-                <p>${data.types[0].type.name} ${data.types[1].type.name}</p>
+                <p>Type:${data.types[0].type.name} ${data.types[1].type.name}</p>
                 <p>${data.height}</p>
                 <p>${data.weight}</p>
                 <p>${data.abilities[0].name} ${data.abilities[1].name}</p>
