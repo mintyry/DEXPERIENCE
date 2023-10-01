@@ -1,4 +1,9 @@
 // JS TODO List: 
+//  - find a way to display stats and list of games with the for loop.
+//  - need to create functionality for search button (event listener that takes user input), randomize button
+//  - need to save user input into local storage and render last three searches on page
+//  - right side buttons: pokemon of the day, quiz, user journal entry
+
 // Global Variables 
 const catUrl = 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random'; // Chuck Norris API
 const options = {
@@ -86,7 +91,7 @@ fetch(pokeUrl)
         // <p>MAIN GAMES FOUND IN: ${listOfGames.map(game => game.version.name).join(', ')}</p> 
         //  this works and displays all the info. but i dont know what's happening. Not sure what .map is doing, where 'game' came from, and how arrow function works.
 
-        document.querySelector('#stat-container').setHTML(statCardHTML);
+        document.querySelector('#stat-page').setHTML(statCardHTML);
     })
 //
 
