@@ -31,12 +31,12 @@
     </header>
 
     <!-- this is the main container, holding three columns: left buttons, center cards, right buttons-->
-    <main class="columns is-flex-wrap-nowrap is-centered">
+    <main class="columns is-centered is-flex">
 
         <!-- left side buttons holding search history -->
         <!-- TODO: buttons are touching the left side of the viewport; have it touch the center card -->
         <div id="search-history"
-            class="column is-flex is-flex-direction-column is-justify-content-space-between is-align-items-flex-end px-0 py-5">
+            class="column is-one-quarter is-flex is-flex-direction-column is-justify-content-space-between is-align-items-flex-end px-0 py-5">
             <button class="side-btn">test</button>
             <button class="side-btn">test</button>
             <button class="side-btn">test</button>
@@ -44,7 +44,7 @@
         </div>
 
         <!-- center column holding stat -->
-        <div class="column p-5">
+        <div class="column is-half p-5">
             <div id="stat-container" class="card is-full">
                 <!-- pokemon stat should fill this from js -->
             </div>
@@ -52,7 +52,7 @@
 
         <!-- right column holding feature buttons -->
         <div id="other-features"
-            class="column is-flex is-flex-direction-column is-justify-content-space-around is-align-content-end p-0">
+            class="column is-one-quarter is-flex is-flex-direction-column is-justify-content-space-between is-align-items-flex-start px-0 py-5">
             <button class="side-btn">test</button>
             <button class="side-btn">test</button>
             <button class="side-btn">test</button>

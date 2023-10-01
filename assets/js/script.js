@@ -46,6 +46,7 @@ const stat = document.querySelector('#stat-container');
 //https://pokeapi.co/api/v2/pokemon/{name} would pull up details on that specific pokemon
 //would need function to pass in the name of particular pokemon from user's input
 
+
 fetch(pokeUrl)
     .then(function (response) {
         return response.json();
@@ -53,26 +54,38 @@ fetch(pokeUrl)
     .then(function (data) {
         // pokeStat(data);
         console.log(data);
+        console.log(data.stats[0].stat.name)
+        console.log(data.stats[0].base_stat)
 
-// this function pulls up every game the pokemon is in; dont know how to display all those names in setHTML -Ryan
-function gamesList() {
+        //declared this for a more accessible scope so it can be used in function and when displaying content
         let listOfGames = data.game_indices;
-        console.log (listOfGames);
 
-        for (let i = 0; i < listOfGames.length; i++) {
-           console.log(listOfGames[i].version.name);
-        };
-    }
-  
+        // this function logs every game the pokemon is in; dont know how to display all those names in setHTML; i'm used to doing textContent -Ryan
+        function gamesList() {
+
+            console.log(listOfGames);
+
+            for (let i = 0; i < listOfGames.length; i++) {
+                console.log(listOfGames[i].version.name);
+            };
+        }
+
+        // need for loop for stats; it would display as such >> '${data.stats[i].stat.name : ${data.stats[i].base_stat}'
+        // can replace abilities with stats or just add new category for stats.
+
         let statCardHTML =
             `<div>
-                <p>Name: ${data.name}</p>
-                <p>Type:${data.types[0].type.name} ${data.types[1].type.name}</p>
-                <p>${data.height}</p>
-                <p>${data.weight}</p>
-                <p>${data.abilities[0].name} ${data.abilities[1].name}</p>
-                <p>Main games found in: ${gamesList()}</p>
+                <p>NAME: ${data.name}</p>
+                <p>TYPE: ${data.types[0].type.name} ${data.types[1].type.name}</p>
+                <p>HEIGHT: ${data.height}</p>
+                <p>WEIGHT: ${data.weight}</p>
+                <p>ABILITIES: ${data.abilities[0].name} ${data.abilities[1].name}</p>
+                <p>MAIN GAMES FOUND IN: </p>
     </div>`
+
+        // <p>MAIN GAMES FOUND IN: ${listOfGames.map(game => game.version.name).join(', ')}</p> 
+        //  this works and displays all the info. but i dont know what's happening. Not sure what .map is doing, where 'game' came from, and how arrow function works.
+
         document.querySelector('#stat-container').setHTML(statCardHTML);
     })
 //
