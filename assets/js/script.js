@@ -19,60 +19,59 @@ const options = {
 
 // Chuck Norris API Section
 
-    // fetch(catUrl, options)
-    // .then(function (response) {
-    //     return response.json();
-    // })
-    // .then(function (data) {
-    //     document.querySelector('#quote').innerHTML = data.value
-    //     console.log(data);
+// fetch(catUrl, options)
+// .then(function (response) {
+//     return response.json();
+// })
+// .then(function (data) {
+//     document.querySelector('#quote').innerHTML = data.value
+//     console.log(data);
 
-        //testing to see if we can replace chuck norris' name
-        // let cnQuote = data.value;
-        // console.log(cnQuote);
-        // let pkmnQuote = cnQuote.replaceAll('Chuck Norris', 'Bulbasaur');
-        // console.log(pkmnQuote);
+//testing to see if we can replace chuck norris' name
+// let cnQuote = data.value;
+// console.log(cnQuote);
+// let pkmnQuote = cnQuote.replaceAll('Chuck Norris', 'Bulbasaur');
+// console.log(pkmnQuote);
 
-        //only problem is if chuck norris' name is used in possessive because of how apostrophe works.
-        //need if statement to achieve this.
-    
+//only problem is if chuck norris' name is used in possessive because of how apostrophe works.
+//need if statement to achieve this.
 
-
-
-
-
-
-
+// ===========================================
 
 // Pokemon API Section
 let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/bulbasaur'; //Pokemon API
 const stat = document.querySelector('#stat-container');
-function pokeTest () {
+
+//this endpoint simply lists all pokemon
+//https://pokeapi.co/api/v2/pokemon/{name} would pull up details on that specific pokemon
+//would need function to pass in the name of particular pokemon from user's input
+
 fetch(pokeUrl)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
-        pokeStat(data);
+        // pokeStat(data);
         console.log(data);
-        console.log(data.results[0].url);
+        // console.log(data.results[0].url);
+        let statCardHTML =
+            `<div>
+                <p>${data.name}</p>
+                <p>${data.types[0].type.name} ${data.types[1].type.name}</p>
+                <p>${data.height}</p>
+                <p>${data.weight}</p>
+                <p>${data.abilities[0].name} ${data.abilities[1].name}</p>
+                <p>${data.game_indices[0].version.name}</p>
+    </div>`
+        document.querySelector('#stat-container').setHTML(statCardHTML);
     })
-};
+//
 
 
-    // function pokeStat(data) {
-    //     let statCardHTML = 
-    //     `<div>
-    //         <p>${data.name}</p>
-    //         <p>${data.type[0].name} ${data.type[1].name}</p>
-    //         <p>${data.height}</p>
-    //         <p>${data.weight}</p>
-    //         <p>${data.abilities[0].name} ${data.abilities[1].name}</p>
-    //         <p>${data.game_indices[0].version.name}</p>
-    //     </div>`
-    //     document.querySelector('#stat-container').setHTML(statCardHTML);
-    // }
-    // pokeStat();
+// function pokeStat(data) {
+
+// }
+// pokeStat();
 // Note's for pokemon api section
 // POKEMON FETCH
 // so if using pokemon name with chuck norris fact, take user's input as name and .replace chuck norris
@@ -83,9 +82,4 @@ fetch(pokeUrl)
 //     let inputBox = document.createElement('input');
 //     main.append(inputBox);
 //     let submitBtn = document.createElement('button');
-
-
-
-//this endpoint simply lists all pokemon
-//https://pokeapi.co/api/v2/pokemon/{name} would pull up details on that specific pokemon
-//would need function to pass in the name of particular pokemon
+// };
