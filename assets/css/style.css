@@ -6,6 +6,15 @@
     outline: 2px solid red;   
 }
 
+body {
+    outline: 2px solid chartreuse;
+}
+
+main {
+    outline: 2px solid teal;  
+    /* margin-top: 200px; */
+}
+
 #search {
     margin: auto;
 }

@@ -53,15 +53,25 @@ fetch(pokeUrl)
     .then(function (data) {
         // pokeStat(data);
         console.log(data);
-        // console.log(data.results[0].url);
+
+// this function pulls up every game the pokemon is in; dont know how to display all those names in setHTML -Ryan
+function gamesList() {
+        let listOfGames = data.game_indices;
+        console.log (listOfGames);
+
+        for (let i = 0; i < listOfGames.length; i++) {
+           console.log(listOfGames[i].version.name);
+        };
+    }
+  
         let statCardHTML =
             `<div>
-                <p>${data.name}</p>
+                <p>Name: ${data.name}</p>
                 <p>${data.types[0].type.name} ${data.types[1].type.name}</p>
                 <p>${data.height}</p>
                 <p>${data.weight}</p>
                 <p>${data.abilities[0].name} ${data.abilities[1].name}</p>
-                <p>${data.game_indices[0].version.name}</p>
+                <p>Main games found in: ${gamesList()}</p>
     </div>`
         document.querySelector('#stat-container').setHTML(statCardHTML);
     })
