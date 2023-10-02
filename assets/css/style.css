@@ -12,17 +12,22 @@
 }
 
 /* to make sure background color fills up the entire page. Found out that bulma uses some properties that disallows this by default */
-html,
-body {
+html, body {
     margin: 0;
     padding: 0;
-    background-color: rgb(179, 179, 179);
+     background-image: linear-gradient(#ffffff, #eaeaea, #8ab2a9);
+}
+
+#bar {
+    outline: 1px dashed blue;   
 }
 
 .vertbar {
-    background-image: linear-gradient(#d4faa3, #bdecdb, #bdecdb);
+    display: flex;
+    background-color: lightsalmon;
+    /* background-image: linear-gradient(#d4faa3, #bdecdb, #bdecdb); */
     height: 575px;
-    width: 60px;
+    /* width: 60px; */
     position: absolute;
 
 }
@@ -50,8 +55,7 @@ body {
 
 #stat-container {
    
-    background-color: rgb(160, 188, 156);
-    border:solid;
+    border: 20px solid;
     flex-basis: 0;
     flex-grow: 1;
     flex-shrink: 1;
@@ -63,6 +67,7 @@ body {
     overflow-y: scroll;
      /* text-overflow:; */
     z-index: 1;
+    background-image: radial-gradient(rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(203, 203, 203, 1));
 }
 
 #stat-page {
@@ -75,7 +80,7 @@ body {
     font-size: 80%;
     text-align: center;
     white-space: normal;
-    background-color: rgb(160, 188, 156);
+    background-image: radial-gradient(rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(203, 203, 203, 1));
 }
 
 #img-container {
@@ -97,9 +102,11 @@ figure {
     height: 40%;
     position: relative;
     margin-top: -250px;
+   
 }
 
 #norris-fact {
     background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
     font-size: 3vw;
+    border-radius: 25px;
 }
