@@ -44,7 +44,7 @@ const options = {
 // ===========================================
 
 // Pokemon API Section
-let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/bulbasaur'; //Pokemon API
+let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/fuecoco'; //Pokemon API
 const stat = document.querySelector('#stat-container');
 
 //this endpoint simply lists all pokemon
@@ -82,11 +82,12 @@ fetch(pokeUrl)
         //multiply by 0.10 to get km, then multiply by 39.4 to get inches, then divide by 12 to get feet -- may need function for this conversion
         //write formula to write height in feet, weight in pounds
         // will need to write this in a for loop replacing index numbers with i.
+        //just noticed for typing: code is broken if we include both types and pokemon only has one. need if statement to include second type
 
         let statCardHTML =
             `<div>
                 <p><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
-                <p><strong>TYPE:</strong>  ${data.types[0].type.name} / ${data.types[1].type.name}</p>
+                <p><strong>TYPE:</strong>  ${data.types[0].type.name}}</p>
                 <p><strong>HEIGHT:</strong>  ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)}'</p>
                 <p><strong>WEIGHT:</strong>  ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs </p>
                 <p><strong>ABILITIES:</strong>  ${data.abilities[0].name} ${data.abilities[1].name}</p>
