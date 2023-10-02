@@ -75,15 +75,19 @@ fetch(pokeUrl)
             };
         }
 
+        //DISPLAYING STAT CARD
         // need for loop for stats; it would display as such >> '${data.stats[i].stat.name : ${data.stats[i].base_stat}'
         // can replace abilities with stats or just add new category for stats.
+        //just noticed height and weight are in decimeters and hectograms. must multiply by 0.10 to get kg units, multiply by 2.205 to pounds
+            //multiply by 0.10 to get km, then multiply by 39.4 to get inches, then divide by 12 to get feet -- may need function for this conversion
+            //write formula to write height in feet, weight in pounds
 
         let statCardHTML =
             `<div>
                 <p>NAME: ${data.name}</p>
                 <p>TYPE: ${data.types[0].type.name} ${data.types[1].type.name}</p>
-                <p>HEIGHT: ${data.height}</p>
-                <p>WEIGHT: ${data.weight}</p>
+                <p>HEIGHT: ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)}'</p>
+                <p>WEIGHT: ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs </p>
                 <p>ABILITIES: ${data.abilities[0].name} ${data.abilities[1].name}</p>
                 <p>MAIN GAMES FOUND IN: </p>
     </div>`
@@ -92,6 +96,13 @@ fetch(pokeUrl)
         //  this works and displays all the info. but i dont know what's happening. Not sure what .map is doing, where 'game' came from, and how arrow function works.
 
         document.querySelector('#stat-page').setHTML(statCardHTML);
+
+
+        //DISPLAY IMAGE
+            let image = document.querySelector('#pkmn-img');
+            let imgUrl = data.sprites.front_default;
+            image.setAttribute('src', imgUrl)
+
     })
 //
 

@@ -50,20 +50,29 @@ body {
     font-size: 80%;
     text-align: center;
     white-space: normal;
+    background-color: rgba(50, 119, 108, 0.5);
 }
 
 #img-container {
     z-index: 1;
-    margin-top: -30px;
+    margin-top: -200px;
     background-color: transparent;
+}
+
+#pkmn-img {
+    /* width: 500px;
+    height: 500px; */
+    
 }
 
 #norris-container {
     z-index: 2;
     height: 40%;
     position: relative;
+    margin-top: -200px;
 }
 
 #norris-fact {
     background-color: rgba(141, 255, 236, 0.5);
+    font-size: 3vw;
 }
