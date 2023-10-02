@@ -49,21 +49,25 @@ body {
 }
 
 #stat-container {
+   
     background-color: rgb(160, 188, 156);
-    border: 20px double grey;
+    border:solid;
     flex-basis: 0;
     flex-grow: 1;
     flex-shrink: 1;
-    /* border-image: radial-gradient(#d2d2d2, #ffffff); */
-    /* border-image-slice: 1; */
+     border-image: linear-gradient(#d2d2d2, #ffffff);
+ border-image-slice: 1;
+
     width: 350px;
     height: 350px;
+    overflow-y: scroll;
+     /* text-overflow:; */
     z-index: 1;
 }
 
 #stat-page {
     background-color: transparent;
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis; */
 }
 
 .side-btn {
@@ -81,6 +85,12 @@ body {
     background-color: transparent;
 }
 
+
+figure {
+    /* These are to override the column's mediaquery settings that happen at 769px */
+    flex: none !important;
+    width: 41.66667% !important;
+}
 
 #norris-container {
     z-index: 3;

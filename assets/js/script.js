@@ -85,12 +85,12 @@ fetch(pokeUrl)
 
         let statCardHTML =
             `<div>
-                <p>NAME: ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
-                <p>TYPE: ${data.types[0].type.name} / ${data.types[1].type.name}</p>
-                <p>HEIGHT: ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)}'</p>
-                <p>WEIGHT: ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs </p>
-                <p>ABILITIES: ${data.abilities[0].name} ${data.abilities[1].name}</p>
-                <p>MAIN GAMES FOUND IN: ${listOfGames.map(game => game.version.name).join(', ')}</p> 
+                <p><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
+                <p><strong>TYPE:</strong>  ${data.types[0].type.name} / ${data.types[1].type.name}</p>
+                <p><strong>HEIGHT:</strong>  ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)}'</p>
+                <p><strong>WEIGHT:</strong>  ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs </p>
+                <p><strong>ABILITIES:</strong>  ${data.abilities[0].name} ${data.abilities[1].name}</p>
+                <p><strong>MAIN GAMES FOUND IN:</strong>  ${listOfGames.map(game => game.version.name).join(', ')}</p> 
     </div>`
 
         // <p>MAIN GAMES FOUND IN: ${listOfGames.map(game => game.version.name).join(', ')}</p> 

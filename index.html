@@ -12,7 +12,7 @@
 
 <body>
     <!-- Unsure how to position this bar not to move at all, commented out for now -->
-    <!-- <div class = "vertbar"></div> -->
+    <div class = "vertbar"></div>
 
     <!-- Header bar container for the Application; holds brand/name of app along with search bar and buttons -->
     <header class="is-flex my-6">
@@ -32,6 +32,7 @@
     </header>
 
     <!-- this is the main container, holding three columns: left buttons, stat container right buttons-->
+    <!-- if we keep flex property, stat box shrinks terribly. If we dont keep it, at 769px, buttons go on own row bc of display:block -->
     <main class="columns is-centered is-flex">
 
         <!-- left side buttons holding search history -->
