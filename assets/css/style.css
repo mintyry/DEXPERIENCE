@@ -14,15 +14,22 @@
 /* to make sure background color fills up the entire page. Found out that bulma uses some properties that disallows this by default */
 html,
 body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(179, 179, 179);
+    margin: 0;
+    padding: 0;
+    background-color: rgb(179, 179, 179);
+}
+
+.vertbar {
+    background-image: linear-gradient(#d4faa3, #bdecdb, #bdecdb);
+    height: 575px;
+    width: 60px;
+    position: absolute;
+
 }
 
 
 #search {
     margin-left: -47px;
-    /* outline: 2px solid peru; */
 }
 
 #brand {
@@ -30,50 +37,59 @@ body {
     margin-top: -50px;
     transform: rotate(-30deg);
 }
-#brand, #empty-right {
+
+#brand,
+#empty-right {
     flex: 1;
 }
 
-#search-button, #random {
+#search-button,
+#random {
     flex-basis: 50%;
 }
 
 #stat-container {
     background-color: rgb(160, 188, 156);
+    border: 20px double grey;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    /* border-image: radial-gradient(#d2d2d2, #ffffff); */
+    /* border-image-slice: 1; */
+    width: 350px;
+    height: 350px;
+    z-index: 1;
 }
 
 #stat-page {
     background-color: transparent;
+    text-overflow: ellipsis;
 }
+
 .side-btn {
     width: 120px;
     font-size: 80%;
     text-align: center;
     white-space: normal;
-    background-color: rgba(50, 119, 108, 0.5);
+    background-color: rgb(160, 188, 156);
 }
 
 #img-container {
-    z-index: 1;
+    position: relative;
+    z-index: 2;
     margin-top: -230px;
     background-color: transparent;
 }
 
-#pkmn-img {
-    /* width: 500px;
-    height: 500px; */
-    
-}
 
 #norris-container {
-    z-index: 2;
+    z-index: 3;
     height: 40%;
     position: relative;
     margin-top: -250px;
 }
 
 #norris-fact {
-    /* background-color: rgba(141, 255, 236, 0.5); */
     background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
     font-size: 3vw;
 }

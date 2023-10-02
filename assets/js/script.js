@@ -79,8 +79,8 @@ fetch(pokeUrl)
         // need for loop for stats; it would display as such >> '${data.stats[i].stat.name : ${data.stats[i].base_stat}'
         // can replace abilities with stats or just add new category for stats.
         //just noticed height and weight are in decimeters and hectograms. must multiply by 0.10 to get kg units, multiply by 2.205 to pounds
-            //multiply by 0.10 to get km, then multiply by 39.4 to get inches, then divide by 12 to get feet -- may need function for this conversion
-            //write formula to write height in feet, weight in pounds
+        //multiply by 0.10 to get km, then multiply by 39.4 to get inches, then divide by 12 to get feet -- may need function for this conversion
+        //write formula to write height in feet, weight in pounds
         // will need to write this in a for loop replacing index numbers with i.
 
         let statCardHTML =
@@ -99,13 +99,12 @@ fetch(pokeUrl)
         document.querySelector('#stat-page').setHTML(statCardHTML);
 
 
-        //DISPLAY IMAGE
-            let image = document.querySelector('#pkmn-img');
-            let imgUrl = data.sprites.front_default;
-            image.setAttribute('src', imgUrl)
+        //DISPLAY IMAGE -- it's responsiveness on the page is weird, unsure why it's behaving how it is
+        let image = document.querySelector('#pkmn-img');
+        let imgUrl = data.sprites.front_default;
+        image.setAttribute('src', imgUrl)
 
     })
-//
 
 
 // function pokeStat(data) {
