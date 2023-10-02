@@ -44,7 +44,7 @@ const options = {
 // ===========================================
 
 // Pokemon API Section
-let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/fuecoco'; //Pokemon API
+let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/geodude'; //Pokemon API
 const stat = document.querySelector('#stat-container');
 
 //this endpoint simply lists all pokemon
@@ -86,12 +86,12 @@ fetch(pokeUrl)
 
         let statCardHTML =
             `<div>
-                <p><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
-                <p><strong>TYPE:</strong>  ${data.types[0].type.name}}</p>
-                <p><strong>HEIGHT:</strong>  ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)}'</p>
-                <p><strong>WEIGHT:</strong>  ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs </p>
-                <p><strong>ABILITIES:</strong>  ${data.abilities[0].name} ${data.abilities[1].name}</p>
-                <p><strong>MAIN GAMES FOUND IN:</strong>  ${listOfGames.map(game => game.version.name).join(', ')}</p> 
+                <p class = "block"><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
+                <p class = "block"><strong>TYPE:</strong>  ${(data.types[0].type.name).charAt(0).toUpperCase() + (data.types[0].type.name).slice(1)}</p>
+                <p class = "block"><strong>HEIGHT:</strong>  ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)}'</p>
+                <p class = "block"><strong>WEIGHT:</strong>  ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs </p>
+                <p class = "block"><strong>ABILITIES:</strong>  ${data.abilities[0].name} ${data.abilities[1].name}</p>
+                <p class = "block"><strong>MAIN GAMES FOUND IN:</strong>  ${listOfGames.map(game => game.version.name).join(', ')}</p> 
     </div>`
 
         // <p>MAIN GAMES FOUND IN: ${listOfGames.map(game => game.version.name).join(', ')}</p> 

@@ -9,17 +9,19 @@
 * {
     /* outline: 1px dashed blue;    */
     /* outline: 2px solid red;    */
+    /* font-size: 1.5vw; */
 }
 
 /* to make sure background color fills up the entire page. Found out that bulma uses some properties that disallows this by default */
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
-     background-image: linear-gradient(#ffffff, #eaeaea, #8ab2a9);
+    background-image: linear-gradient(#ffffff, #eaeaea, #8ab2a9);
 }
 
 #bar {
-    outline: 1px dashed blue;   
+    outline: 1px dashed blue;
 }
 
 .vertbar {
@@ -39,8 +41,9 @@ html, body {
 
 #brand {
     margin-left: 47px;
-    margin-top: -50px;
-    transform: rotate(-30deg);
+    /* transform: rotate(-20deg); */
+    text-wrap: nowrap;
+
 }
 
 #brand,
@@ -53,56 +56,79 @@ html, body {
     flex-basis: 50%;
 }
 
-#stat-container {
-   
-    border: 20px solid;
-    flex-basis: 0;
-    flex-grow: 1;
-    flex-shrink: 1;
-     border-image: linear-gradient(#d2d2d2, #ffffff);
- border-image-slice: 1;
+@media screen and (max-width: 320px) {
 
-    width: 350px;
-    height: 350px;
-    overflow-y: scroll;
-     /* text-overflow:; */
+    #search-button,
+    #random {
+        flex-basis: 100%;
+    }
+
+    #brand {
+        margin-top: -40px;
+    }
+}
+
+
+#stat-container {
+    outline: 1px dashed blue;
+    border: 20px solid;
+    border-image: linear-gradient(#d2d2d2, #ffffff, #d2d2d2);
+    border-image-slice: 1;
+    /* overflow-y: scroll; */
     z-index: 1;
     background-image: radial-gradient(rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(203, 203, 203, 1));
 }
 
 #stat-page {
     background-color: transparent;
-    /* text-overflow: ellipsis; */
 }
 
 .side-btn {
-    width: 120px;
+    width: 50%;
+    height: 120px;
     font-size: 80%;
     text-align: center;
     white-space: normal;
-    background-image: radial-gradient(rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(203, 203, 203, 1));
+    border:#d2d2d2 double 2px;
+
 }
 
-#img-container {
+#search-history {
+    transform: skew(0deg, -20deg);
     position: relative;
-    z-index: 2;
-    margin-top: -230px;
-    background-color: transparent;
+    top: 5vh;
+
 }
 
+#search-history > .side-btn {
+    background-image: linear-gradient(to right, rgb(195, 230, 190), rgba(160, 188, 156, 1), rgb(127, 150, 124));
+}
+
+#other-features {
+    transform: skew(0deg, 20deg);
+    position: relative;
+    top: 5vh;
+}
+#other-features > .side-btn {
+    background-image: linear-gradient(to left, rgb(195, 230, 190), rgba(160, 188, 156, 1), rgb(127, 150, 124));
+}
 
 figure {
-    /* These are to override the column's mediaquery settings that happen at 769px */
-    flex: none !important;
-    width: 41.66667% !important;
+    /* outline: 2px dashed rgb(255, 0, 144); */
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 2;
+    bottom: 165px;
+    width: 350px;
 }
+
 
 #norris-container {
     z-index: 3;
-    height: 40%;
+    height: 334px;
     position: relative;
-    margin-top: -250px;
-   
+    margin-top: -315px;
+    /* outline: 2px dashed red; */
 }
 
 #norris-fact {
