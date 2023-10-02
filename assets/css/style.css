@@ -1,15 +1,35 @@
-/* CSS TODO List:  */
-/*  */
+/* CSS TODO List: 
+- Add rounded edges to stat-container and norris-container
+- Give a light-grey border to stat-container
+- Find cool pixel font to use, link up with google fonts, unless you know how to link up via another distributor 
+- Give techy color to side buttons*/
 
+/* toggle outlines on and off to see where each table is positioned */
+/* by toggle, i mean comment in and out */
 * {
     /* outline: 1px dashed blue;    */
-    outline: 2px solid red;   
+    /* outline: 2px solid red;    */
 }
+
+/* to make sure background color fills up the entire page. Found out that bulma uses some properties that disallows this by default */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(179, 179, 179);
+}
+
 
 #search {
-    margin: auto;
+    margin-left: -47px;
+    /* outline: 2px solid peru; */
 }
 
+#brand {
+    margin-left: 47px;
+    margin-top: -50px;
+    transform: rotate(-30deg);
+}
 #brand, #empty-right {
     flex: 1;
 }
@@ -18,8 +38,42 @@
     flex-basis: 50%;
 }
 
-@media (max-width: 340px) {
-    #search-button, #random {
-        flex-basis: 100%;
-    }
+#stat-container {
+    background-color: rgb(160, 188, 156);
+}
+
+#stat-page {
+    background-color: transparent;
+}
+.side-btn {
+    width: 120px;
+    font-size: 80%;
+    text-align: center;
+    white-space: normal;
+    background-color: rgba(50, 119, 108, 0.5);
+}
+
+#img-container {
+    z-index: 1;
+    margin-top: -230px;
+    background-color: transparent;
+}
+
+#pkmn-img {
+    /* width: 500px;
+    height: 500px; */
+    
+}
+
+#norris-container {
+    z-index: 2;
+    height: 40%;
+    position: relative;
+    margin-top: -250px;
+}
+
+#norris-fact {
+    /* background-color: rgba(141, 255, 236, 0.5); */
+    background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
+    font-size: 3vw;
 }
