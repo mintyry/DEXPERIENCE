@@ -47,10 +47,7 @@ const options = {
 let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/geodude'; //Pokemon API
 const stat = document.querySelector('#stat-container');
 
-//this endpoint simply lists all pokemon
-//https://pokeapi.co/api/v2/pokemon/{name} would pull up details on that specific pokemon
-//would need function to pass in the name of particular pokemon from user's input
-
+//https://pokeapi.co/api/v2/pokemon/{name} will allow for user input to pass name in
 
 fetch(pokeUrl)
     .then(function (response) {
@@ -62,7 +59,18 @@ fetch(pokeUrl)
         console.log(data.stats[0].stat.name)
         console.log(data.stats[0].base_stat)
 
-        //declared this for a more accessible scope so it can be used in function and when displaying content
+        renderPkmnPage(data);
+
+
+        //DISPLAY IMAGE -- it's responsiveness on the page is weird, unsure why it's behaving how it is
+        let image = document.querySelector('#pkmn-img');
+        let imgUrl = data.sprites.front_default;
+        image.setAttribute('src', imgUrl)
+
+    })
+
+    function renderPkmnPage(data) {
+            //declared this for a more accessible scope so it can be used in function and when displaying content
         let listOfGames = data.game_indices;
 
         // this function logs every game the pokemon is in; dont know how to display all those names in setHTML; i'm used to doing textContent -Ryan
@@ -84,10 +92,21 @@ fetch(pokeUrl)
         // will need to write this in a for loop replacing index numbers with i.
         //just noticed for typing: code is broken if we include both types and pokemon only has one. need if statement to include second type
 
+        let pkmnType = (data.types[0].type.name).charAt(0).toUpperCase() + (data.types[0].type.name).slice(1);
+        console.log(pkmnType);
+        let secondType = (data.types[1].type.name).charAt(0).toUpperCase() + (data.types[1].type.name).slice(1);
+        let plusType;
+
+        if (data.types[1].type.name) {
+
+            plusType = pkmnType.concat('/' + secondType)
+            console.log(plusType);
+        };
+
         let statCardHTML =
             `<div>
                 <p class = "block"><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
-                <p class = "block"><strong>TYPE:</strong>  ${(data.types[0].type.name).charAt(0).toUpperCase() + (data.types[0].type.name).slice(1)}</p>
+                <p class = "block"><strong>TYPE:</strong>  ${plusType}</p>
                 <p class = "block"><strong>HEIGHT:</strong>  ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)}'</p>
                 <p class = "block"><strong>WEIGHT:</strong>  ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs </p>
                 <p class = "block"><strong>ABILITIES:</strong>  ${data.abilities[0].name} ${data.abilities[1].name}</p>
@@ -98,14 +117,7 @@ fetch(pokeUrl)
         //  this works and displays all the info. but i dont know what's happening. Not sure what .map is doing, where 'game' came from, and how arrow function works.
 
         document.querySelector('#stat-page').setHTML(statCardHTML);
-
-
-        //DISPLAY IMAGE -- it's responsiveness on the page is weird, unsure why it's behaving how it is
-        let image = document.querySelector('#pkmn-img');
-        let imgUrl = data.sprites.front_default;
-        image.setAttribute('src', imgUrl)
-
-    })
+    }
 
 
 // function pokeStat(data) {
