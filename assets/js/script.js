@@ -95,18 +95,17 @@ fetch(pokeUrl)
         let pkmnType = (data.types[0].type.name).charAt(0).toUpperCase() + (data.types[0].type.name).slice(1);
         console.log(pkmnType);
         let secondType = (data.types[1].type.name).charAt(0).toUpperCase() + (data.types[1].type.name).slice(1);
-        let plusType;
 
         if (data.types[1].type.name) {
 
-            plusType = pkmnType.concat('/' + secondType)
-            console.log(plusType);
+            pkmnType = pkmnType.concat('/' + secondType)
+            console.log(pkmnType);
         };
 
         let statCardHTML =
             `<div>
                 <p class = "block"><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
-                <p class = "block"><strong>TYPE:</strong>  ${plusType}</p>
+                <p class = "block"><strong>TYPE:</strong>  ${pkmnType}</p>
                 <p class = "block"><strong>HEIGHT:</strong>  ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)}'</p>
                 <p class = "block"><strong>WEIGHT:</strong>  ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs </p>
                 <p class = "block"><strong>ABILITIES:</strong>  ${data.abilities[0].name} ${data.abilities[1].name}</p>
