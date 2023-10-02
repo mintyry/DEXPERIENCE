@@ -81,15 +81,16 @@ fetch(pokeUrl)
         //just noticed height and weight are in decimeters and hectograms. must multiply by 0.10 to get kg units, multiply by 2.205 to pounds
             //multiply by 0.10 to get km, then multiply by 39.4 to get inches, then divide by 12 to get feet -- may need function for this conversion
             //write formula to write height in feet, weight in pounds
+        // will need to write this in a for loop replacing index numbers with i.
 
         let statCardHTML =
             `<div>
-                <p>NAME: ${data.name}</p>
-                <p>TYPE: ${data.types[0].type.name} ${data.types[1].type.name}</p>
+                <p>NAME: ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
+                <p>TYPE: ${data.types[0].type.name} / ${data.types[1].type.name}</p>
                 <p>HEIGHT: ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)}'</p>
                 <p>WEIGHT: ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs </p>
                 <p>ABILITIES: ${data.abilities[0].name} ${data.abilities[1].name}</p>
-                <p>MAIN GAMES FOUND IN: </p>
+                <p>MAIN GAMES FOUND IN: ${listOfGames.map(game => game.version.name).join(', ')}</p> 
     </div>`
 
         // <p>MAIN GAMES FOUND IN: ${listOfGames.map(game => game.version.name).join(', ')}</p> 

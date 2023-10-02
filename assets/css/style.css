@@ -55,7 +55,7 @@ body {
 
 #img-container {
     z-index: 1;
-    margin-top: -200px;
+    margin-top: -230px;
     background-color: transparent;
 }
 
@@ -69,10 +69,11 @@ body {
     z-index: 2;
     height: 40%;
     position: relative;
-    margin-top: -200px;
+    margin-top: -250px;
 }
 
 #norris-fact {
-    background-color: rgba(141, 255, 236, 0.5);
+    /* background-color: rgba(141, 255, 236, 0.5); */
+    background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
     font-size: 3vw;
 }
