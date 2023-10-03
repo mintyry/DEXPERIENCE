@@ -1,0 +1,30 @@
+let searchBtn = document.querySelector('#search-button')
+
+// Chuck Norris API Section
+searchBtn.addEventListener('click',
+    function replaceName(event) {
+        event.preventDefault();
+
+        fetch(catUrl, options)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+
+                console.log(data);
+                // testing to see if we can replace chuck norris' name
+                let pokeName = document.querySelector('#search-bar')
+                let cnQuote = data.value;
+                // let cnQuote = 'CHuck Norris is <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.';
+
+                let pkmnQuote = cnQuote.replaceAll(/Chuck Norris/ig, pokeName.value.trim().charAt(0).toUpperCase() + (pokeName.value).slice(1));
+                console.log(pkmnQuote);
+                console.log(cnQuote);
+                let pluralNorris = /Chuck Norris'/;
+                if (cnQuote.includes(pluralNorris)) {
+                    cnQuote.replaceAll(/Chuck Norris'/ig, pokeName.value.trim().charAt(0).toUpperCase() + (pokeName.value).slice(1) + `'s`);
+                } else {
+                    document.querySelector('#norris-quote').textContent = pkmnQuote;
+                }
+            })
+    });
