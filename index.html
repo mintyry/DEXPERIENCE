@@ -16,12 +16,16 @@
 </head>
 
 <body>
+    <!-- Unsure how to position this bar not to move at all, commented out for now -->
+    <!-- <div id = "bar" class = "columns">
+    <div class = "vertbar column "></div>
+    </div> -->
 
     <!-- Header bar container for the Application; holds brand/name of app along with search bar and buttons -->
     <header class="is-flex my-6">
 
         <!-- brand name -->
-        <h1 id="brand">Dexperience</h1>
+        <h1 id="brand" class="pt-3">Dexperience</h1>
 
         <!-- Form holds search box along with search and randomize buttons -->
         <form id="search" class="is-flex is-flex-wrap-wrap">
@@ -35,54 +39,53 @@
     </header>
 
     <!-- this is the main container, holding three columns: left buttons, stat container right buttons-->
-    <main class="columns is-centered is-flex">
+    <!-- if we keep flex property, stat box shrinks terribly. If we dont keep it, at 769px, buttons go on own row bc of display:block -->
+    <main class="columns is-mobile">
 
         <!-- left side buttons holding search history -->
         <!-- TODO: buttons are touching the left side of the viewport; have it touch the center card -->
-        <div id="search-history"
+        <aside id="search-history"
             class="column is-one-quarter is-flex is-flex-direction-column is-justify-content-space-between is-align-items-flex-end px-0 py-5">
-            <button class="side-btn button p-3">test</button>
-            <button class="side-btn button p-3">test</button>
-            <button class="side-btn button p-3">test</button>
-        </div>
-        </div>
+            <button class="side-btn button p-6">test</button>
+            <button class="side-btn button p-6">test</button>
+            <button class="side-btn button p-6">test</button>
+            </div>
+        </aside>
 
         <!-- center column holding stats -->
-        <div id="stat-container" class="column is-3 p-5">
+        <div id="stat-container" class="column is-half">
             <!-- card class is adding box shadow; we can keep or remove depending on how we feel -->
-            <div id="stat-page" class="card is-full">
+            <div id="stat-page">
                 <!-- pokemon stat should fill this from js -->
             </div>
         </div>
 
         <!-- right column holding feature buttons -->
-        <div id="other-features"
+        <aside id="other-features"
             class="column is-one-quarter is-flex is-flex-direction-column is-justify-content-space-between is-align-items-flex-start px-0 py-5">
-            <button class="side-btn button p-3">test</button>
-            <button class="side-btn button p-3">test</button>
-            <button class="side-btn button p-3">test</button>
-        </div>
+            <button class="side-btn button p-6">Pokémon<br />of the Day</button>
+            <button class="side-btn button p-6">MySquad</button>
+            <button class="side-btn button p-6">PokéJournal</button>
+        </aside>
 
 
     </main>
-    <!-- this is the image container, current image is just a sample; will use js to populate it with sprite image -->
-    <div id="img-container" class="columns is-flex is-justify-content-center">
-        <figure class="image column is-5">
-            <img id="pkmn-img" class="is-rounded" src="./assets/images/MAKE_A_WISH,_61023.png">
-        </figure>
-    </div>
-    <!-- container holds the chuck norris fact which will replace norris' name with a pokemon name -->
-    <div id="norris-container" class="columns is-centered is-flex ">
 
-        <div id="norris-fact" class="content column is-8 p-6">
-            Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi
-            porta
-            gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes,
-            nascetur
-            ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
+    <!-- pkmn img -->
+    <figure class="image is-flex">
+        <img id="pkmn-img" />
+    </figure>
+
+    <!-- norris fact to be replaced with pokemon name -->
+    <div id="norris-container" class="columns is-flex ">
+
+        <div id="norris-fact" class="column p-6 has-text-white is-8 is-offset-2">
+            Did you know?
         </div>
 
     </div>
+
+
 
 
 

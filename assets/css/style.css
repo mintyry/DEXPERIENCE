@@ -9,73 +9,140 @@
 * {
     /* outline: 1px dashed blue;    */
     /* outline: 2px solid red;    */
+    /* font-size: 1.5vw; */
 }
 
 /* to make sure background color fills up the entire page. Found out that bulma uses some properties that disallows this by default */
 html,
 body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(179, 179, 179);
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(#ffffff, #eaeaea, #8ab2a9);
+}
+
+#bar {
+    outline: 1px dashed blue;
+}
+
+.vertbar {
+    display: flex;
+    background-color: lightsalmon;
+    /* background-image: linear-gradient(#d4faa3, #bdecdb, #bdecdb); */
+    height: 575px;
+    /* width: 60px; */
+    position: absolute;
+
 }
 
 
 #search {
     margin-left: -47px;
-    /* outline: 2px solid peru; */
 }
 
 #brand {
     margin-left: 47px;
-    margin-top: -50px;
-    transform: rotate(-30deg);
+    /* transform: rotate(-20deg); */
+    text-wrap: nowrap;
+
 }
-#brand, #empty-right {
+
+#brand,
+#empty-right {
     flex: 1;
 }
 
-#search-button, #random {
+#search-button,
+#random {
     flex-basis: 50%;
 }
 
-#stat-container {
-    background-color: rgb(160, 188, 156);
+@media screen and (max-width: 320px) {
+
+    #search-button,
+    #random {
+        flex-basis: 100%;
+    }
+
+    #brand {
+        margin-top: -40px;
+    }
 }
+
+
+#stat-container {
+    /* outline: 1px dashed blue; */
+    border: 20px solid;
+    border-image: linear-gradient(#d2d2d2, #ffffff, #d2d2d2);
+    border-image-slice: 1;
+    /* overflow-y: scroll; */
+    z-index: 1;
+    background-image: radial-gradient(rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(203, 203, 203, 1));
+}
+
+@media screen and (max-width: 745px) {
+
+    #stat-container {
+        width: 360px;
+    }
+}
+
 
 #stat-page {
     background-color: transparent;
     font-family: 'Press Start 2P';
 }
+
 .side-btn {
-    width: 120px;
+    width: 60%;
+    height: 120px;
     font-size: 80%;
     text-align: center;
     white-space: normal;
-    background-color: rgba(50, 119, 108, 0.5);
+    border:#d2d2d2 double 2px;
+
 }
 
-#img-container {
-    z-index: 1;
-    margin-top: -230px;
-    background-color: transparent;
+#search-history {
+    transform: skew(0deg, -20deg);
+    position: relative;
+    top: 5vh;
+
 }
 
-#pkmn-img {
-    /* width: 500px;
-    height: 500px; */
-    
+#search-history > .side-btn {
+    background-image: linear-gradient(to right, rgb(195, 230, 190), rgba(160, 188, 156, 1), rgb(127, 150, 124));
 }
+
+#other-features {
+    transform: skew(0deg, 20deg);
+    position: relative;
+    top: 5vh;
+}
+#other-features > .side-btn {
+    background-image: linear-gradient(to left, rgb(195, 230, 190), rgba(160, 188, 156, 1), rgb(127, 150, 124));
+}
+
+figure {
+    /* outline: 2px dashed rgb(255, 0, 144); */
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 2;
+    bottom: 165px;
+    width: 350px;
+}
+
 
 #norris-container {
-    z-index: 2;
-    height: 40%;
+    z-index: 3;
+    height: 334px;
     position: relative;
-    margin-top: -250px;
+    margin-top: -315px;
+    /* outline: 2px dashed red; */
 }
 
 #norris-fact {
-    /* background-color: rgba(141, 255, 236, 0.5); */
     background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
     font-size: 3vw;
+    border-radius: 25px;
     font-family: 'Press Start 2P';
 }
