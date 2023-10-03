@@ -13,9 +13,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-
     background-image: url(../images/city-landscape.webp);
-    background: linear-gradient(rgba(#ee3b9a, #e98f57, #c3f886, 0.8));
     background-position: 25% 75%;
     min-height: 100vh;
 }
@@ -104,6 +102,7 @@ aside {
     text-align: center;
     white-space: normal;
     border:#d2d2d2 double 2px;
+    margin-bottom: 1%;
 
 }
 

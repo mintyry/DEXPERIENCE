@@ -19,7 +19,6 @@ searchBtn.addEventListener('click', function replaceName(event) {
 
 
     renderPokemon(input);
-    
 });
 
 // Pokemon API Section
@@ -31,6 +30,10 @@ function renderPokemon(name) {
 
     fetch(pokeUrl)
         .then(function (response) {
+            // if (!response.ok) {
+            //     alert('Please enter a Pokémon name.')
+            //     return;
+            // } could create modal instead of alert message
             return response.json();
         })
         .then(function (data) {
@@ -136,21 +139,3 @@ function norrisFact(name) {
     
     //only problem is if chuck norris' name is used in possessive because of how apostrophe works.
     //need if statement to achieve this.
-    
-   
-
-// function pokeStat(data) {
-
-// }
-// pokeStat();
-// Note's for pokemon api section
-// POKEMON FETCH
-// so if using pokemon name with chuck norris fact, take user's input as name and .replace chuck norris
-
-// getPokemonName();
-
-// function getPokemonName() {
-//     let inputBox = document.createElement('input');
-//     main.append(inputBox);
-//     let submitBtn = document.createElement('button');
-// };
