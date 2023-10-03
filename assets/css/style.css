@@ -137,7 +137,6 @@ figure {
 
 #norris-container {
     z-index: 3;
-    height: 334px;
     position: relative;
     margin-top: -315px;
     /* outline: 2px dashed red; */
