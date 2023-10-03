@@ -10,13 +10,13 @@ let quoteSection = document.querySelector('#quote');
 let main = document.querySelector('main');
 let searchBtn = document.querySelector('#search-button')
 let norrisBox = document.querySelector('#norris-container')
+// let body = document.querySelector('body');
 
 // event listener for clicking search button
 searchBtn.addEventListener('click', function replaceName(event) {
     event.preventDefault();
 
     let input = document.querySelector('input').value.toLowerCase();
-
 
     renderPokemon(input);
 });
@@ -30,13 +30,25 @@ function renderPokemon(name) {
 
     fetch(pokeUrl)
         .then(function (response) {
-            // if (!response.ok) {
-            //     alert('Please enter a Pokémon name.')
-            //     return;
-            // } could create modal instead of alert message
+            if (!response.ok) {
+                // body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);')
+                let errorMsg = 
+                `<p>Oak's words echoed... "There's a time and place for everything but not now!"</p>`;
+                document.querySelector('#stat-page').setHTML(errorMsg);
+                document.querySelector('img').src = './assets/images/MissingNo.1.webp';
+                norrisBox.setAttribute('style', 'display:flex');
+                document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
+                return;
+            }
             return response.json();
         })
         .then(function (data) {
+            // console.log(data);
+            // body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
+            let pkmnObj = JSON.parse(localStorage.getItem('pokemon')) || [];
+            pkmnObj.push(data.name);
+            localStorage.setItem('pokemon', JSON.stringify(pkmnObj));
+
             statCard(data); // DISPLAY pokemon info
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
             norrisBox.setAttribute('style', 'display:flex');
