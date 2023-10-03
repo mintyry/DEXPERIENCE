@@ -79,6 +79,14 @@ body {
     background-image: radial-gradient(rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(160, 188, 156, 1), rgba(203, 203, 203, 1));
 }
 
+@media screen and (max-width: 745px) {
+
+    #stat-container {
+        width: 360px;
+    }
+}
+
+
 #stat-page {
     background-color: transparent;
 }
