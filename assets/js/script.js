@@ -44,13 +44,10 @@ const options = {
 // ===========================================
 
 // Pokemon API Section
-let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/bulbasaur'; //Pokemon API
+let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/geodude'; //Pokemon API
 const stat = document.querySelector('#stat-container');
 
-//this endpoint simply lists all pokemon
-//https://pokeapi.co/api/v2/pokemon/{name} would pull up details on that specific pokemon
-//would need function to pass in the name of particular pokemon from user's input
-
+//https://pokeapi.co/api/v2/pokemon/{name} will allow for user input to pass name in
 
 fetch(pokeUrl)
     .then(function (response) {
