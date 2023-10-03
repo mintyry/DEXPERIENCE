@@ -89,6 +89,7 @@ body {
 
 #stat-page {
     background-color: transparent;
+    font-family: 'Press Start 2P';
 }
 
 .side-btn {
@@ -143,4 +144,5 @@ figure {
     background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
     font-size: 3vw;
     border-radius: 25px;
+    font-family: 'Press Start 2P';
 }
