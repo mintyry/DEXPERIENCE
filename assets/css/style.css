@@ -70,7 +70,7 @@ body {
 
 
 #stat-container {
-    outline: 1px dashed blue;
+    /* outline: 1px dashed blue; */
     border: 20px solid;
     border-image: linear-gradient(#d2d2d2, #ffffff, #d2d2d2);
     border-image-slice: 1;
