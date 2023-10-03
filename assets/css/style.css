@@ -18,6 +18,7 @@ body {
     margin: 0;
     padding: 0;
     background-image: linear-gradient(#ffffff, #eaeaea, #8ab2a9);
+    min-height: 100vh;
 }
 
 #bar {
@@ -134,7 +135,7 @@ figure {
 
 #norris-container {
     z-index: 3;
-    height: 334px;
+    /* height: 334px; */
     position: relative;
     margin-top: -315px;
     /* outline: 2px dashed red; */
@@ -147,3 +148,9 @@ figure {
     font-family: 'Press Start 2P';
 }
 
+#norris-quote {
+    /* background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2)); */
+    font-size: 1vw;
+    border-radius: 25px;
+    font-family: 'Press Start 2P';
+}

@@ -15,28 +15,41 @@ const options = {
     }
 };
 
-//var apiKey =  '868927087amsh65a6ffffa5b7c46p19dcadjsn7079a2a63238';
+var apiKey =  '868927087amsh65a6ffffa5b7c46p19dcadjsn7079a2a63238';
 
 
-// let quoteSection = document.querySelector('#quote');
-// let main = document.querySelector('main');
-
+let quoteSection = document.querySelector('#quote');
+let main = document.querySelector('main');
+let searchBtn = document.querySelector('#search-button')
 
 // Chuck Norris API Section
+searchBtn.addEventListener('click',
+    function replaceName(event) {
+        event.preventDefault();
 
-// fetch(catUrl, options)
-// .then(function (response) {
-//     return response.json();
-// })
-// .then(function (data) {
-//     document.querySelector('#quote').innerHTML = data.value
-//     console.log(data);
+        fetch(catUrl, options)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
 
-//testing to see if we can replace chuck norris' name
-// let cnQuote = data.value;
-// console.log(cnQuote);
-// let pkmnQuote = cnQuote.replaceAll('Chuck Norris', 'Bulbasaur');
-// console.log(pkmnQuote);
+                console.log(data);
+                // testing to see if we can replace chuck norris' name
+                let pokeName = document.querySelector('#search-bar')
+                let cnQuote = data.value;
+                // let cnQuote = 'CHuck Norris is <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.';
+
+                let pkmnQuote = cnQuote.replaceAll(/Chuck Norris/ig, pokeName.value.trim().charAt(0).toUpperCase() + (pokeName.value).slice(1));
+                console.log(pkmnQuote);
+                console.log(cnQuote);
+                let pluralNorris = 'Chuck Norris\'';
+                if (cnQuote.includes(pluralNorris)) {
+                    cnQuote.replaceAll('Chuck Norris\'', pokeName.value.trim().charAt(0).toUpperCase() + (pokeName.value).slice(1) + `'s`);
+                } else {
+                    document.querySelector('#norris-quote').textContent = pkmnQuote;
+                }
+            })
+    });
 
 //only problem is if chuck norris' name is used in possessive because of how apostrophe works.
 //need if statement to achieve this.
