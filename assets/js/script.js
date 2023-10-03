@@ -30,6 +30,7 @@ function renderPokemon(name) {
 
     fetch(pokeUrl)
         .then(function (response) {
+            
             if (!response.ok) {
                 // body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);')
                 let errorMsg = 
@@ -40,19 +41,27 @@ function renderPokemon(name) {
                 document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
                 return;
             }
+
             return response.json();
         })
         .then(function (data) {
-            // console.log(data);
-            // body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
-            let pkmnObj = JSON.parse(localStorage.getItem('pokemon')) || [];
-            pkmnObj.push(data.name);
-            localStorage.setItem('pokemon', JSON.stringify(pkmnObj));
+
+            // using localStorage to save user's searches
+            let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
+
+            if (pkmnArr.includes(data.name)) {
+                let index = pkmnArr.indexOf(data.name);
+                pkmnArr.splice(index, 1);
+            }
+            pkmnArr.unshift(data.name);
+            localStorage.setItem('pokemon', JSON.stringify(pkmnArr));
+
+            //all the actions that happen once we get data
 
             statCard(data); // DISPLAY pokemon info
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
-            norrisBox.setAttribute('style', 'display:flex');
-            norrisFact(name);
+            norrisBox.setAttribute('style', 'display:flex');//removes norris box from hiding
+            norrisFact(name);//displays norris-pokemon fact
            
         })
 
