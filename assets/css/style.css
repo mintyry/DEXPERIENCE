@@ -17,7 +17,10 @@ html,
 body {
     margin: 0;
     padding: 0;
-    background-image: linear-gradient(#ffffff, #eaeaea, #8ab2a9);
+
+    background-image: url(../images/city-landscape.webp);
+    background: linear-gradient(rgba(#ee3b9a, #e98f57, #c3f886, 0.8));
+    background-position: 25% 75%;
     min-height: 100vh;
 }
 
@@ -135,7 +138,6 @@ figure {
 
 #norris-container {
     z-index: 3;
-    /* height: 334px; */
     position: relative;
     margin-top: -315px;
     /* outline: 2px dashed red; */
