@@ -6,83 +6,39 @@
 //  - captialize abilities and types
 
 // Global Variables 
-const catUrl = 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random'; // Chuck Norris API
-const options = {
-    method: 'GET',
-    headers: {
-        accept: 'application/json',
-        'X-RapidAPI-Key': '868927087amsh65a6ffffa5b7c46p19dcadjsn7079a2a63238',
-        'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
-    }
-};
-
-let apiKey = '868927087amsh65a6ffffa5b7c46p19dcadjsn7079a2a63238';
-
-
 let quoteSection = document.querySelector('#quote');
 let main = document.querySelector('main');
 let searchBtn = document.querySelector('#search-button')
+let norrisBox = document.querySelector('#norris-container')
 
 // event listener for clicking search button
 searchBtn.addEventListener('click', function replaceName(event) {
     event.preventDefault();
 
-    let input = document.querySelector('input').value;
+    let input = document.querySelector('input').value.toLowerCase();
+
 
     renderPokemon(input);
-    norrisFact(input);
-
+    
 });
 
-
-
-// Chuck Norris API Section
-function norrisFact(name) {
-    fetch(catUrl, options)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-
-            console.log(data);
-            // testing to see if we can replace chuck norris' name
-            let pokeName = `${name}`;
-            console.log(pokeName);
-            let cnQuote = data.value;
-            // let cnQuote = 'CHuck Norris is <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.';
-
-            let pkmnQuote = cnQuote.replaceAll(/Chuck Norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
-            console.log(pkmnQuote);
-            console.log(cnQuote);
-            let pluralNorris = 'Chuck Norris\'';
-            if (cnQuote.includes(pluralNorris)) {
-                cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
-            } else {
-                document.querySelector('#norris-quote').textContent = pkmnQuote;
-            }
-        })
-};
-
-//only problem is if chuck norris' name is used in possessive because of how apostrophe works.
-//need if statement to achieve this.
-
-// ===========================================
-
 // Pokemon API Section
-
-
 function renderPokemon(name) {
     let pokeUrl = `https://pokeapi.co/api/v2/pokemon/${name}`; //Pokemon API
 
     //https://pokeapi.co/api/v2/pokemon/{name} will allow for user input to pass name in
+
 
     fetch(pokeUrl)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
+            statCard(data); // DISPLAY pokemon info
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
-            statCard(data);
+            norrisBox.setAttribute('style', 'display:flex');
+            norrisFact(name);
+           
         })
 
     // Renders the Image for the current Pokemon
@@ -94,7 +50,7 @@ function renderPokemon(name) {
 
     // Renders the abilities of the Pokemon
     function renderAbilities(abilitiesArr) {
-        let HTML = 'ABILITIES: ';
+        let HTML = '';
         for (let i = 0; i < abilitiesArr.length; i++) {
             HTML += `<span> ${abilitiesArr[i].ability.name}</span>`
         }
@@ -103,7 +59,7 @@ function renderPokemon(name) {
 
     // Renders the different types of the Pokemon
     function renderTypes(typesArr) {
-        let HTML = 'TYPE: ';
+        let HTML = '';
         for (let i = 0; i < typesArr.length; i++) {
             HTML += `<span> ${typesArr[i].type.name}</span>`
         }
@@ -112,7 +68,7 @@ function renderPokemon(name) {
 
     // Renders the base_stat and name for the Pokemon
     function renderBaseStat(baseStatArr) {
-        let HTML = 'STATS: ';
+        let HTML = '';
         for (let i = 0; i < baseStatArr.length; i++) {
             HTML += `<li>${baseStatArr[i].stat.name}: ${baseStatArr[i].base_stat} </li>`
         }
@@ -124,16 +80,64 @@ function renderPokemon(name) {
         let statCardHTML = ''
         statCardHTML +=
             `<div class="stat-element">
-                <p>NAME: ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
-                <p>HEIGHT: ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p>
-                <p>WEIGHT: ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p>
-               <p>${renderAbilities(data.abilities)} </p>
-               <p>${renderTypes(data.types)}</p>
-               <ul>${renderBaseStat(data.stats)}</ul>
+                <p><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
+                <p><strong>HEIGHT:</strong> ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p>
+                <p><strong>WEIGHT:</strong> ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p>
+               <p><strong>ABILITIES:</strong> ${renderAbilities(data.abilities)} </p>
+               <p><strong>TYPES:</strong> ${renderTypes(data.types)}</p>
+               <ul><strong>STATS:</strong> ${renderBaseStat(data.stats)}</ul>
             </div>`
         document.querySelector('#stat-page').setHTML(statCardHTML);
     }
-}
+};
+
+ // ===========================================
+
+// Chuck Norris API Section
+function norrisFact(name) {
+
+    const catUrl = 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random'; // Chuck Norris API
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            'X-RapidAPI-Key': '868927087amsh65a6ffffa5b7c46p19dcadjsn7079a2a63238',
+            'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
+        }
+    };
+    
+    let apiKey = '868927087amsh65a6ffffa5b7c46p19dcadjsn7079a2a63238';
+    //never read anywhere, do we need it?
+    
+        fetch(catUrl, options)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+    
+                console.log(data);
+                // testing to see if we can replace chuck norris' name
+                let pokeName = `${name}`;
+                console.log(pokeName);
+                let cnQuote = data.value;
+                // let cnQuote = 'CHuck Norris is <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.';
+    
+                let pkmnQuote = cnQuote.replaceAll(/Chuck Norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
+                console.log(pkmnQuote);
+                console.log(cnQuote);
+                let pluralNorris = 'Chuck Norris\'';
+                if (cnQuote.includes(pluralNorris)) {
+                    cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
+                } else {
+                    document.querySelector('#norris-quote').textContent = pkmnQuote;
+                }
+            })
+    };
+    
+    //only problem is if chuck norris' name is used in possessive because of how apostrophe works.
+    //need if statement to achieve this.
+    
+   
 
 // function pokeStat(data) {
 
