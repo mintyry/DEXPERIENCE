@@ -152,7 +152,6 @@ function norrisFact(name) {
             }
         })
         
-        norrisFact();
 
 // ========================================
 // event listener for clicking search button
