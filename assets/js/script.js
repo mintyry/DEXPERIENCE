@@ -19,7 +19,6 @@ searchBtn.addEventListener('click', function replaceName(event) {
     let input = document.querySelector('input').value.toLowerCase();
 
     renderPokemon(input);
-    renderSearchHistory();
 });
 
 // Pokemon API Section
@@ -41,6 +40,7 @@ function renderPokemon(name) {
             }
             document.querySelector('#norris-quote').textContent = '';
             body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
+            // body.setAttribute('style', 'background-position: 25% 75%;')
             return response.json();
 
         })
@@ -66,6 +66,8 @@ function renderPokemon(name) {
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
             norrisBox.setAttribute('style', 'display:flex');//removes norris box from hiding
             norrisFact(name);//displays norris-pokemon fact
+
+            renderSearchHistory();
 
         })
 
@@ -181,9 +183,9 @@ function renderSearchHistory() {
 
 }
 
-document.querySelector('#search-history').addEventListener('click', function (event) { 
-    if (event.target.matches('.button')) {
-        console.log(event.target);
-     }
-});
+// document.querySelector('#search-history').addEventListener('click', function (event) { 
+//     if (event.target.matches('.button')) {
+//         console.log(event.target);
+//      }
+// });
 
