@@ -19,6 +19,7 @@ searchBtn.addEventListener('click', function replaceName(event) {
     let input = document.querySelector('input').value.toLowerCase();
 
     renderPokemon(input);
+    renderSearchHistory();
 });
 
 // Pokemon API Section
@@ -40,14 +41,16 @@ function renderPokemon(name) {
                 norrisBox.setAttribute('style', 'display:flex');
                 document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
                 return;
-            }  
-                document.querySelector('#norris-quote').textContent = '';
-                body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
-                return response.json();
-        
+            }
+            document.querySelector('#norris-quote').textContent = '';
+            body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
+            return response.json();
+
         })
         .then(function (data) {
 
+            console.log(data);
+            
             // using localStorage to save user's searches
             let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
 
@@ -57,6 +60,8 @@ function renderPokemon(name) {
             }
             pkmnArr.unshift(data.name);
             localStorage.setItem('pokemon', JSON.stringify(pkmnArr));
+
+           
 
             //all the actions that happen once we get data
 
@@ -160,5 +165,37 @@ function norrisFact(name) {
         })
 };
 
-//only problem is if chuck norris' name is used in possessive because of how apostrophe works.
-//need if statement to achieve this.
+// ========================================
+// event listener for clicking search button
+let pastPkmn = document.querySelector('#search-button');
+
+pastPkmn.addEventListener('click', function addHistoryBtn(event) {
+    event.preventDefault();
+
+    let input = document.querySelector('input').value.toLowerCase();
+
+    renderPokemon(input);
+});
+
+function renderSearchHistory() {
+let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
+
+
+
+for (let i = 0; i < pkmnArr.length && i < 3; i++) {
+    let history = document.querySelector('#search-history')
+    
+
+    history.children[i].textContent = pkmnArr[i];
+    console.log(pkmnArr);
+}
+
+}
+
+document.querySelector('#search-history').addEventListener ('click', function(event){
+    if (event.target.matches('.button')){
+        console.log(event.target);
+
+
+    }
+});
