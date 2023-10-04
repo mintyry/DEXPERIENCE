@@ -200,5 +200,13 @@ function pokemon_of_the_day() {
     }
 }
 
+pod.addEventListener("click", function(){
+    const today = dayjs().format("MM/DD/YYYY");
+    // console.log(today);
 
+    let pokemon = JSON.parse(localStorage.getItem(today));
+    // console .log (pokemon) 
+    // console .log (pokemon.name) 
+    renderPokemon (pokemon.name)
+})
 pokemon_of_the_day();
