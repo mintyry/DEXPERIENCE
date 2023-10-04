@@ -18,6 +18,15 @@ body {
     min-height: 100vh;
 }
 
+header h1 {
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+    font-style: italic;
+    font-weight: bolder;
+    font-family: 'Press Start 2P' ;
+}
+
 #bar {
     outline: 1px dashed blue;
 }
@@ -32,8 +41,22 @@ body {
 
 }
 
+form {
+       font-style: 'Press Start 2P' !important;
+  
+}
 
-#search {
+#search-bar {
+    border-image: url(https://luttje.github.io/css-pokemon-gameboy/styles/images/frame-hd.png) 42 round;
+    border-width: 21px;
+    border-style: solid;
+    padding: 1em;
+    margin: 1em 0 0 0;
+    width: 100%;
+    max-width: 100%;
+ 
+}
+#search {  
     margin-left: -47px;
 }
 
@@ -128,13 +151,30 @@ figure {
     z-index: 2;
     bottom: 165px;
     width: 350px;
+    
 }
-
-
+img{
+animation-name: float;
+animation-duration: 6000ms;
+transform-origin: 50% 50%;
+animation-iteration-count: infinite;
+animation-timing-function: ease;
+}
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% { 
+        transform: translate(2px, 20px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
 #norris-container {
     z-index: 3;
     position: relative;
-    margin-top: -315px;
+    margin-top: -215px;
     /* outline: 2px dashed red; */
     display:none;
 }
