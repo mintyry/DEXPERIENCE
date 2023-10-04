@@ -35,11 +35,11 @@ function renderPokemon(name) {
                 norrisBox.setAttribute('style', 'display:flex');
                 document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
                 return;
-            }  
-                document.querySelector('#norris-quote').textContent = '';
-                body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
-                return response.json();
-        
+            }
+            document.querySelector('#norris-quote').textContent = '';
+            body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
+            return response.json();
+
         })
         .then(function (data) {
 
@@ -134,7 +134,7 @@ function norrisFact(name) {
         .then(function (data) {
             console.log(data);
             let pokeName = `${name}`;
-             console.log(pokeName);
+            console.log(pokeName);
             let cnQuote = data.value;
             let pkmnQuote = cnQuote.replaceAll(/Chuck Norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
             let pluralNorris = 'Chuck Norris\'';
@@ -144,7 +144,7 @@ function norrisFact(name) {
                 document.querySelector('#norris-quote').textContent = pkmnQuote;
             }
         })
-        
+
 
 };
 norrisFact();
