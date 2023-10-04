@@ -11,7 +11,7 @@ let main = document.querySelector('main');
 let searchBtn = document.querySelector('#search-button')
 let norrisBox = document.querySelector('#norris-container')
 let body = document.querySelector('body');
-
+let pod = document.querySelector('#pod')
 // event listener for clicking search button
 searchBtn.addEventListener('click', function replaceName(event) {
     event.preventDefault();
@@ -162,3 +162,43 @@ function norrisFact(name) {
 
 //only problem is if chuck norris' name is used in possessive because of how apostrophe works.
 //need if statement to achieve this.
+function pokemon_of_the_day() {
+    const today = dayjs().format("MM/DD/YYYY");
+    console.log(today);
+
+    let pokemon = localStorage.getItem(today);
+    console .log (pokemon)
+    pokemon = pokemon ? JSON.parse(pokemon) : null;
+
+    if (pokemon === null) {
+        console.log("Fetching new Pokemon...");
+        const randomId = Math.floor(Math.random() * 200);
+        const url = `https://pokeapi.co/api/v2/pokemon/${randomId}/`;
+        
+        fetch(url)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
+            .then(data => {
+                const pokemonData = {
+                    name: data.name,
+                    id: data.id
+                };
+                console.log(pokemonData);
+
+                // Saving the Pokemon data to localStorage
+                localStorage.setItem(today, JSON.stringify(pokemonData));
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+    } else {
+        console.log("Pokemon already created:", pokemon);
+    }
+}
+
+
+pokemon_of_the_day();
