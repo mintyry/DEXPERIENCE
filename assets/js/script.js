@@ -1,6 +1,4 @@
 // JS TODO List: 
-//  - find a way to display stats and list of games with the for loop.
-//  - need to create functionality for search button (event listener that takes user input), randomize button
 //  - need to save user input into local storage and render last three searches on page
 //  - right side buttons: pokemon of the day, quiz, user journal entry
 //  - captialize abilities and types
@@ -25,9 +23,6 @@ searchBtn.addEventListener('click', function replaceName(event) {
 function renderPokemon(name) {
     let pokeUrl = `https://pokeapi.co/api/v2/pokemon/${name}`; //Pokemon API
 
-    //https://pokeapi.co/api/v2/pokemon/{name} will allow for user input to pass name in
-
-
     fetch(pokeUrl)
         .then(function (response) {
 
@@ -40,11 +35,11 @@ function renderPokemon(name) {
                 norrisBox.setAttribute('style', 'display:flex');
                 document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
                 return;
-            }  
-                document.querySelector('#norris-quote').textContent = '';
-                body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
-                return response.json();
-        
+            }
+            document.querySelector('#norris-quote').textContent = '';
+            body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
+            return response.json();
+
         })
         .then(function (data) {
 
@@ -120,9 +115,10 @@ function renderPokemon(name) {
 // ===========================================
 
 // Chuck Norris API Section
+const getRandomCategory = () => ['animal', 'career', 'celebrity', 'dev', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'science', 'sport', 'travel'][Math.floor(Math.random() * 13)];
 function norrisFact(name) {
 
-    const catUrl = 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random'; // Chuck Norris API
+    let catUrl = `https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random?category=${getRandomCategory()}`; // Chuck Norris API
     const options = {
         method: 'GET',
         headers: {
@@ -131,26 +127,16 @@ function norrisFact(name) {
             'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
         }
     };
-
-    let apiKey = '868927087amsh65a6ffffa5b7c46p19dcadjsn7079a2a63238';
-    //never read anywhere, do we need it?
-
     fetch(catUrl, options)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-
             console.log(data);
-            // testing to see if we can replace chuck norris' name
             let pokeName = `${name}`;
             console.log(pokeName);
             let cnQuote = data.value;
-            // let cnQuote = 'CHuck Norris is <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.';
-
             let pkmnQuote = cnQuote.replaceAll(/Chuck Norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
-            console.log(pkmnQuote);
-            console.log(cnQuote);
             let pluralNorris = 'Chuck Norris\'';
             if (cnQuote.includes(pluralNorris)) {
                 cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
@@ -158,7 +144,7 @@ function norrisFact(name) {
                 document.querySelector('#norris-quote').textContent = pkmnQuote;
             }
         })
-};
 
-//only problem is if chuck norris' name is used in possessive because of how apostrophe works.
-//need if statement to achieve this.
+
+};
+norrisFact();
