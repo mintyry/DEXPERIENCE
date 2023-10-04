@@ -19,7 +19,7 @@ searchBtn.addEventListener('click', function replaceName(event) {
     let input = document.querySelector('input').value.toLowerCase();
 
     renderPokemon(input);
-    renderSearchHistory();
+    // renderSearchHistory();
 });
 
 // Pokemon API Section
@@ -148,7 +148,7 @@ function norrisFact(name) {
             if (cnQuote.includes(pluralNorris)) {
                 cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
             } else {
-                document.querySelector('#norris-quote').textContent = pkmnQuote;
+                document.querySelector('#norris-quote').setHTML(`<p style = "font-size: 4vh">Did you know?</p> <br> ${pkmnQuote}`);
             }
         })
         
