@@ -177,8 +177,10 @@ function renderSearchHistory() {
         let history = document.querySelector('#search-history')
 
 
-        history.children[i].textContent = pkmnArr[i];
+        history.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1);
         console.log(pkmnArr);
+        console.log(pkmnArr[i]);
+        console.log(pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1))
     }
 
 }
