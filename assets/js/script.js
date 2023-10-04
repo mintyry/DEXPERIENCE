@@ -57,7 +57,7 @@ searchBtn.addEventListener('click',
 // ===========================================
 
 // Pokemon API Section
-let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/geodude'; //Pokemon API
+let pokeUrl = 'https://pokeapi.co/api/v2/pokemon/charizard'; //Pokemon API
 const stat = document.querySelector('#stat-container');
 
 //https://pokeapi.co/api/v2/pokemon/{name} will allow for user input to pass name in
