@@ -12,6 +12,8 @@ let body = document.querySelector('body');
 
 console.log(pokeList);
 
+renderSearchHistory();
+
 // event listener for clicking search button
 searchBtn.addEventListener('click', function replaceName(event) {
     event.preventDefault();
@@ -32,7 +34,7 @@ function renderPokemon(name) {
                 body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);')
                 let errorMsg =
                     `<p>Oak's words echoed... "There's a time and place for everything but not now!"</p>`;
-                document.querySelector('#stat-page').setHTML(errorMsg);
+                document.querySelector('#stat-page').innerHTML = errorMsg;
                 document.querySelector('img').src = './assets/images/MissingNo.1.webp';
                 norrisBox.setAttribute('style', 'display:flex');
                 document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
@@ -110,14 +112,14 @@ function renderPokemon(name) {
         let statCardHTML = ''
         statCardHTML +=
             `<div class="stat-element">
-                <p><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
-                <p><strong>HEIGHT:</strong> ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p>
-                <p><strong>WEIGHT:</strong> ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p>
-               <p><strong>ABILITIES:</strong> ${renderAbilities(data.abilities)} </p>
-               <p><strong>TYPES:</strong> ${renderTypes(data.types)}</p>
-               <ul><strong>STATS:</strong> ${renderBaseStat(data.stats)}</ul>
+                <p><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p><br>
+                <p><strong>HEIGHT:</strong> ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p><br>
+                <p><strong>WEIGHT:</strong> ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p><br>
+               <p><strong>ABILITIES:</strong> ${renderAbilities(data.abilities)} </p><br>
+               <p><strong>TYPES:</strong> ${renderTypes(data.types)}</p><br>
+               <ul><strong>STATS:</strong> ${renderBaseStat(data.stats)}</ul><br>
             </div>`
-        document.querySelector('#stat-page').setHTML(statCardHTML);
+        document.querySelector('#stat-page').innerHTML=statCardHTML;
     }
 };
 
@@ -151,7 +153,7 @@ function norrisFact(name) {
             if (cnQuote.includes(pluralNorris)) {
                 cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
             } else {
-                document.querySelector('#norris-quote').setHTML(`<p style = "font-size: 4vh">Did you know?</p> <br> ${pkmnQuote}`);
+                document.querySelector('#norris-quote').innerHTML = `<p style = "font-size: 4vh">Did you know?</p> <br> ${pkmnQuote}`;
             }
         })
 };
@@ -176,18 +178,18 @@ function renderSearchHistory() {
     for (let i = 0; i < pkmnArr.length && i < 3; i++) {
         let history = document.querySelector('#search-history')
 
-
         history.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1);
-        console.log(pkmnArr);
-        console.log(pkmnArr[i]);
-        console.log(pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1))
+
     }
 
 }
 
-// document.querySelector('#search-history').addEventListener('click', function (event) { 
-//     if (event.target.matches('.button')) {
-//         console.log(event.target);
-//      }
-// });
+document.querySelector('#search-history').addEventListener('click', function (event) { 
+    if (event.target.matches('.button')) {
+        // console.log(event.target.textContent);
+        let searchedPkmn = event.target.textContent.toLowerCase();
+        // console.log(searchedPkmn);
+        renderPokemon(searchedPkmn);
+     }
+});
 

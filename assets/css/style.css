@@ -36,7 +36,7 @@ body {
 
 ::placeholder {
     font-style: 'Press Start 2P' !important;
-    color: rgb(0, 0, 0) !important;
+    color: rgb(255, 255, 255) !important;
     opacity: 1;
     /* Firefox */
 }
@@ -47,12 +47,13 @@ body {
     /* Edge 12-18 */
 }
 
-#search-bar {
-    border-image: url(https://luttje.github.io/css-pokemon-gameboy/styles/images/frame-hd.png) 42 round;
+#search-bar, #search-bar:hover, #search-bar:focus, #search-bar:active {
+    /* border-image: url(https://luttje.github.io/css-pokemon-gameboy/styles/images/frame-hd.png) 42 round;
     border-width: 21px;
     border-style: solid;
     padding: 1em;
-    margin: 1em 0 0 0;
+    margin: 1em 0 0 0; */
+    border: 1px white solid;
     width: 100%;
     max-width: 100%;
     background-color: transparent;
@@ -89,17 +90,16 @@ header {
     flex: 1;
 }
 
-#search-button,
-#random {
-    flex-basis: 50%;
+#search-button {
+    flex-basis: 100%;
 }
 
 @media screen and (max-width: 320px) {
 
-    #search-button,
+    /* #search-button,
     #random {
         flex-basis: 100%;
-    }
+    } */
 
     #brand {
         margin-top: -40px;
@@ -135,14 +135,15 @@ aside {
     top: 6.5vh;
 }
 
-.side-btn {
+.side-btn, .side-btn:focus {
+    font-family: 'Antonio', sans-serif;
     width: 60%;
     height: 120px;
     font-size: 80%;
     text-align: center;
     white-space: normal;
     border: #d2d2d2 double 2px;
-    margin-bottom: 1%;
+    margin-top: 1%;
 
 }
 
@@ -169,7 +170,19 @@ figure {
     z-index: 2;
     bottom: 165px;
     width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  
 
+}
+
+@media screen and (max-width: 745px) {
+
+   figure {
+        width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 img {
@@ -178,6 +191,8 @@ img {
     transform-origin: 50% 50%;
     animation-iteration-count: infinite;
     animation-timing-function: ease;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @keyframes float {
@@ -200,6 +215,15 @@ img {
     margin-top: -315px;
     /* outline: 2px dashed red; */
     display: none;
+}
+
+@media screen and (max-width: 760px) {
+
+    #norris-container {
+        width: 550px;
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 
 #norris-fact {
