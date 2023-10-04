@@ -196,7 +196,7 @@ img {
 #norris-container {
     z-index: 3;
     position: relative;
-    margin-top: -210px;
+    margin-top: -315px;
     /* outline: 2px dashed red; */
     display: none;
 }
