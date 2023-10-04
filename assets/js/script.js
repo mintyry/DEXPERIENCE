@@ -12,6 +12,8 @@ let searchBtn = document.querySelector('#search-button')
 let norrisBox = document.querySelector('#norris-container')
 let body = document.querySelector('body');
 
+console.log(pokeList);
+
 // event listener for clicking search button
 searchBtn.addEventListener('click', function replaceName(event) {
     event.preventDefault();
