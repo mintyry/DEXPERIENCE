@@ -1,6 +1,6 @@
 // JS TODO List: 
 //  - need to save user input into local storage and render last three searches on page
-//  - right side buttons: pokemon of the day, quiz, user journal entry
+//  - right side buttons: pokemon of the day, mysquad, user journal entry
 //  - captialize abilities and types
 
 // Global Variables 
@@ -19,7 +19,7 @@ searchBtn.addEventListener('click', function replaceName(event) {
     let input = document.querySelector('input').value.toLowerCase();
 
     renderPokemon(input);
-    // renderSearchHistory();
+    renderSearchHistory();
 });
 
 // Pokemon API Section
@@ -47,7 +47,7 @@ function renderPokemon(name) {
         .then(function (data) {
 
             console.log(data);
-            
+
             // using localStorage to save user's searches
             let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
 
@@ -58,7 +58,7 @@ function renderPokemon(name) {
             pkmnArr.unshift(data.name);
             localStorage.setItem('pokemon', JSON.stringify(pkmnArr));
 
-           
+
 
             //all the actions that happen once we get data
 
@@ -123,6 +123,7 @@ function renderPokemon(name) {
 
 // Chuck Norris API Section
 const getRandomCategory = () => ['animal', 'career', 'celebrity', 'dev', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'science', 'sport', 'travel'][Math.floor(Math.random() * 13)];
+
 function norrisFact(name) {
 
     let catUrl = `https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random?category=${getRandomCategory()}`; // Chuck Norris API
@@ -151,42 +152,38 @@ function norrisFact(name) {
                 document.querySelector('#norris-quote').setHTML(`<p style = "font-size: 4vh">Did you know?</p> <br> ${pkmnQuote}`);
             }
         })
-        
+};
 
 // ========================================
 // event listener for clicking search button
-let pastPkmn = document.querySelector('#search-button');
+// let pastPkmn = document.querySelector('.search-button');
 
-pastPkmn.addEventListener('click', function addHistoryBtn(event) {
-    event.preventDefault();
+// pastPkmn.addEventListener('click', function addHistoryBtn(event) {
+//     event.preventDefault();
 
-    let input = document.querySelector('input').value.toLowerCase();
+//     let input = document.querySelector('input').value.toLowerCase();
 
-    renderPokemon(input);
-});
+//     renderPokemon(input);
+// });
 
 function renderSearchHistory() {
-let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
+    let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
 
 
 
-for (let i = 0; i < pkmnArr.length && i < 3; i++) {
-    let history = document.querySelector('#search-history')
-    
-
-    history.children[i].textContent = pkmnArr[i];
-    console.log(pkmnArr);
-}
-
-}
-
-document.querySelector('#search-history').addEventListener ('click', function(event){
-    if (event.target.matches('.button')){
-        console.log(event.target);
+    for (let i = 0; i < pkmnArr.length && i < 3; i++) {
+        let history = document.querySelector('#search-history')
 
 
+        history.children[i].textContent = pkmnArr[i];
+        console.log(pkmnArr);
     }
-});
 
-};
+}
+
+document.querySelector('#search-history').addEventListener('click', function (event) { 
+    if (event.target.matches('.button')) {
+        console.log(event.target);
+     }
+});
 
