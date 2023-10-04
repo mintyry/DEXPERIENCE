@@ -1,8 +1,4 @@
 /* CSS TODO List: 
-- Add rounded edges to stat-container and norris-container
-- Give a light-grey border to stat-container
-- Find cool pixel font to use, link up with google fonts, unless you know how to link up via another distributor 
-- Give techy color to side buttons*/
 
 /* toggle outlines on and off to see where each table is positioned */
 /* by toggle, i mean comment in and out */
@@ -17,9 +13,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-
     background-image: url(../images/city-landscape.webp);
-    background: linear-gradient(rgba(#ee3b9a, #e98f57, #c3f886, 0.8));
     background-position: 25% 75%;
     min-height: 100vh;
 }
@@ -96,6 +90,11 @@ body {
     font-family: 'Press Start 2P';
 }
 
+aside {
+    position: relative;
+    top: 6.5vh;
+}
+
 .side-btn {
     width: 60%;
     height: 120px;
@@ -103,14 +102,12 @@ body {
     text-align: center;
     white-space: normal;
     border:#d2d2d2 double 2px;
+    margin-bottom: 1%;
 
 }
 
 #search-history {
     transform: skew(0deg, -20deg);
-    position: relative;
-    top: 5vh;
-
 }
 
 #search-history > .side-btn {
@@ -119,8 +116,6 @@ body {
 
 #other-features {
     transform: skew(0deg, 20deg);
-    position: relative;
-    top: 5vh;
 }
 #other-features > .side-btn {
     background-image: linear-gradient(to left, rgb(195, 230, 190), rgba(160, 188, 156, 1), rgb(127, 150, 124));
@@ -141,18 +136,19 @@ figure {
     position: relative;
     margin-top: -315px;
     /* outline: 2px dashed red; */
+    display:none;
 }
 
 #norris-fact {
     background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
-    font-size: 3vw;
+    font-size: 3vh;
     border-radius: 25px;
     font-family: 'Press Start 2P';
 }
 
 #norris-quote {
     /* background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2)); */
-    font-size: 1vw;
+    font-size: 2vh;
     border-radius: 25px;
     font-family: 'Press Start 2P';
 }
