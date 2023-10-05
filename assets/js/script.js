@@ -1,6 +1,6 @@
 // JS TODO List: 
 //  - need to save user input into local storage and render last three searches on page
-//  - right side buttons: pokemon of the day, quiz, user journal entry
+//  - right side buttons: pokemon of the day, mysquad, user journal entry
 //  - captialize abilities and types
 
 // Global Variables 
@@ -9,6 +9,10 @@ let main = document.querySelector('main');
 let searchBtn = document.querySelector('#search-button')
 let norrisBox = document.querySelector('#norris-container')
 let body = document.querySelector('body');
+
+console.log(pokeList);
+
+renderSearchHistory();
 
 // event listener for clicking search button
 searchBtn.addEventListener('click', function replaceName(event) {
@@ -30,7 +34,7 @@ function renderPokemon(name) {
                 body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);')
                 let errorMsg =
                     `<p>Oak's words echoed... "There's a time and place for everything but not now!"</p>`;
-                document.querySelector('#stat-page').setHTML(errorMsg);
+                document.querySelector('#stat-page').innerHTML = errorMsg;
                 document.querySelector('img').src = './assets/images/MissingNo.1.webp';
                 norrisBox.setAttribute('style', 'display:flex');
                 document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
@@ -38,10 +42,13 @@ function renderPokemon(name) {
             }
             document.querySelector('#norris-quote').textContent = '';
             body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
+            // body.setAttribute('style', 'background-position: 25% 75%;')
             return response.json();
 
         })
         .then(function (data) {
+
+            console.log(data);
 
             // using localStorage to save user's searches
             let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
@@ -53,12 +60,16 @@ function renderPokemon(name) {
             pkmnArr.unshift(data.name);
             localStorage.setItem('pokemon', JSON.stringify(pkmnArr));
 
+
+
             //all the actions that happen once we get data
 
             statCard(data); // DISPLAY pokemon info
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
             norrisBox.setAttribute('style', 'display:flex');//removes norris box from hiding
             norrisFact(name);//displays norris-pokemon fact
+
+            renderSearchHistory();
 
         })
 
@@ -73,7 +84,10 @@ function renderPokemon(name) {
     function renderAbilities(abilitiesArr) {
         let HTML = '';
         for (let i = 0; i < abilitiesArr.length; i++) {
-            HTML += `<span> ${abilitiesArr[i].ability.name}</span>`
+            HTML += `<span> ${abilitiesArr[i].ability.name.charAt(0).toUpperCase() + (abilitiesArr[i].ability.name).slice(1)}</span>`
+            if (i < abilitiesArr.length - 1) {
+                HTML += ' /';
+              }
         }
         return HTML;
     }
@@ -82,7 +96,12 @@ function renderPokemon(name) {
     function renderTypes(typesArr) {
         let HTML = '';
         for (let i = 0; i < typesArr.length; i++) {
-            HTML += `<span> ${typesArr[i].type.name}</span>`
+            HTML += `<span> ${typesArr[i].type.name.charAt(0).toUpperCase() + (typesArr[i].type.name).slice(1)}</span>`
+            // credit to AI Xpert
+            if (i < typesArr.length - 1) {
+                HTML += ' /';
+              }
+              console.log(typesArr[0].type.name.charAt(0).toUpperCase() + (typesArr[0].type.name).slice(1))
         }
         return HTML;
     }
@@ -91,7 +110,7 @@ function renderPokemon(name) {
     function renderBaseStat(baseStatArr) {
         let HTML = '';
         for (let i = 0; i < baseStatArr.length; i++) {
-            HTML += `<li>${baseStatArr[i].stat.name}: ${baseStatArr[i].base_stat} </li>`
+            HTML += `<li>${baseStatArr[i].stat.name.toUpperCase()}: ${baseStatArr[i].base_stat} </li>`
         }
         return HTML;
     }
@@ -101,14 +120,14 @@ function renderPokemon(name) {
         let statCardHTML = ''
         statCardHTML +=
             `<div class="stat-element">
-                <p><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p>
-                <p><strong>HEIGHT:</strong> ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p>
-                <p><strong>WEIGHT:</strong> ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p>
-               <p><strong>ABILITIES:</strong> ${renderAbilities(data.abilities)} </p>
-               <p><strong>TYPES:</strong> ${renderTypes(data.types)}</p>
-               <ul><strong>STATS:</strong> ${renderBaseStat(data.stats)}</ul>
+                <p><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p><br>
+                <p><strong>HEIGHT:</strong> ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p><br>
+                <p><strong>WEIGHT:</strong> ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p><br>
+               <p><strong>ABILITIES:</strong> ${renderAbilities(data.abilities)} </p><br>
+               <p><strong>TYPES:</strong> ${renderTypes(data.types)}</p><br>
+               <ul><strong>STATS:</strong> ${renderBaseStat(data.stats)}</ul><br>
             </div>`
-        document.querySelector('#stat-page').setHTML(statCardHTML);
+        document.querySelector('#stat-page').innerHTML=statCardHTML;
     }
 };
 
@@ -116,6 +135,7 @@ function renderPokemon(name) {
 
 // Chuck Norris API Section
 const getRandomCategory = () => ['animal', 'career', 'celebrity', 'dev', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'science', 'sport', 'travel'][Math.floor(Math.random() * 13)];
+
 function norrisFact(name) {
 
     let catUrl = `https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random?category=${getRandomCategory()}`; // Chuck Norris API
@@ -141,10 +161,43 @@ function norrisFact(name) {
             if (cnQuote.includes(pluralNorris)) {
                 cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
             } else {
-                document.querySelector('#norris-quote').textContent = pkmnQuote;
+                document.querySelector('#norris-quote').innerHTML = `<p style = "font-size: 4vh">Did you know?</p> <br> ${pkmnQuote}`;
             }
         })
-
-
 };
-norrisFact();
+
+// ========================================
+// event listener for clicking search button
+// let pastPkmn = document.querySelector('.search-button');
+
+// pastPkmn.addEventListener('click', function addHistoryBtn(event) {
+//     event.preventDefault();
+
+//     let input = document.querySelector('input').value.toLowerCase();
+
+//     renderPokemon(input);
+// });
+
+function renderSearchHistory() {
+    let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
+
+
+
+    for (let i = 0; i < pkmnArr.length && i < 3; i++) {
+        let history = document.querySelector('#search-history')
+
+        history.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1);
+
+    }
+
+}
+
+document.querySelector('#search-history').addEventListener('click', function (event) { 
+    if (event.target.matches('.button')) {
+        // console.log(event.target.textContent);
+        let searchedPkmn = event.target.textContent.toLowerCase();
+        // console.log(searchedPkmn);
+        renderPokemon(searchedPkmn);
+     }
+});
+
