@@ -11,15 +11,16 @@ let norrisBox = document.querySelector('#norris-container');
 let body = document.querySelector('body');
 let statContainer = document.querySelector('#stat-container');
 let pokeInfo = document.querySelector('#stat-page');
+let mySquadBtn = document.querySelector('#my-squad');
 
 
 // We scraped data endpoint and reduced it to an array of names, pokeList.
 // Use this to build auto-complete feature for when user is searching names.
 console.log(pokeList);
 
-// This function is called at page load in order to have left side buttons already displaying last three searches
-// when user comes back.
+// These functions are called so they are functional at page load.
 renderSearchHistory();
+renderMySquad();
 
 // event listener for clicking search button
 searchBtn.addEventListener('click', function replaceName(event) {
@@ -74,7 +75,8 @@ function renderPokemon(name) {
             norrisBox.setAttribute('style', 'display:flex');//removes norris box from hiding
             norrisFact(name);//displays norris-pokemon fact
             renderSearchHistory(); //adds search history button
-            addMySquad(); // allows for double clicking to add to mySquad;
+            addMySquad(); // allows for double clicking to add to mySquad in local storage;
+
 
         })
 
@@ -178,36 +180,56 @@ document.querySelector('#search-history').addEventListener('click', function (ev
 });
 
 // ===========================================
-// mySquad code
+// mySquad feature
 function addMySquad() {
     //this enables the cursor to switch to cell icon to indicate user can now add to team
     statContainer.setAttribute('style', 'cursor: cell');
+
+    // I set a span id for the pokemon's name in statCard function so we can access whatever name is in stat-page
+    let mySquadName = document.querySelector('#squadName')
+    console.log(mySquadName.textContent.toLowerCase());
+    // Access array for mySquad
+    let addSquadPkmn = JSON.parse(localStorage.getItem('mySquad')) || [];
+    // console.log(addSquadPkmn[i]);
+
+    // this is what the double click event triggers
     statContainer.addEventListener('dblclick', function (event) {
         event.preventDefault();
 
-        // set a span id for the pokemon's name in statCard function so we can access whatever name is in stat-page
-        let mySquadName = document.querySelector('#squadName')
-        console.log(mySquadName.textContent.toLowerCase());
-        // Access array for mySquad
-        let mySquadPkmn= JSON.parse(localStorage.getItem('mySquad')) || [];
         // Resolves the issue that doubleclick was registering name more than once by eliminating dupes.
-        if (mySquadPkmn.includes(mySquadName.textContent.toLowerCase())) {
-            let index = mySquadPkmn.indexOf(mySquadName.textContent.toLowerCase());
-            mySquadPkmn.splice(index, 1);
+        if (addSquadPkmn.includes(mySquadName.textContent.toLowerCase())) {
+            let index = addSquadPkmn.indexOf(mySquadName.textContent.toLowerCase());
+            addSquadPkmn.splice(index, 1);
         }
-        // Add doubleclicked pokemon to array
-        mySquadPkmn.push(mySquadName.textContent.toLowerCase())
-        localStorage.setItem('mySquad', JSON.stringify(mySquadPkmn));
+        // Add double-clicked pokemon to array
+        addSquadPkmn.push(mySquadName.textContent.toLowerCase())
+        localStorage.setItem('mySquad', JSON.stringify(addSquadPkmn));
 
     });
-
 };
 
+// this listens for a click event on the mySquad button on the right of page
+function renderMySquad() {
+    mySquadBtn.addEventListener('click', function (event) {
+        event.preventDefault();
 
+        let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
 
+        pokeInfo.innerHTML = '';
+        console.log('this works');
 
+        for (let i = 0; i < mySquadArr.length && i < 6; i++) {
+            let squadList = document.createElement('ul');
+            let squadMember = document.createElement('li');
 
+            pokeInfo.appendChild(squadList);
+            squadList.appendChild(squadMember);
 
+            squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
+        };
+
+    });
+};
 
 // ===========================================
 
