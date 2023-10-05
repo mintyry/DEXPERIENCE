@@ -84,7 +84,10 @@ function renderPokemon(name) {
     function renderAbilities(abilitiesArr) {
         let HTML = '';
         for (let i = 0; i < abilitiesArr.length; i++) {
-            HTML += `<span> ${abilitiesArr[i].ability.name}</span>`
+            HTML += `<span> ${abilitiesArr[i].ability.name.charAt(0).toUpperCase() + (abilitiesArr[i].ability.name).slice(1)}</span>`
+            if (i < abilitiesArr.length - 1) {
+                HTML += ' /';
+              }
         }
         return HTML;
     }
@@ -93,7 +96,11 @@ function renderPokemon(name) {
     function renderTypes(typesArr) {
         let HTML = '';
         for (let i = 0; i < typesArr.length; i++) {
-            HTML += `<span> ${typesArr[i].type.name}</span>`
+            HTML += `<span> ${typesArr[i].type.name.charAt(0).toUpperCase() + (typesArr[i].type.name).slice(1)}</span>`
+            if (i < typesArr.length - 1) {
+                HTML += ' /';
+              }
+              console.log(typesArr[0].type.name.charAt(0).toUpperCase() + (typesArr[0].type.name).slice(1))
         }
         return HTML;
     }
@@ -102,7 +109,7 @@ function renderPokemon(name) {
     function renderBaseStat(baseStatArr) {
         let HTML = '';
         for (let i = 0; i < baseStatArr.length; i++) {
-            HTML += `<li>${baseStatArr[i].stat.name}: ${baseStatArr[i].base_stat} </li>`
+            HTML += `<li>${baseStatArr[i].stat.name.toUpperCase()}: ${baseStatArr[i].base_stat} </li>`
         }
         return HTML;
     }
