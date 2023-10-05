@@ -172,6 +172,7 @@ img{
 }
 
 #norris-fact button {
+    justify-content:flex-end;
     background: none;
 	color: inherit;
 	border: none;

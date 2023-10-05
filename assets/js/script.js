@@ -1,8 +1,6 @@
 // JS TODO List: 
-//  - find a way to display stats and list of games with the for loop.
-//  - need to create functionality for search button (event listener that takes user input), randomize button
 //  - need to save user input into local storage and render last three searches on page
-//  - right side buttons: pokemon of the day, quiz, user journal entry
+//  - right side buttons: pokemon of the day, mysquad, user journal entry
 //  - captialize abilities and types
 
 // Global Variables 
@@ -12,23 +10,21 @@ let searchBtn = document.querySelector('#search-button')
 let norrisBox = document.querySelector('#norris-container')
 let body = document.querySelector('body');
 
+console.log(pokeList);
+
 // event listener for clicking search button
 searchBtn.addEventListener('click', function replaceName(event) {
     event.preventDefault();
 
     let input = document.querySelector('input').value.toLowerCase();
-    document.querySelector('#norris-quote').textContent = ''
-
 
     renderPokemon(input);
+    renderSearchHistory();
 });
 
 // Pokemon API Section
 function renderPokemon(name) {
     let pokeUrl = `https://pokeapi.co/api/v2/pokemon/${name}`; //Pokemon API
-
-    //https://pokeapi.co/api/v2/pokemon/{name} will allow for user input to pass name in
-
 
     fetch(pokeUrl)
         .then(function (response) {
@@ -36,26 +32,21 @@ function renderPokemon(name) {
             if (!response.ok) {
                 body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);')
                 let errorMsg =
-                    `<p>That\'s not a Pokémon, LOL.</p>`;
+                    `<p>Oak's words echoed... "There's a time and place for everything but not now!"</p>`;
                 document.querySelector('#stat-page').setHTML(errorMsg);
                 document.querySelector('img').src = './assets/images/MissingNo.1.webp';
-                norrisBox.setAttribute('style', 'display:flex'); 
-                document.querySelector('#norris-fact').textContent = ''
-                typeWriter = () => { if (i < oaksQuote.length) {
-                    let i = 0
-                    let oaksQuote = 'Oak\'s words echoed... "There\'s a time and place for everything but not now!"'
-                    document.querySelector('#norris-quote').textContent += oaksQuote.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 20);
-                }}
-                typeWriter();
-              return;
+                norrisBox.setAttribute('style', 'display:flex');
+                document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
+                return;
             }
             document.querySelector('#norris-quote').textContent = '';
             body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
             return response.json();
+
         })
         .then(function (data) {
+
+            console.log(data);
 
             // using localStorage to save user's searches
             let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
@@ -67,13 +58,15 @@ function renderPokemon(name) {
             pkmnArr.unshift(data.name);
             localStorage.setItem('pokemon', JSON.stringify(pkmnArr));
 
+
+
             //all the actions that happen once we get data
 
             statCard(data); // DISPLAY pokemon info
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
             norrisBox.setAttribute('style', 'display:flex');//removes norris box from hiding
-            document.getElementById('norris-button').addEventListener('click', function (event) {
-             event.preventDefault(); if (!event.detail||event.detail === 1){norrisFact(name)} });//displays norris-pokemon fact
+            norrisFact(name);//displays norris-pokemon fact
+
         })
 
     // Renders the Image for the current Pokemon
@@ -129,9 +122,11 @@ function renderPokemon(name) {
 // ===========================================
 
 // Chuck Norris API Section
+const getRandomCategory = () => ['animal', 'career', 'celebrity', 'dev', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'science', 'sport', 'travel'][Math.floor(Math.random() * 13)];
+
 function norrisFact(name) {
 
-    const catUrl = 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random'; // Chuck Norris API
+    let catUrl = `https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random?category=${getRandomCategory()}`; // Chuck Norris API
     const options = {
         method: 'GET',
         headers: {
@@ -140,71 +135,54 @@ function norrisFact(name) {
             'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
         }
     };
-
-    let apiKey = '868927087amsh65a6ffffa5b7c46p19dcadjsn7079a2a63238';
-    //never read anywhere, do we need it?
-
     fetch(catUrl, options)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-
             console.log(data);
-            // testing to see if we can replace chuck norris' name
             let pokeName = `${name}`;
             console.log(pokeName);
             let cnQuote = data.value;
-            // let cnQuote = 'CHuck Norris is <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quidem blanditiis, perspiciatis minus aspernatur repellat. Nostrum aperiam accusamus sit blanditiis voluptatem aut magni dolorum. Odit voluptatum nobis sunt alias est.';
-
-
-            // console.log(pkmnQuote);
-            console.log(cnQuote);
-            if (cnQuote.includes('Chuck Norris\'')) {
-                let pkmnQuote = cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
-
-                // first we clear the container in case a fun fact is already loaded
-                document.querySelector('#norris-quote').innerHTML = ''
-
-                // then we create the function to add the animation to the fun fact
-                let i = 0;
-                function typeWriter() {
-                    if (i < pkmnQuote.length) {
-
-                //then we disable the button so that we don't have mutiple fetches happening at the same time
-                        document.getElementById('norris-button').disabled = true;
-                        document.querySelector('#norris-quote').textContent += pkmnQuote.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 20);
-                    } else if (pkmnQuote === pkmnQuote) {
-
-                // then we enable the button to allow another fun fact to be loaded for the same pokemon
-                        document.getElementById('norris-button').disabled = false;
-                    }
-                };
-                typeWriter();
+            let pkmnQuote = cnQuote.replaceAll(/Chuck Norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
+            let pluralNorris = 'Chuck Norris\'';
+            if (cnQuote.includes(pluralNorris)) {
+                cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
+            } else {
+                document.querySelector('#norris-quote').setHTML(`<p style = "font-size: 4vh">Did you know?</p> <br> ${pkmnQuote}`);
             }
-            else {
-                document.querySelector('#norris-quote').innerHTML = ''
-                let pkmnQuote = cnQuote.replaceAll(/chuck(?:\s+norris)?'?/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
-                let i = 0;
-                typeWriter = () => {
-                    if (i < pkmnQuote.length) {
-                        document.getElementById('norris-button').disabled = true;
-                        document.querySelector('#norris-quote').textContent += pkmnQuote.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 20);
-                    } else if (pkmnQuote === pkmnQuote) {
-                        document.getElementById('norris-button').disabled = false;
-                    }
-                }
-                typeWriter();
-            }
+        })
+};
+
+// ========================================
+// event listener for clicking search button
+// let pastPkmn = document.querySelector('.search-button');
+
+// pastPkmn.addEventListener('click', function addHistoryBtn(event) {
+//     event.preventDefault();
+
+//     let input = document.querySelector('input').value.toLowerCase();
+
+//     renderPokemon(input);
+// });
+
+function renderSearchHistory() {
+    let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
 
 
-        }
-        )
+
+    for (let i = 0; i < pkmnArr.length && i < 3; i++) {
+        let history = document.querySelector('#search-history')
+
+
+        history.children[i].textContent = pkmnArr[i];
+        console.log(pkmnArr);
+    }
+
 }
 
-//only problem is if chuck norris' name is used in possessive because of how apostrophe works.
-//need if statement to achieve this.
+document.querySelector('#search-history').addEventListener('click', function (event) { 
+    if (event.target.matches('.button')) {
+        console.log(event.target);
+     }
+});
