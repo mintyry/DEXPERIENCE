@@ -148,6 +148,11 @@ aside {
 
 }
 
+.button[disabled] {
+    opacity: 1;
+    color: rgb(91, 107, 89)
+}
+
 #search-history {
     transform: skew(0deg, -20deg);
 }

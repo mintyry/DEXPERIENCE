@@ -12,6 +12,7 @@ let body = document.querySelector('body');
 let statContainer = document.querySelector('#stat-container');
 let pokeInfo = document.querySelector('#stat-page');
 let mySquadBtn = document.querySelector('#my-squad');
+let historySection = document.querySelector('#search-history')
 
 
 // We scraped data endpoint and reduced it to an array of names, pokeList.
@@ -132,7 +133,7 @@ function renderPokemon(name) {
                 <p><strong>HEIGHT: </strong>${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p><br>
                 <p><strong>WEIGHT: </strong>${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p><br>
                <p><strong>ABILITIES: </strong>${renderAbilities(data.abilities)} </p><br>
-               <p><strong>TYPES: </strong>${renderTypes(data.types)}</p><br>
+               <p><strong>TYPES: </strong><span id = "squadType">${renderTypes(data.types)}</span></p><br>
                <ul><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
             </div>`
         document.querySelector('#stat-page').innerHTML = statCardHTML;
@@ -162,17 +163,21 @@ function renderSearchHistory() {
 
 }
 
+
+
+// We disable the search history buttons that do not have past searches in them.
+for (let i = 0; i < 3; i++) {
+    if (historySection.children[i].textContent === 'Search Pokémon') {
+        historySection.children[i].setAttribute('disabled', 'disabled');
+    };
+};
+
 // Event listener that listens for user's click on specific button in order to render
 // corresponding Pokemon's information.
 
 document.querySelector('#search-history').addEventListener('click', function (event) {
     if (event.target.matches('.button')) {
         let searchedPkmn = event.target.textContent.toLowerCase();
-
-        // We disable the search history buttons that do not have past searches in them.
-        if (event.target.textContent === 'Search Pokémon') {
-            document.querySelector('#search-history').children.setAttribute('disabled');
-        };
 
         // when the click goes through, we render pokemon info on stat-page.
         renderPokemon(searchedPkmn);
@@ -187,7 +192,9 @@ function addMySquad() {
 
     // I set a span id for the pokemon's name in statCard function so we can access whatever name is in stat-page
     let mySquadName = document.querySelector('#squadName')
+    let mySquadType = document.querySelector('#squadType')
     console.log(mySquadName.textContent.toLowerCase());
+    console.log(mySquadType.textContent);
     // Access array for mySquad
     let addSquadPkmn = JSON.parse(localStorage.getItem('mySquad')) || [];
     // console.log(addSquadPkmn[i]);
@@ -212,6 +219,8 @@ function addMySquad() {
 function renderMySquad() {
     mySquadBtn.addEventListener('click', function (event) {
         event.preventDefault();
+
+        pokeInfo.setAttribute('style', 'text-align: center');
 
         let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
 
