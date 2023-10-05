@@ -10,8 +10,12 @@ let searchBtn = document.querySelector('#search-button')
 let norrisBox = document.querySelector('#norris-container')
 let body = document.querySelector('body');
 
+// We scraped data endpoint and reduced it to an array of names, pokeList.
+// Use this to build auto-complete feature for when user is searching names.
 console.log(pokeList);
 
+// This function is called at page load in order to have left side buttons already displaying last three searches
+// when user comes back.
 renderSearchHistory();
 
 // event listener for clicking search button
@@ -132,6 +136,46 @@ function renderPokemon(name) {
 };
 
 // ===========================================
+// SEARCH HISTORY BUTTONS
+// Following code includes a function that generates user's last three Pokemon searches 
+// and renders names on the left side buttons.
+
+function renderSearchHistory() {
+    //We access array with key of pokemon to retrieve the names of the last three Pokemon user searched.
+    // If no searches have been made, we retrieve an empty array.
+
+    let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
+
+    // This loop access the search-history id element then its direct children,
+    // looping through each button and adding corresponding element indexed (pokemon names)
+    // in the array as text.
+    for (let i = 0; i < pkmnArr.length && i < 3; i++) {
+
+        let history = document.querySelector('#search-history')
+        history.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1);
+
+    }
+
+}
+
+// Event listener that listens for user's click on specific button in order to render
+// corresponding Pokemon's information.
+
+document.querySelector('#search-history').addEventListener('click', function (event) { 
+    if (event.target.matches('.button')) {
+        let searchedPkmn = event.target.textContent.toLowerCase();
+
+        // We disable the search history buttons that do not have past searches in them.
+        if (event.target.textContent === 'Search Pokémon'){
+            document.querySelector('#search-history').children.setAttribute('disabled');
+        };
+
+        // when the click goes through, we render pokemon info on stat-page.
+        renderPokemon(searchedPkmn);
+     }
+});
+
+// ===========================================
 
 // Chuck Norris API Section
 const getRandomCategory = () => ['animal', 'career', 'celebrity', 'dev', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'science', 'sport', 'travel'][Math.floor(Math.random() * 13)];
@@ -165,39 +209,4 @@ function norrisFact(name) {
             }
         })
 };
-
-// ========================================
-// event listener for clicking search button
-// let pastPkmn = document.querySelector('.search-button');
-
-// pastPkmn.addEventListener('click', function addHistoryBtn(event) {
-//     event.preventDefault();
-
-//     let input = document.querySelector('input').value.toLowerCase();
-
-//     renderPokemon(input);
-// });
-
-function renderSearchHistory() {
-    let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
-
-
-
-    for (let i = 0; i < pkmnArr.length && i < 3; i++) {
-        let history = document.querySelector('#search-history')
-
-        history.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1);
-
-    }
-
-}
-
-document.querySelector('#search-history').addEventListener('click', function (event) { 
-    if (event.target.matches('.button')) {
-        // console.log(event.target.textContent);
-        let searchedPkmn = event.target.textContent.toLowerCase();
-        // console.log(searchedPkmn);
-        renderPokemon(searchedPkmn);
-     }
-});
 
