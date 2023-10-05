@@ -68,6 +68,7 @@ body {
 /* edit */
 header {
     background-image: linear-gradient(to right, rgba(167, 167, 167, 0.5), rgba(167, 167, 167, 1), rgba(167, 167, 167, 1), rgba(167, 167, 167, 1), rgba(167, 167, 167, 0.5));
+    width: 100%;
 }
 
 #brand {
