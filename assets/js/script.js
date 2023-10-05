@@ -97,6 +97,7 @@ function renderPokemon(name) {
         let HTML = '';
         for (let i = 0; i < typesArr.length; i++) {
             HTML += `<span> ${typesArr[i].type.name.charAt(0).toUpperCase() + (typesArr[i].type.name).slice(1)}</span>`
+            // credit to AI Xpert
             if (i < typesArr.length - 1) {
                 HTML += ' /';
               }
