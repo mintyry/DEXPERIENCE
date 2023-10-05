@@ -6,9 +6,12 @@
 // Global Variables 
 let quoteSection = document.querySelector('#quote');
 let main = document.querySelector('main');
-let searchBtn = document.querySelector('#search-button')
-let norrisBox = document.querySelector('#norris-container')
+let searchBtn = document.querySelector('#search-button');
+let norrisBox = document.querySelector('#norris-container');
 let body = document.querySelector('body');
+let statContainer = document.querySelector('#stat-container');
+let pokeInfo = document.querySelector('#stat-page');
+
 
 // We scraped data endpoint and reduced it to an array of names, pokeList.
 // Use this to build auto-complete feature for when user is searching names.
@@ -52,8 +55,6 @@ function renderPokemon(name) {
         })
         .then(function (data) {
 
-            console.log(data);
-
             // using localStorage to save user's searches
             let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
 
@@ -72,8 +73,8 @@ function renderPokemon(name) {
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
             norrisBox.setAttribute('style', 'display:flex');//removes norris box from hiding
             norrisFact(name);//displays norris-pokemon fact
-
-            renderSearchHistory();
+            renderSearchHistory(); //adds search history button
+            addMySquad(); // allows for double clicking to add to mySquad;
 
         })
 
@@ -91,7 +92,7 @@ function renderPokemon(name) {
             HTML += `<span> ${abilitiesArr[i].ability.name.charAt(0).toUpperCase() + (abilitiesArr[i].ability.name).slice(1)}</span>`
             if (i < abilitiesArr.length - 1) {
                 HTML += ' /';
-              }
+            }
         }
         return HTML;
     }
@@ -104,8 +105,8 @@ function renderPokemon(name) {
             // credit to AI Xpert
             if (i < typesArr.length - 1) {
                 HTML += ' /';
-              }
-              console.log(typesArr[0].type.name.charAt(0).toUpperCase() + (typesArr[0].type.name).slice(1))
+            }
+            console.log(typesArr[0].type.name.charAt(0).toUpperCase() + (typesArr[0].type.name).slice(1))
         }
         return HTML;
     }
@@ -123,15 +124,16 @@ function renderPokemon(name) {
     function statCard(data) {
         let statCardHTML = ''
         statCardHTML +=
+            // gave pokemon name in first p tag a span id so we can access name for mySquad dblclick event
             `<div class="stat-element">
-                <p><strong>NAME:</strong> ${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</p><br>
-                <p><strong>HEIGHT:</strong> ${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p><br>
-                <p><strong>WEIGHT:</strong> ${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p><br>
-               <p><strong>ABILITIES:</strong> ${renderAbilities(data.abilities)} </p><br>
-               <p><strong>TYPES:</strong> ${renderTypes(data.types)}</p><br>
-               <ul><strong>STATS:</strong> ${renderBaseStat(data.stats)}</ul><br>
+                <p><strong>NAME: </strong><span id = "squadName">${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</span></p><br>
+                <p><strong>HEIGHT: </strong>${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p><br>
+                <p><strong>WEIGHT: </strong>${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p><br>
+               <p><strong>ABILITIES: </strong>${renderAbilities(data.abilities)} </p><br>
+               <p><strong>TYPES: </strong>${renderTypes(data.types)}</p><br>
+               <ul><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
             </div>`
-        document.querySelector('#stat-page').innerHTML=statCardHTML;
+        document.querySelector('#stat-page').innerHTML = statCardHTML;
     }
 };
 
@@ -161,19 +163,51 @@ function renderSearchHistory() {
 // Event listener that listens for user's click on specific button in order to render
 // corresponding Pokemon's information.
 
-document.querySelector('#search-history').addEventListener('click', function (event) { 
+document.querySelector('#search-history').addEventListener('click', function (event) {
     if (event.target.matches('.button')) {
         let searchedPkmn = event.target.textContent.toLowerCase();
 
         // We disable the search history buttons that do not have past searches in them.
-        if (event.target.textContent === 'Search Pokémon'){
+        if (event.target.textContent === 'Search Pokémon') {
             document.querySelector('#search-history').children.setAttribute('disabled');
         };
 
         // when the click goes through, we render pokemon info on stat-page.
         renderPokemon(searchedPkmn);
-     }
+    }
 });
+
+// ===========================================
+// mySquad code
+function addMySquad() {
+    //this enables the cursor to switch to cell icon to indicate user can now add to team
+    statContainer.setAttribute('style', 'cursor: cell');
+    statContainer.addEventListener('dblclick', function (event) {
+        event.preventDefault();
+
+        // set a span id for the pokemon's name in statCard function so we can access whatever name is in stat-page
+        let mySquadName = document.querySelector('#squadName')
+        console.log(mySquadName.textContent.toLowerCase());
+        // Access array for mySquad
+        let mySquadPkmn= JSON.parse(localStorage.getItem('mySquad')) || [];
+        // Resolves the issue that doubleclick was registering name more than once by eliminating dupes.
+        if (mySquadPkmn.includes(mySquadName.textContent.toLowerCase())) {
+            let index = mySquadPkmn.indexOf(mySquadName.textContent.toLowerCase());
+            mySquadPkmn.splice(index, 1);
+        }
+        // Add doubleclicked pokemon to array
+        mySquadPkmn.push(mySquadName.textContent.toLowerCase())
+        localStorage.setItem('mySquad', JSON.stringify(mySquadPkmn));
+
+    });
+
+};
+
+
+
+
+
+
 
 // ===========================================
 
