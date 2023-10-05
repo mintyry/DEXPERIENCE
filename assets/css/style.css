@@ -169,6 +169,17 @@ aside {
     background-image: linear-gradient(to left, rgb(195, 230, 190), rgba(160, 188, 156, 1), rgb(127, 150, 124));
 }
 
+.squad-mon {
+    list-style: none;
+    background-color: rgb(171, 200, 167);
+
+            padding: 1% 15%;
+            background-image: url("../images/pokeballmarker.png");
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: 3em;
+}
+
 figure {
     /* outline: 2px dashed rgb(255, 0, 144); */
     margin-left: auto;

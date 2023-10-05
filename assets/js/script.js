@@ -163,13 +163,11 @@ function renderSearchHistory() {
 
 }
 
-
-
 // We disable the search history buttons that do not have past searches in them.
 for (let i = 0; i < 3; i++) {
     if (historySection.children[i].textContent === 'Search Pokémon') {
         historySection.children[i].setAttribute('disabled', 'disabled');
-    };
+    }
 };
 
 // Event listener that listens for user's click on specific button in order to render
@@ -204,12 +202,15 @@ function addMySquad() {
         event.preventDefault();
 
         // Resolves the issue that doubleclick was registering name more than once by eliminating dupes.
-        if (addSquadPkmn.includes(mySquadName.textContent.toLowerCase())) {
-            let index = addSquadPkmn.indexOf(mySquadName.textContent.toLowerCase());
-            addSquadPkmn.splice(index, 1);
+        // if (addSquadPkmn.includes(mySquadName.textContent.toLowerCase())) {
+        //     let index = addSquadPkmn.indexOf(mySquadName.textContent.toLowerCase());
+        //     addSquadPkmn.splice(index, 1);
+        // }
+        // Add double-clicked pokemon to array, if team is full, removes first pokemon
+        if (addSquadPkmn.length >= 6) {
+            addSquadPkmn.shift();
         }
-        // Add double-clicked pokemon to array
-        addSquadPkmn.push(mySquadName.textContent.toLowerCase())
+        addSquadPkmn.push((mySquadName.textContent.toLowerCase()) + ' - ' + mySquadType.textContent);
         localStorage.setItem('mySquad', JSON.stringify(addSquadPkmn));
 
     });
@@ -220,8 +221,6 @@ function renderMySquad() {
     mySquadBtn.addEventListener('click', function (event) {
         event.preventDefault();
 
-        pokeInfo.setAttribute('style', 'text-align: center');
-
         let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
 
         pokeInfo.innerHTML = '';
@@ -230,6 +229,8 @@ function renderMySquad() {
         for (let i = 0; i < mySquadArr.length && i < 6; i++) {
             let squadList = document.createElement('ul');
             let squadMember = document.createElement('li');
+            squadMember.classList.add('squad-mon');
+            squadMember.setAttribute('style', 'margin-bottom: 1%');
 
             pokeInfo.appendChild(squadList);
             squadList.appendChild(squadMember);
