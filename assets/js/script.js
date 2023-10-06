@@ -213,6 +213,7 @@ function addMySquad() {
 function renderMySquad() {
     mySquadBtn.addEventListener('click', function (event) {
         event.preventDefault();
+        statContainer.setAttribute('style', 'cursor: auto');
 
         let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
 
@@ -229,6 +230,17 @@ function renderMySquad() {
             squadList.appendChild(squadMember);
 
             squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
+
+            squadMember.addEventListener('click', function (event) {
+                event.preventDefault();
+               
+                let listedPkmn = squadMember.textContent;
+                listedPkmn = listedPkmn.split(' -');
+                listedPkmn = listedPkmn[0].toLowerCase();
+                
+                renderPokemon(listedPkmn);
+            })
+
         };
 
     });
