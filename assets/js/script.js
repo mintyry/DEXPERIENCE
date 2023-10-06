@@ -419,6 +419,7 @@ function renderSearchHistory() {
     for (let i = 0; i < pkmnArr.length && i < 3; i++) {
         let history = document.querySelector('#search-history')
         history.children[i].textContent = pkmnArr[i];
+        historySection.children[i].removeAttribute('disabled');
         // console.log(pkmnArr);
     }
 };
