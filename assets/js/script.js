@@ -166,14 +166,15 @@ function norrisFact(name) {
 
             let pokeName = `${name}`;
             console.log(pokeName);
+            // let cnQuote = data.value;            
             let cnQuote = data.value;
             console.log(cnQuote)
-
+     
 
 
             let possessiveNorris = 'Chuck Norris\'';
             let insideQuotesNorris = `'Chuck Norris'`;
-            let pkmnQuote = cnQuote.replaceAll(/chuck?+ +norris?/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
+            let pkmnQuote = cnQuote.replaceAll(/chuck? norris?/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
             let pkmnPossessive = cnQuote.replaceAll(/chuck norris?'?s?/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
             let pkmnInsideQuotes = cnQuote.replaceAll(`'Chuck Norris'`, `'` + pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'`);
 
