@@ -244,8 +244,9 @@ img {
 }
 
 #norris-fact {
-    background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
     font-size: 3vh;
+    border-radius: 25px;
+    background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
     /* border-radius: 25px; */
     font-family: 'Press Start 2P';
     border-image: url(https://luttje.github.io/css-pokemon-gameboy/styles/images/frame-hd.png) 42 round;
@@ -254,6 +255,27 @@ img {
     padding: 1em;
     /* margin: 1em 0 0 0; */
 }
+
+#norris-fact button {
+    justify-content:flex-end;
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	/* cursor: pointer; */
+    font-family: 'Press Start 2P';
+    /* animation: blinking .5s steps(2, start) infinite; */
+}
+
+#norris-fact button span {
+    animation: blinking .5s steps(2, start) infinite;}
+
+
+@keyframes blinking {
+    to {
+      visibility: hidden;
+    }}
 
 #norris-quote {
     /* background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2)); */
