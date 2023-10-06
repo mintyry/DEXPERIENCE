@@ -68,6 +68,7 @@ body {
 /* edit */
 header {
     background-image: linear-gradient(to right, rgba(167, 167, 167, 0.5), rgba(167, 167, 167, 1), rgba(167, 167, 167, 1), rgba(167, 167, 167, 1), rgba(167, 167, 167, 0.5));
+    width: 100%;
 }
 
 #brand {
@@ -147,6 +148,11 @@ aside {
 
 }
 
+.button[disabled] {
+    opacity: 1;
+    color: rgb(91, 107, 89)
+}
+
 #search-history {
     transform: skew(0deg, -20deg);
 }
@@ -161,6 +167,17 @@ aside {
 
 #other-features>.side-btn {
     background-image: linear-gradient(to left, rgb(195, 230, 190), rgba(160, 188, 156, 1), rgb(127, 150, 124));
+}
+
+.squad-mon {
+    list-style: none;
+    background-color: rgb(171, 200, 167);
+
+            padding: 1% 15%;
+            background-image: url("../images/pokeballmarker.png");
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: 3em;
 }
 
 figure {
