@@ -22,6 +22,7 @@ console.log(pokeList);
 // These functions are called so they are functional at page load.
 renderSearchHistory();
 renderMySquad();
+// disableNoSearch();
 
 // event listener for clicking search button
 searchBtn.addEventListener('click', function replaceName(event) {
@@ -158,17 +159,9 @@ function renderSearchHistory() {
 
         let history = document.querySelector('#search-history')
         history.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1);
-
+        historySection.children[i].removeAttribute('disabled');
     }
-
 }
-
-// We disable the search history buttons that do not have past searches in them.
-for (let i = 0; i < 3; i++) {
-    if (historySection.children[i].textContent === 'Search Pokémon') {
-        historySection.children[i].setAttribute('disabled', 'disabled');
-    }
-};
 
 // Event listener that listens for user's click on specific button in order to render
 // corresponding Pokemon's information.
