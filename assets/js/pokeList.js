@@ -3876,3 +3876,5 @@ let pokeList = [
         "name": "ogerpon-cornerstone-mask"
     }
 ]
+
+// datalist
