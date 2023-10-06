@@ -1,36 +1,32 @@
-// JS TODO List:
-//  - need to save user input into local storage and render last three searches on page
-//  - right side buttons: pokemon of the day, mysquad, user journal entry
-//  - captialize abilities and types
-
 // Global Variables 
+let quoteSection = document.querySelector('#quote');
+let main = document.querySelector('main');
+let searchBtn = document.querySelector('#search-button');
+let norrisBox = document.querySelector('#norris-container');
+let body = document.querySelector('body');
+let statContainer = document.querySelector('#stat-container');
+let pokeInfo = document.querySelector('#stat-page');
+let mySquadBtn = document.querySelector('#my-squad');
+let historySection = document.querySelector('#search-history')
+let pod = document.querySelector("#pod");
+let ranBtn = document.querySelector('#random-button');
+let ranClick = localStorage.getItem('ranClick') || 0;
+let bodyEl = document.querySelector('#body');
+let image = document.querySelector('#pkmn-img');
+let quote = document.querySelector('#norris-quote');
 let search = document.querySelector('#search')
 let norrisQuote = document.querySelector('#norris-quote')
 let norrisBtn = document.querySelector('#norris-button')
-
-// Global Variables
-let quoteSection = document.querySelector("#quote");
-let main = document.querySelector("main");
-let searchBtn = document.querySelector("#search-button");
-let norrisBox = document.querySelector("#norris-container");
-let body = document.querySelector("body");
-let pod = document.querySelector("#pod");
-let statContainer = document.querySelector("#stat-container");
-let pokeInfo = document.querySelector("#stat-page");
-let mySquadBtn = document.querySelector("#my-squad");
-let historySection = document.querySelector("#search-history");
-
-// We scraped data endpoint and reduced it to an array of names, pokeList.
-// Use this to build auto-complete feature for when user is searching names.
-console.log(pokeList);
+let isAnimateActive = false;
 
 // These functions are called so they are functional at page load.
+randomPokemon();
 renderSearchHistory();
 renderMySquad();
-// disableNoSearch();
+pokemon_of_the_day();
 
 // event listener for clicking search button
-searchBtn.addEventListener('click', function replaceName(event) {
+searchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     let input = document.querySelector('input').value.toLowerCase();
     renderPokemon(input);
@@ -93,26 +89,25 @@ function renderPokemon(name) {
             addMySquad(); // allows for double clicking to add to mySquad in local storage;
         });
 }
+
 // Renders the Image for the current Pokemon
 function pokemonImg(data) {
-    let image = document.querySelector("#pkmn-img");
     let imgUrl = data.sprites.front_default;
-    image.setAttribute("src", imgUrl);
+    image.setAttribute('src', imgUrl)
 }
 
 // Renders the abilities of the Pokemon
 function renderAbilities(abilitiesArr) {
-    let HTML = "";
+    let HTML = '';
     for (let i = 0; i < abilitiesArr.length; i++) {
-        HTML += `<span> ${abilitiesArr[i].ability.name.charAt(0).toUpperCase() +
-            abilitiesArr[i].ability.name.slice(1)
-            }</span>`;
+        HTML += `<span> ${abilitiesArr[i].ability.name.charAt(0).toUpperCase() + (abilitiesArr[i].ability.name).slice(1)}</span>`
         if (i < abilitiesArr.length - 1) {
-            HTML += " /";
+            HTML += ' /';
         }
     }
     return HTML;
 }
+
 
 // Renders the different types of the Pokemon
 function renderTypes(typesArr) {
@@ -231,29 +226,66 @@ function addMySquad() {
 
 // this listens for a click event on the mySquad button on the right of page
 function renderMySquad() {
-    mySquadBtn.addEventListener("click", function (event) {
+    mySquadBtn.addEventListener('click', function (event) {
         event.preventDefault();
+        statContainer.setAttribute('style', 'cursor: auto');
 
-        let mySquadArr = JSON.parse(localStorage.getItem("mySquad")) || [];
+        let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
 
-        pokeInfo.innerHTML = "";
-        console.log("this works");
+        pokeInfo.innerHTML = '';
+        console.log('this works');
 
         for (let i = 0; i < mySquadArr.length && i < 6; i++) {
-            let squadList = document.createElement("ul");
-            let squadMember = document.createElement("li");
-            squadMember.classList.add("squad-mon");
-            squadMember.setAttribute("style", "margin-bottom: 1%");
+            let squadList = document.createElement('ul');
+            let squadMember = document.createElement('li');
+            squadMember.classList.add('squad-mon');
+            squadMember.setAttribute('style', 'margin-bottom: 1%');
 
             pokeInfo.appendChild(squadList);
             squadList.appendChild(squadMember);
 
-            squadMember.textContent =
-                mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
-        }
-    });
-}
+            squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
 
+            squadMember.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                let listedPkmn = squadMember.textContent;
+                listedPkmn = listedPkmn.split(' -');
+                listedPkmn = listedPkmn[0].toLowerCase();
+
+                renderPokemon(listedPkmn);
+            })
+
+        };
+
+    });
+};
+
+function mySquadList() {
+    let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
+
+    pokeInfo.innerHTML = '';
+    console.log('this works');
+
+    for (let i = 0; i < mySquadArr.length && i < 6; i++) {
+        let squadList = document.createElement('ul');
+        let squadMember = document.createElement('li');
+        squadMember.classList.add('squad-mon');
+        squadMember.setAttribute('style', 'margin-bottom: 1%');
+
+        squadMember.addEventListener('click', function (event) {
+            event.preventDefault();
+            let name = (event.target.textContent.split(' - ')[0].toLowerCase());
+            renderPokemon(name);
+        })
+
+        pokeInfo.appendChild(squadList);
+        squadList.appendChild(squadMember);
+
+        squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
+    };
+
+};
 // ===========================================
 
 // Chuck Norris API Section
@@ -303,25 +335,62 @@ function norrisFact(name) {
             if (cnQuote.match(possessiveNorris)) {
                 norrisQuote.textContent = ''
                 function typeWriter() {
+                    isAnimateActive = true;
+                    console.log(isAnimateActive);
                     if (i < pkmnPossessive.length) {
                         norrisQuote.textContent += pkmnPossessive.charAt(i);
                         i++
                         setTimeout(typeWriter, 20);
-                    };
+                    } else {
+                        isAnimateActive = false;
+                        console.log(isAnimateActive);
+
+                    }
+
                 };
-                typeWriter();
+
+                if (!isAnimateActive) {
+                    typeWriter();
+                }
+
             } else {
+                console.log(isAnimateActive);
                 norrisQuote.textContent = ''
                 function typeWriter() {
+                    isAnimateActive = true;
+                    console.log(isAnimateActive);
                     if (i < pkmnQuote.length) {
                         norrisQuote.textContent += pkmnQuote.charAt(i);
                         i++
                         setTimeout(typeWriter, 20);
-                    };
+                    } else {
+                        isAnimateActive = false;
+                        console.log(isAnimateActive);
+
+                    }
                 };
-                typeWriter();
+
+                if (!isAnimateActive) {
+                    typeWriter();
+                }
             };
         });
+};
+
+// Renders a random Pokemon upon the click
+function randomPokemon() {
+    ranBtn.addEventListener('click', function (event) {
+        event.preventDefault();
+        localStorage.setItem('ranClick', ranClick++);
+        if (ranClick === 50) {
+            pokeInfo.setHTML('Chuck Norris email address is Gmail@chucknorris.com');
+            image.src = './assets/images/chuckNorris.jpeg';
+            quote.setHTML('Chuck Norris proved that we are alone in the universe. We weren\'t before his first space expedition');
+        } else {
+            let random = pokeList[Math.floor(Math.random() * pokeList.length)].name;
+            renderPokemon(random);
+        }
+    })
 };
 
 // ========================================
@@ -400,9 +469,8 @@ pod.addEventListener("click", function () {
     const today = dayjs().format("MM/DD/YYYY");
     // console.log(today);
 
-    let pokemon = JSON.parse(localStorage.getItem(today));
-    // console .log (pokemon)
+    let pokemon = JSON.parse(localStorage.getItem(today)) || [];
+    console.log(pokemon)
     // console .log (pokemon.name)
     renderPokemon(pokemon.name);
 });
-pokemon_of_the_day();

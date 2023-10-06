@@ -91,7 +91,7 @@ header {
     flex: 1;
 }
 
-#search-button {
+#search-button, #random-button {
     flex-basis: 100%;
 }
 
