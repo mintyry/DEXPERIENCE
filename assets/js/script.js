@@ -26,6 +26,8 @@ searchBtn.addEventListener('click', function replaceName(event) {
     renderPokemon(input);
     renderSearchHistory();
     search.reset()
+    norrisQuote.textContent = ''
+
 });
 
 
@@ -46,8 +48,10 @@ function renderPokemon(name) {
                 document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
                 return;
             } else {
+            
             document.querySelector('#norris-quote').textContent = '';
             body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
+            
             return response.json();}
 
         })
@@ -77,6 +81,7 @@ function renderPokemon(name) {
 // added event listener to down arrow in norris quote then display norris-pokemon fact
             norrisBtn.addEventListener('click', function (event) {
                 event.preventDefault();
+                norrisQuote.textContent = ''
                 if (!event.detail || event.detail === 1) { norrisFact(name) }
             });
             
@@ -140,7 +145,6 @@ const getRandomCategory = () => ['animal', 'career', 'celebrity', 'dev', 'fashio
 
 function norrisFact(name) {
 
-
     let catUrl = `https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random?category=${getRandomCategory()}`; // Chuck Norris API
     const options = {
         method: 'GET',
@@ -150,36 +154,44 @@ function norrisFact(name) {
             'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
         }
     };
+
+
     fetch(catUrl, options)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
             console.log(data);
-            const pokeName = `${name}`;
+
+
+            let pokeName = `${name}`;
             console.log(pokeName);
-            const cnQuote = data.value;
+            let cnQuote = data.value;
+            console.log(cnQuote)
 
 
-            let pkmnQuote = cnQuote.replaceAll(/chuck norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
-            let pkmnPossessive = cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
-            let pkmnInsideQuotes = cnQuote.replaceAll(`'Chuck Norris'`, `'` + pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'`);
+
             let possessiveNorris = 'Chuck Norris\'';
             let insideQuotesNorris = `'Chuck Norris'`;
+            let pkmnQuote = cnQuote.replaceAll(/chuck?+ +norris?/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
+            let pkmnPossessive = cnQuote.replaceAll(/chuck norris?'?s?/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
+            let pkmnInsideQuotes = cnQuote.replaceAll(`'Chuck Norris'`, `'` + pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'`);
+
+            
+            
+
             let i = 0;
 
 
-            // console.log(cnQuote)
-
             if (cnQuote.includes(possessiveNorris)) {
                 console.log(pkmnPossessive)
-                norrisQuote.textContent = `${pkmnPossessive}`;            
+
+                // norrisQuote.textContent = `${pkmnPossessive}`;            
                 
                 // norrisQuote.textContent = ''            
                 // function typeWriter() {
                 //     if (i < pkmnPossessive.length) {
-
-                //         norrisQuote.textContent += pkmnPossessive.charAt[i];
+                //         norrisQuote.textContent += pkmnPossessive.charAt(i); 
                 //         i++
                 //         setTimeout(typeWriter, 20);
                 //     };
@@ -188,30 +200,38 @@ function norrisFact(name) {
 
             } else if (cnQuote.includes(insideQuotesNorris)) {
                 console.log(pkmnInsideQuotes)
-                norrisQuote.textContent = `${pkmnInsideQuotes}`;            
+
+                // norrisQuote.textContent = `${pkmnInsideQuotes}`;            
 
                 // norrisQuote.textContent = ''
                 // function typeWriter() {
+                //     // let i = 0;
+
                 //     if (i < pkmnInsideQuotes.length) {
-                //         norrisQuote.textContent += pkmnInsideQuotes.charAt[i];
+                //         norrisQuote.textContent += pkmnInsideQuotes.charAt(i);
                 //         i++
-                //         setTimeout(typeWriter, 20);
+                //         setTimeout(typeWriter, 20);                        
+
                 //     };
                 // };
                 // typeWriter();
+
             } else {
                 console.log(pkmnQuote)
-                norrisQuote.textContent = `${pkmnQuote}`;            
+
+                // norrisQuote.textContent = `${pkmnQuote}`;            
 
                 // norrisQuote.textContent = ''
                 // function typeWriter() {
+                //     // let i = 0;
                 //     if (i < pkmnQuote.length) {
-                //         norrisQuote.textContent += pkmnQuote.charAt[i];
+                //         norrisQuote.textContent += pkmnQuote.charAt(i);
                 //         i++
                 //         setTimeout(typeWriter, 20);
                 //     };
                 // };
                 // typeWriter();
+
             };
         });
 };
@@ -249,7 +269,7 @@ function renderSearchHistory() {
 
 
             history.children[i].textContent = pkmnArr[i];
-            console.log(pkmnArr);
+            // console.log(pkmnArr);
         }
 
     };
