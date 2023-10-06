@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- THis is our Stylesheet -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Dexperience</title>
 </head>
@@ -22,16 +25,15 @@
     </div> -->
 
     <!-- Header bar container for the Application; holds brand/name of app along with search bar and buttons -->
-    <header class="is-flex my-6">
+    <header class=" is-flex my-6 ">
 
         <!-- brand name -->
-        <h1 id="brand" class="pt-3">Dexperience</h1>
+        <h1 id="brand" class="pt-3 has-text-white has-text-centered is-size-1">DEXPERIENCE</h1>
 
         <!-- Form holds search box along with search and randomize buttons -->
-        <form id="search" class="is-flex is-flex-wrap-wrap">
-            <input id="search-bar" class="input autocomplete-input is-half" type="text" placeholder="Look for Pokémon">
+        <form id="search" class="is-flex is-flex-wrap-wrap py-3">
+            <input id="search-bar" class="input is-half" type="text" placeholder="Enter Pokémon Name">
             <button id="search-button" class="button is-primary" type="submit">Search</button>
-            <button id="random" class="button is-primary is-light">Randomize</button>
         </form>
         <!-- empty div to hold search form in center -->
         <div id="empty-right"></div>
@@ -45,11 +47,10 @@
         <!-- left side buttons holding search history -->
         <!-- TODO: buttons are touching the left side of the viewport; have it touch the center card -->
         <aside id="search-history"
-            class="column is-one-quarter is-flex is-flex-direction-column is-justify-content-space-between is-align-items-flex-end px-0 py-5">
-            <button class="side-btn button p-6">test</button>
-            <button class="side-btn button p-6">test</button>
-            <button class="side-btn button p-6">test</button>
-            </div>
+            class="column is-one-quarter is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-end px-0 py-5">
+            <button class="side-btn button p-6" disabled>Search Pokémon</button>
+            <button class="side-btn button p-6" disabled>Search Pokémon</button>
+            <button class="side-btn button p-6" disabled>Search Pokémon</button>
         </aside>
 
         <!-- center column holding stats -->
@@ -62,9 +63,9 @@
 
         <!-- right column holding feature buttons -->
         <aside id="other-features"
-            class="column is-one-quarter is-flex is-flex-direction-column is-justify-content-space-between is-align-items-flex-start px-0 py-5">
+            class="column is-one-quarter is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-start px-0 py-5">
             <button class="side-btn button p-6">Pokémon<br />of the Day</button>
-            <button class="side-btn button p-6">MySquad</button>
+            <button id="my-squad" class="side-btn button p-6">MySquad</button>
             <button class="side-btn button p-6">PokéJournal</button>
         </aside>
 
@@ -80,12 +81,12 @@
     <div id="norris-container" class="columns">
 
         <div id="norris-fact" class="column p-6 has-text-white is-8 is-offset-2">
-            <span id="did-you-know">Did you know?   </span> <button id="norris-button"><span>  ▼</span></button>
-        <p id="norris-quote" class="p-3"></p>
+            <span id="did-you-know">Did you know? </span> <button id="norris-button"><span> ▼</span></button>
+            <p id="norris-quote" class="p-3"></p>
         </div>
-       
-    </div>
 
+    </div>
+    <script src="./assets/js/pokeList.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
