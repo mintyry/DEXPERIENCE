@@ -35,7 +35,9 @@ body {
 
 #search {
     margin-left: -47px;
+    /* position:relative; */
 }
+
 
 #search-bar {
     border-image: url(../images/poke-frame-hd.png) 42 round;
@@ -43,6 +45,8 @@ body {
     border-style: solid;
     padding: 15px;
 }
+
+
 
 #brand {
     margin-left: 47px;

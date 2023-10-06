@@ -10,7 +10,12 @@ let searchBtn = document.querySelector('#search-button')
 let norrisBox = document.querySelector('#norris-container')
 let body = document.querySelector('body');
 
-console.log(pokeList);
+// added variable for readability
+let search = document.querySelector('#search')
+let norrisQuote = document.querySelector('#norris-quote')
+let norrisBtn = document.querySelector('#norris-button')
+
+// console.log(pokeList);
 
 // event listener for clicking search button
 searchBtn.addEventListener('click', function replaceName(event) {
@@ -20,7 +25,9 @@ searchBtn.addEventListener('click', function replaceName(event) {
 
     renderPokemon(input);
     renderSearchHistory();
+    search.reset()
 });
+
 
 // Pokemon API Section
 function renderPokemon(name) {
@@ -38,10 +45,10 @@ function renderPokemon(name) {
                 norrisBox.setAttribute('style', 'display:flex');
                 document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
                 return;
-            }
+            } else {
             document.querySelector('#norris-quote').textContent = '';
             body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
-            return response.json();
+            return response.json();}
 
         })
         .then(function (data) {
@@ -65,9 +72,15 @@ function renderPokemon(name) {
             statCard(data); // DISPLAY pokemon info
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
             norrisBox.setAttribute('style', 'display:flex');//removes norris box from hiding
-            norrisFact(name);//displays norris-pokemon fact
+            // norrisFact(name);//displays norris-pokemon fact
 
-        })
+// added event listener to down arrow in norris quote then display norris-pokemon fact
+            norrisBtn.addEventListener('click', function (event) {
+                event.preventDefault();
+                if (!event.detail || event.detail === 1) { norrisFact(name) }
+            });
+            
+    });
 
     // Renders the Image for the current Pokemon
     function pokemonImg(data) {
@@ -122,9 +135,11 @@ function renderPokemon(name) {
 // ===========================================
 
 // Chuck Norris API Section
+
 const getRandomCategory = () => ['animal', 'career', 'celebrity', 'dev', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'science', 'sport', 'travel'][Math.floor(Math.random() * 13)];
 
 function norrisFact(name) {
+
 
     let catUrl = `https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random?category=${getRandomCategory()}`; // Chuck Norris API
     const options = {
@@ -141,48 +156,100 @@ function norrisFact(name) {
         })
         .then(function (data) {
             console.log(data);
-            let pokeName = `${name}`;
+            const pokeName = `${name}`;
             console.log(pokeName);
-            let cnQuote = data.value;
-            let pkmnQuote = cnQuote.replaceAll(/Chuck Norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
-            let pluralNorris = 'Chuck Norris\'';
-            if (cnQuote.includes(pluralNorris)) {
-                cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
+            const cnQuote = data.value;
+
+
+            let pkmnQuote = cnQuote.replaceAll(/chuck norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
+            let pkmnPossessive = cnQuote.replaceAll('Chuck Norris\'', pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
+            let pkmnInsideQuotes = cnQuote.replaceAll(`'Chuck Norris'`, `'` + pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'`);
+            let possessiveNorris = 'Chuck Norris\'';
+            let insideQuotesNorris = `'Chuck Norris'`;
+            let i = 0;
+
+
+            // console.log(cnQuote)
+
+            if (cnQuote.includes(possessiveNorris)) {
+                console.log(pkmnPossessive)
+                norrisQuote.textContent = `${pkmnPossessive}`;            
+                
+                // norrisQuote.textContent = ''            
+                // function typeWriter() {
+                //     if (i < pkmnPossessive.length) {
+
+                //         norrisQuote.textContent += pkmnPossessive.charAt[i];
+                //         i++
+                //         setTimeout(typeWriter, 20);
+                //     };
+                // };
+                // typeWriter();
+
+            } else if (cnQuote.includes(insideQuotesNorris)) {
+                console.log(pkmnInsideQuotes)
+                norrisQuote.textContent = `${pkmnInsideQuotes}`;            
+
+                // norrisQuote.textContent = ''
+                // function typeWriter() {
+                //     if (i < pkmnInsideQuotes.length) {
+                //         norrisQuote.textContent += pkmnInsideQuotes.charAt[i];
+                //         i++
+                //         setTimeout(typeWriter, 20);
+                //     };
+                // };
+                // typeWriter();
             } else {
-                document.querySelector('#norris-quote').setHTML(`<p style = "font-size: 4vh">Did you know?</p> <br> ${pkmnQuote}`);
-            }
-        })
+                console.log(pkmnQuote)
+                norrisQuote.textContent = `${pkmnQuote}`;            
+
+                // norrisQuote.textContent = ''
+                // function typeWriter() {
+                //     if (i < pkmnQuote.length) {
+                //         norrisQuote.textContent += pkmnQuote.charAt[i];
+                //         i++
+                //         setTimeout(typeWriter, 20);
+                //     };
+                // };
+                // typeWriter();
+            };
+        });
 };
+    // ========================================
+    // event listener for clicking search button
+    // let pastPkmn = document.querySelector('.search-button');
 
-// ========================================
-// event listener for clicking search button
-// let pastPkmn = document.querySelector('.search-button');
+    // pastPkmn.addEventListener('click', function addHistoryBtn(event) {
+    //     event.preventDefault();
 
-// pastPkmn.addEventListener('click', function addHistoryBtn(event) {
-//     event.preventDefault();
+    //     let input = document.querySelector('input').value.toLowerCase();
 
-//     let input = document.querySelector('input').value.toLowerCase();
+    //     renderPokemon(input);
+    // });
 
-//     renderPokemon(input);
-// });
 
+
+    
+
+
+
+
+document.querySelector('#search-history').addEventListener('click', function (event) {
+        if (event.target.matches('.button')) {
+            console.log(event.target);
+        }
+    });
 function renderSearchHistory() {
-    let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
+        let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
 
 
 
-    for (let i = 0; i < pkmnArr.length && i < 3; i++) {
-        let history = document.querySelector('#search-history')
+        for (let i = 0; i < pkmnArr.length && i < 3; i++) {
+            let history = document.querySelector('#search-history')
 
 
-        history.children[i].textContent = pkmnArr[i];
-        console.log(pkmnArr);
-    }
+            history.children[i].textContent = pkmnArr[i];
+            console.log(pkmnArr);
+        }
 
-}
-
-document.querySelector('#search-history').addEventListener('click', function (event) { 
-    if (event.target.matches('.button')) {
-        console.log(event.target);
-     }
-});
+    };
