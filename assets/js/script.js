@@ -227,6 +227,7 @@ function renderMySquad() {
 
             pokeInfo.appendChild(squadList);
             squadList.appendChild(squadMember);
+            
 
             squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
 
