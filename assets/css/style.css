@@ -19,51 +19,8 @@ body {
     min-height: 100vh;
 }
 
-#bar {
-    /* outline: 1px dashed blue; */
-    position: relative;
-    left: 21%;
-}
-
-.vertbar {
-    display: flex;
-    background-color: lightsalmon;
-    /* background-image: linear-gradient(#d4faa3, #bdecdb, #bdecdb); */
-    height: 725px;
-    width: 60px;
-    position: absolute;
-
-}
-
-#bar-right {
-    /* outline: 1px dashed blue; */
-    position: relative;
-    left: 76.39%;
-}
-
-.vertbar-r {
-    display: flex;
-    background-color: lightsalmon;
-    /* background-image: linear-gradient(#d4faa3, #bdecdb, #bdecdb); */
-    height: 725px;
-    width: 60px;
-    position: absolute;
-
-}
 
 
-::placeholder {
-    font-style: 'Press Start 2P' !important;
-    color: rgb(255, 255, 255) !important;
-    opacity: 1;
-    /* Firefox */
-}
-
-::-ms-input-placeholder {
-    color: white !important;
-    font-style: 'Press Start 2P' !important;
-    /* Edge 12-18 */
-}
 
 #search-bar,
 #search-bar:hover,
@@ -120,11 +77,6 @@ header {
 }
 
 @media screen and (max-width: 320px) {
-
-    /* #search-button,
-    #random {
-        flex-basis: 100%;
-    } */
 
     #brand {
         margin-top: -40px;
