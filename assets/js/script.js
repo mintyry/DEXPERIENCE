@@ -32,6 +32,7 @@ searchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     let input = document.querySelector('input').value.toLowerCase();
     renderPokemon(input);
+    //why is norrisQuote clearing here? noticed that if user has pokemon info showing and searches empty search bar, it clears norris box while still showing pokemon info and img
     norrisQuote.textContent = ''
     search.reset();
 });
