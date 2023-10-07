@@ -37,7 +37,8 @@
 
         <!-- Form holds search box along with search and randomize buttons -->
         <form id="search" class="is-flex is-flex-wrap-wrap py-3">
-            <input id="search-bar" class="input is-half" type="text" placeholder="Enter Pokémon Name">
+            <input list="poke-recommendations" id="search-bar" class="input is-half" type="text" placeholder="Enter Pokémon Name">
+            <datalist id = "poke-recommendations"></datalist>
             <button id="search-button" class="button is-primary" type="submit">Search</button>
             <button id="random-button" class="button is-primary" type="submit">Random</button>
         </form>
@@ -54,9 +55,9 @@
         <!-- TODO: buttons are touching the left side of the viewport; have it touch the center card -->
         <aside id="search-history"
             class="column is-one-quarter is-flex is-flex-direction-column is-justify-content-center is-align-items-flex-end px-0 py-5">
-            <button class="side-btn button p-6" >Search Pokémon</button>
-            <button class="side-btn button p-6" >Search Pokémon</button>
-            <button class="side-btn button p-6" >Search Pokémon</button>
+            <button class="side-btn button p-6" disabled >Search Pokémon</button>
+            <button class="side-btn button p-6" disabled >Search Pokémon</button>
+            <button class="side-btn button p-6" disabled >Search Pokémon</button>
         </aside>
 
         <!-- center column holding stats -->

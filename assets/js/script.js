@@ -15,12 +15,14 @@ let search = document.querySelector('#search')
 let norrisQuote = document.querySelector('#norris-quote')
 let norrisBtn = document.querySelector('#norris-button')
 let isAnimateActive = false;
+let recommendations = document.querySelector('#poke-recommendations');
 
 // These functions are called so they are functional at page load.
 randomPokemon();
 renderSearchHistory();
 renderMySquad();
 pokemon_of_the_day();
+autoComplete();
 
 //Access this variable to to make auto-complete
 console.log(pokeList);
@@ -30,7 +32,7 @@ searchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     let input = document.querySelector('input').value.toLowerCase();
     renderPokemon(input);
-    norrisQuote.textContent = ''
+    norrisQuote.textContent = ''//what is the purpose of placement here? I found if user searches pokemon and displays it, then searches empty box, norrisQuote is empty while pokemon image and stats remain
     search.reset();
 });
 
@@ -382,3 +384,13 @@ pod.addEventListener('click', function () {
     // console .log (pokemon.name)
     renderPokemon(pokemon.name);
 });
+
+function autoComplete() {
+    for (let i = 0; i < pokeList.length; i++) {
+        let option = document.createElement('option');
+        option.setAttribute('value', pokeList[i].name.charAt(0).toUpperCase() + pokeList[i].name.slice(1));
+        console.log(pokeList[i].name)
+        recommendations.appendChild(option);
+        // console.log(recommendations);
+    }
+};
