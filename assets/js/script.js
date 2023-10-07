@@ -144,7 +144,7 @@ function statCard(data) {
                 <p><strong>WEIGHT: </strong>${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p><br>
                <p><strong>ABILITIES: </strong>${renderAbilities(data.abilities)} </p><br>
                <p><strong>TYPES: </strong><span id = "squadType">${renderTypes(data.types)}</span></p><br>
-               <ul><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
+               <ul id="pkmn-stats"><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
             </div>`
     pokeInfo.innerHTML= statCardHTML;
 };

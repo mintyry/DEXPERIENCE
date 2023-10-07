@@ -155,6 +155,10 @@ header {
     font-family: 'Press Start 2P';
 }
 
+#pkmn-stats {
+    margin-bottom: 20%;
+}
+
 aside {
     position: relative;
     top: 6.5vh;
@@ -211,7 +215,7 @@ figure {
     margin-left: auto;
     margin-right: auto;
     z-index: 2;
-    bottom: 165px;
+    bottom: 185px;
     width: 350px;
     margin-left: auto;
     margin-right: auto;
@@ -219,12 +223,10 @@ figure {
 
 }
 
-@media screen and (max-width: 745px) {
+@media screen and (max-width: 585px) {
 
     figure {
-        width: 350px;
-        margin-left: auto;
-        margin-right: auto;
+        margin-left: 50%;
     }
 }
 
