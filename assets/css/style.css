@@ -38,7 +38,7 @@ body {
 #bar-right {
     /* outline: 1px dashed blue; */
     position: relative;
-    left: 76.39%;
+    left: 76.35%;
 }
 
 .vertbar-r {
@@ -158,9 +158,10 @@ aside {
 
 .side-btn, .side-btn:focus {
     font-family: 'Antonio', sans-serif;
+    font-size: 1.6vw;
     width: 60%;
     height: 120px;
-    font-size: 80%;
+    font-size: 1em;
     text-align: center;
     white-space: normal;
     border: #d2d2d2 double 2px;

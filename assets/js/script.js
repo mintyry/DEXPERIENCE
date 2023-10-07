@@ -18,11 +18,11 @@ let isAnimateActive = false;
 let recommendations = document.querySelector('#poke-recommendations');
 
 // These functions are called so they are functional at page load.
+autoComplete();
 randomPokemon();
 renderSearchHistory();
 renderMySquad();
 pokemon_of_the_day();
-autoComplete();
 
 //Access this variable to to make auto-complete
 console.log(pokeList);
@@ -32,7 +32,7 @@ searchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     let input = document.querySelector('input').value.toLowerCase();
     renderPokemon(input);
-    norrisQuote.textContent = ''//what is the purpose of placement here? I found if user searches pokemon and displays it, then searches empty box, norrisQuote is empty while pokemon image and stats remain
+    norrisQuote.textContent = ''
     search.reset();
 });
 
@@ -164,7 +164,7 @@ function renderSearchHistory() {
     // in the array as text.
     for (let i = 0; i < pkmnArr.length && i < 3; i++) {
 
-        historySection.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1);
+        historySection.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + pkmnArr[i].slice(1)
         historySection.children[i].removeAttribute('disabled');
     }
 }
@@ -389,7 +389,7 @@ function autoComplete() {
     for (let i = 0; i < pokeList.length; i++) {
         let option = document.createElement('option');
         option.setAttribute('value', pokeList[i].name.charAt(0).toUpperCase() + pokeList[i].name.slice(1));
-        console.log(pokeList[i].name)
+        // console.log(pokeList[i].name)
         recommendations.appendChild(option);
         // console.log(recommendations);
     }
