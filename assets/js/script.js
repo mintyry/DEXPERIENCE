@@ -7,7 +7,7 @@ let statContainer = document.querySelector('#stat-container');
 let pokeInfo = document.querySelector('#stat-page');
 let mySquadBtn = document.querySelector('#my-squad');
 let historySection = document.querySelector('#search-history')
-let pod = document.querySelector("#pod");
+let pod = document.querySelector('#pod');
 let ranBtn = document.querySelector('#random-button');
 let ranClick = localStorage.getItem('ranClick') || 0;
 let image = document.querySelector('#pkmn-img');
@@ -22,7 +22,7 @@ renderSearchHistory();
 renderMySquad();
 pokemon_of_the_day();
 
-
+//Access this variable to to make auto-complete
 console.log(pokeList);
 
 // event listener for clicking search button
@@ -30,9 +30,8 @@ searchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     let input = document.querySelector('input').value.toLowerCase();
     renderPokemon(input);
-    renderSearchHistory();
-    search.reset()
     norrisQuote.textContent = ''
+    search.reset();
 });
 
 // Pokemon API Section
@@ -70,20 +69,20 @@ function renderPokemon(name) {
         })
         .then(function (data) {
             // using localStorage to save user's searches
-            let pkmnArr = JSON.parse(localStorage.getItem("pokemon")) || [];
+            let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
 
             if (pkmnArr.includes(data.name)) {
                 let index = pkmnArr.indexOf(data.name);
                 pkmnArr.splice(index, 1);
             }
             pkmnArr.unshift(data.name);
-            localStorage.setItem("pokemon", JSON.stringify(pkmnArr));
+            localStorage.setItem('pokemon', JSON.stringify(pkmnArr));
 
             //all the actions that happen once we get data
 
             statCard(data); // DISPLAY pokemon info
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
-            norrisBox.setAttribute("style", "display:flex"); //removes norris box from hiding
+            norrisBox.setAttribute('style', 'display:flex'); //removes norris box from hiding
             norrisFact(name); //displays norris-pokemon fact
             renderSearchHistory(); //adds search history button
             addMySquad(); // allows for double clicking to add to mySquad in local storage;
@@ -111,19 +110,13 @@ function renderAbilities(abilitiesArr) {
 
 // Renders the different types of the Pokemon
 function renderTypes(typesArr) {
-    let HTML = "";
+    let HTML = '';
     for (let i = 0; i < typesArr.length; i++) {
-        HTML += `<span> ${typesArr[i].type.name.charAt(0).toUpperCase() +
-            typesArr[i].type.name.slice(1)
-            }</span>`;
+        HTML += `<span> ${typesArr[i].type.name.charAt(0).toUpperCase() + typesArr[i].type.name.slice(1)}</span>`;
         // credit to AI Xpert
         if (i < typesArr.length - 1) {
-            HTML += " /";
+            HTML += ' /';
         }
-        console.log(
-            typesArr[0].type.name.charAt(0).toUpperCase() +
-            typesArr[0].type.name.slice(1)
-        );
     }
     return HTML;
 }
@@ -150,7 +143,7 @@ function statCard(data) {
                <p><strong>TYPES: </strong><span id = "squadType">${renderTypes(data.types)}</span></p><br>
                <ul><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
             </div>`
-    pokeInfo.setHTML(statCardHTML);
+    pokeInfo.innerHTML= statCardHTML;
 };
 
 // ===========================================
@@ -169,8 +162,7 @@ function renderSearchHistory() {
     // in the array as text.
     for (let i = 0; i < pkmnArr.length && i < 3; i++) {
 
-        let history = document.querySelector('#search-history')
-        history.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1);
+        historySection.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1);
         historySection.children[i].removeAttribute('disabled');
     }
 }
@@ -178,7 +170,7 @@ function renderSearchHistory() {
 // Event listener that listens for user's click on specific button in order to render
 // corresponding Pokemon's information.
 
-document.querySelector('#search-history').addEventListener('click', function (event) {
+historySection.addEventListener('click', function (event) {
     if (event.target.matches('.button')) {
         let searchedPkmn = event.target.textContent.toLowerCase();
 
@@ -191,34 +183,25 @@ document.querySelector('#search-history').addEventListener('click', function (ev
 // mySquad feature
 function addMySquad() {
     //this enables the cursor to switch to cell icon to indicate user can now add to team
-    statContainer.setAttribute("style", "cursor: cell");
+    statContainer.setAttribute('style', 'cursor: cell');
 
     // I set a span id for the pokemon's name in statCard function so we can access whatever name is in stat-page
-    let mySquadName = document.querySelector("#squadName");
-    let mySquadType = document.querySelector("#squadType");
-    console.log(mySquadName.textContent.toLowerCase());
-    console.log(mySquadType.textContent);
-    // Access array for mySquad
-    let addSquadPkmn = JSON.parse(localStorage.getItem("mySquad")) || [];
-    // console.log(addSquadPkmn[i]);
+    let mySquadName = document.querySelector('#squadName');
+    let mySquadType = document.querySelector('#squadType');
 
-    // this is what the double click event triggers
-    statContainer.addEventListener("dblclick", function (event) {
+    // Access array for mySquad
+    let addSquadPkmn = JSON.parse(localStorage.getItem('mySquad')) || [];
+
+    // This is what the double click event triggers
+    statContainer.addEventListener('dblclick', function (event) {
         event.preventDefault();
 
-        // Resolves the issue that doubleclick was registering name more than once by eliminating dupes.
-        // if (addSquadPkmn.includes(mySquadName.textContent.toLowerCase())) {
-        //     let index = addSquadPkmn.indexOf(mySquadName.textContent.toLowerCase());
-        //     addSquadPkmn.splice(index, 1);
-        // }
         // Add double-clicked pokemon to array, if team is full, removes first pokemon
         if (addSquadPkmn.length >= 6) {
             addSquadPkmn.shift();
         }
-        addSquadPkmn.push(
-            mySquadName.textContent.toLowerCase() + " - " + mySquadType.textContent
-        );
-        localStorage.setItem("mySquad", JSON.stringify(addSquadPkmn));
+        addSquadPkmn.push(mySquadName.textContent.toLowerCase() + ' - ' + mySquadType.textContent);
+        localStorage.setItem('mySquad', JSON.stringify(addSquadPkmn));
     });
 }
 
@@ -246,11 +229,11 @@ function renderMySquad() {
 
             squadMember.addEventListener('click', function (event) {
                 event.preventDefault();
-               
+
                 let listedPkmn = squadMember.textContent;
                 listedPkmn = listedPkmn.split(' -');
                 listedPkmn = listedPkmn[0].toLowerCase();
-                
+
                 renderPokemon(listedPkmn);
             })
 
@@ -259,69 +242,26 @@ function renderMySquad() {
     });
 };
 
-function mySquadList() {
-    let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
-
-    pokeInfo.innerHTML = '';
-    console.log('this works');
-
-    for (let i = 0; i < mySquadArr.length && i < 6; i++) {
-        let squadList = document.createElement('ul');
-        let squadMember = document.createElement('li');
-        squadMember.classList.add('squad-mon');
-        squadMember.setAttribute('style', 'margin-bottom: 1%');
-
-        squadMember.addEventListener('click', function (event) {
-            event.preventDefault();
-            let name = (event.target.textContent.split(' - ')[0].toLowerCase());
-            renderPokemon(name);
-        })
-
-        pokeInfo.appendChild(squadList);
-        squadList.appendChild(squadMember);
-
-        squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
-    };
-
-};
 // ===========================================
 
 // Chuck Norris API Section
-const getRandomCategory = () =>
-    [
-        "animal",
-        "career",
-        "celebrity",
-        "dev",
-        "fashion",
-        "food",
-        "history",
-        "money",
-        "movie",
-        "music",
-        "science",
-        "sport",
-        "travel",
-    ][Math.floor(Math.random() * 13)];
+const getRandomCategory = () => ['animal', 'career', 'celebrity', 'dev', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'science', 'sport', 'travel'][Math.floor(Math.random() * 13)];
 
 function norrisFact(name) {
     let catUrl = `https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random?category=${getRandomCategory()}`; // Chuck Norris API
     const options = {
-        method: "GET",
+        method: 'GET',
         headers: {
-            accept: "application/json",
-            "X-RapidAPI-Key": "868927087amsh65a6ffffa5b7c46p19dcadjsn7079a2a63238",
-            "X-RapidAPI-Host": "matchilling-chuck-norris-jokes-v1.p.rapidapi.com",
+            accept: 'application/json',
+            'X-RapidAPI-Key': '868927087amsh65a6ffffa5b7c46p19dcadjsn7079a2a63238',
+            'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com',
         },
     };
     fetch(catUrl, options)
         .then(function (response) {
-
             return response.json();
-
         })
         .then(function (data) {
-
             let pokeName = `${name}`;
             let cnQuote = data.value;
             let pkmnQuote = cnQuote.replaceAll(/chuck norris|chuck|norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
@@ -342,9 +282,7 @@ function norrisFact(name) {
                     } else {
                         isAnimateActive = false;
                         console.log(isAnimateActive);
-
                     }
-
                 };
 
                 if (!isAnimateActive) {
@@ -381,9 +319,9 @@ function randomPokemon() {
         event.preventDefault();
         localStorage.setItem('ranClick', ranClick++);
         if (ranClick === 50) {
-            pokeInfo.setHTML('Chuck Norris email address is Gmail@chucknorris.com');
+            pokeInfo.innerHTML ='Chuck Norris email address is Gmail@chucknorris.com';
             image.src = './assets/images/chuckNorris.jpeg';
-            norrisQuote.setHTML('Chuck Norris proved that we are alone in the universe. We weren\'t before his first space expedition');
+            norrisQuote.innerHTML = 'Chuck Norris proved that we are alone in the universe. We weren\'t before his first space expedition';
         } else {
             let random = pokeList[Math.floor(Math.random() * pokeList.length)].name;
             renderPokemon(random);
@@ -391,59 +329,33 @@ function randomPokemon() {
     })
 };
 
-// ========================================
-
-// event listener for clicking search button
-// let pastPkmn = document.querySelector('.search-button');
-
-// pastPkmn.addEventListener('click', function addHistoryBtn(event) {
-//     event.preventDefault();
-
-//     let input = document.querySelector('input').value.toLowerCase();
-
-//     renderPokemon(input);
-// });
-
-document.querySelector('#search-history').addEventListener('click', function (event) {
-    if (event.target.matches('.button')) {
-        console.log(event.target);
-    }
-});
-
-
-function renderSearchHistory() {
-    let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
-
-    for (let i = 0; i < pkmnArr.length && i < 3; i++) {
-        let history = document.querySelector('#search-history')
-        history.children[i].textContent = pkmnArr[i];
-        historySection.children[i].removeAttribute('disabled');
-        // console.log(pkmnArr);
-    }
-};
-
-
 function pokemon_of_the_day() {
-    const today = dayjs().format("MM/DD/YYYY");
+
+    const today = dayjs().format('MM/DD/YYYY');
     console.log(today);
 
     let pokemon = localStorage.getItem(today);
     console.log(pokemon);
-    pokemon = pokemon ? JSON.parse(pokemon) : null;
+
+    if (pokemon) {
+        pokemon = JSON.parse(pokemon);
+      } else {
+        pokemon = null;
+      }
 
     if (pokemon === null) {
-        console.log("Fetching new Pokemon...");
-        const randomId = Math.floor(Math.random() * 200);
+        console.log('Fetching new Pokemon...');
+        const randomId = Math.floor(Math.random() * pokeList.length);
         const url = `https://pokeapi.co/api/v2/pokemon/${randomId}/`;
 
         fetch(url)
-            .then((res) => {
+            .then(function (res) {
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
                 return res.json();
             })
-            .then((data) => {
+            .then(function (data) {
                 const pokemonData = {
                     name: data.name,
                     id: data.id,
@@ -453,19 +365,16 @@ function pokemon_of_the_day() {
                 // Saving the Pokemon data to localStorage
                 localStorage.setItem(today, JSON.stringify(pokemonData));
             })
-            .catch((error) => {
-                console.error(
-                    "There has been a problem with your fetch operation:",
-                    error
-                );
+            .catch(function(error) {
+                console.error('There has been a problem with your fetch operation:', error);
             });
     } else {
-        console.log("Pokemon already created:", pokemon);
+        console.log('Pokemon already created:', pokemon);
     }
 }
 
-pod.addEventListener("click", function () {
-    const today = dayjs().format("MM/DD/YYYY");
+pod.addEventListener('click', function () {
+    const today = dayjs().format('MM/DD/YYYY');
     // console.log(today);
 
     let pokemon = JSON.parse(localStorage.getItem(today)) || [];
