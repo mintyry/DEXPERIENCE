@@ -5,7 +5,8 @@ function pokemon_of_the_day() {
 
     let pokemon = localStorage.getItem(today);
     console .log (pokemon)
-    // pokemon = pokemon ? JSON.parse(pokemon) : null;
+    
+   
 
     if (pokemon === null) {
         console.log("Fetching new Pokemon...");

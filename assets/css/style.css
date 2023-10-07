@@ -21,14 +21,32 @@ body {
 
 #bar {
     /* outline: 1px dashed blue; */
+    position: relative;
+    left: 21%;
 }
 
 .vertbar {
     display: flex;
     background-color: lightsalmon;
     /* background-image: linear-gradient(#d4faa3, #bdecdb, #bdecdb); */
-    height: 575px;
-    /* width: 60px; */
+    height: 725px;
+    width: 60px;
+    position: absolute;
+
+}
+
+#bar-right {
+    /* outline: 1px dashed blue; */
+    position: relative;
+    left: 76.39%;
+}
+
+.vertbar-r {
+    display: flex;
+    background-color: lightsalmon;
+    /* background-image: linear-gradient(#d4faa3, #bdecdb, #bdecdb); */
+    height: 725px;
+    width: 60px;
     position: absolute;
 
 }
@@ -47,7 +65,10 @@ body {
     /* Edge 12-18 */
 }
 
-#search-bar, #search-bar:hover, #search-bar:focus, #search-bar:active {
+#search-bar,
+#search-bar:hover,
+#search-bar:focus,
+#search-bar:active {
     /* border-image: url(https://luttje.github.io/css-pokemon-gameboy/styles/images/frame-hd.png) 42 round;
     border-width: 21px;
     border-style: solid;
@@ -69,6 +90,8 @@ body {
 header {
     background-image: linear-gradient(to right, rgba(167, 167, 167, 0.5), rgba(167, 167, 167, 1), rgba(167, 167, 167, 1), rgba(167, 167, 167, 1), rgba(167, 167, 167, 0.5));
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 #brand {
@@ -80,7 +103,7 @@ header {
     text-wrap: nowrap;
     font-size: 3vw;
     font-family: 'Antonio', sans-serif;
-    background: -webkit-linear-gradient(#fff, #fff,rgba(148, 148, 148, 0.2));
+    background: -webkit-linear-gradient(#fff, #fff, rgba(148, 148, 148, 0.2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
@@ -91,7 +114,8 @@ header {
     flex: 1;
 }
 
-#search-button, #random-button {
+#search-button,
+#random-button {
     flex-basis: 100%;
 }
 
@@ -136,11 +160,13 @@ aside {
     top: 6.5vh;
 }
 
-.side-btn, .side-btn:focus {
+.side-btn,
+.side-btn:focus {
     font-family: 'Antonio', sans-serif;
+    font-size: 1.6vw;
     width: 60%;
     height: 120px;
-    font-size: 80%;
+    font-size: 1em;
     text-align: center;
     white-space: normal;
     border: #d2d2d2 double 2px;
@@ -172,12 +198,12 @@ aside {
 .squad-mon {
     list-style: none;
     background-color: rgb(171, 200, 167);
-
-            padding: 1% 15%;
-            background-image: url("../images/pokeballmarker.png");
-            background-repeat: no-repeat;
-            background-position: left center;
-            background-size: 3em;
+    padding: 1% 15%;
+    background-image: url("../images/pokeballmarker.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 3em;
+    cursor: pointer;
 }
 
 figure {
@@ -189,13 +215,13 @@ figure {
     width: 350px;
     margin-left: auto;
     margin-right: auto;
-  
+
 
 }
 
 @media screen and (max-width: 745px) {
 
-   figure {
+    figure {
         width: 350px;
         margin-left: auto;
         margin-right: auto;
@@ -257,25 +283,27 @@ img {
 }
 
 #norris-fact button {
-    justify-content:flex-end;
+    justify-content: flex-end;
     background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	/* cursor: pointer; */
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    /* cursor: pointer; */
     font-family: 'Press Start 2P';
     /* animation: blinking .5s steps(2, start) infinite; */
 }
 
 #norris-fact button span {
-    animation: blinking .5s steps(2, start) infinite;}
+    animation: blinking .5s steps(2, start) infinite;
+}
 
 
 @keyframes blinking {
     to {
-      visibility: hidden;
-    }}
+        visibility: hidden;
+    }
+}
 
 #norris-quote {
     /* background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2)); */
