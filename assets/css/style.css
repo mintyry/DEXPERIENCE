@@ -21,14 +21,32 @@ body {
 
 #bar {
     /* outline: 1px dashed blue; */
+    position: relative;
+    left: 21%;
 }
 
 .vertbar {
     display: flex;
     background-color: lightsalmon;
     /* background-image: linear-gradient(#d4faa3, #bdecdb, #bdecdb); */
-    height: 575px;
-    /* width: 60px; */
+    height: 725px;
+    width: 60px;
+    position: absolute;
+
+}
+
+#bar-right {
+    /* outline: 1px dashed blue; */
+    position: relative;
+    left: 76.39%;
+}
+
+.vertbar-r {
+    display: flex;
+    background-color: lightsalmon;
+    /* background-image: linear-gradient(#d4faa3, #bdecdb, #bdecdb); */
+    height: 725px;
+    width: 60px;
     position: absolute;
 
 }
@@ -69,6 +87,8 @@ body {
 header {
     background-image: linear-gradient(to right, rgba(167, 167, 167, 0.5), rgba(167, 167, 167, 1), rgba(167, 167, 167, 1), rgba(167, 167, 167, 1), rgba(167, 167, 167, 0.5));
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 #brand {

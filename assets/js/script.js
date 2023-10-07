@@ -1,5 +1,4 @@
 // Global Variables 
-let quoteSection = document.querySelector('#quote');
 let main = document.querySelector('main');
 let searchBtn = document.querySelector('#search-button');
 let norrisBox = document.querySelector('#norris-container');
@@ -11,9 +10,7 @@ let historySection = document.querySelector('#search-history')
 let pod = document.querySelector("#pod");
 let ranBtn = document.querySelector('#random-button');
 let ranClick = localStorage.getItem('ranClick') || 0;
-let bodyEl = document.querySelector('#body');
 let image = document.querySelector('#pkmn-img');
-let quote = document.querySelector('#norris-quote');
 let search = document.querySelector('#search')
 let norrisQuote = document.querySelector('#norris-quote')
 let norrisBtn = document.querySelector('#norris-button')
@@ -24,6 +21,9 @@ randomPokemon();
 renderSearchHistory();
 renderMySquad();
 pokemon_of_the_day();
+
+
+console.log(pokeList);
 
 // event listener for clicking search button
 searchBtn.addEventListener('click', function (event) {
@@ -162,32 +162,30 @@ function renderSearchHistory() {
     //We access array with key of pokemon to retrieve the names of the last three Pokemon user searched.
     // If no searches have been made, we retrieve an empty array.
 
-    let pkmnArr = JSON.parse(localStorage.getItem("pokemon")) || [];
+    let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
 
     // This loop access the search-history id element then its direct children,
     // looping through each button and adding corresponding element indexed (pokemon names)
     // in the array as text.
     for (let i = 0; i < pkmnArr.length && i < 3; i++) {
-        let history = document.querySelector("#search-history");
-        history.children[i].textContent =
-            pkmnArr[i].charAt(0).toUpperCase() + pkmnArr[i].slice(1);
-        historySection.children[i].removeAttribute("disabled");
+
+        let history = document.querySelector('#search-history')
+        history.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + (pkmnArr[i]).slice(1);
+        historySection.children[i].removeAttribute('disabled');
     }
 }
 
 // Event listener that listens for user's click on specific button in order to render
 // corresponding Pokemon's information.
 
-document
-    .querySelector("#search-history")
-    .addEventListener("click", function (event) {
-        if (event.target.matches(".button")) {
-            let searchedPkmn = event.target.textContent.toLowerCase();
+document.querySelector('#search-history').addEventListener('click', function (event) {
+    if (event.target.matches('.button')) {
+        let searchedPkmn = event.target.textContent.toLowerCase();
 
-            // when the click goes through, we render pokemon info on stat-page.
-            renderPokemon(searchedPkmn);
-        }
-    });
+        // when the click goes through, we render pokemon info on stat-page.
+        renderPokemon(searchedPkmn);
+    }
+});
 
 // ===========================================
 // mySquad feature
@@ -385,7 +383,7 @@ function randomPokemon() {
         if (ranClick === 50) {
             pokeInfo.setHTML('Chuck Norris email address is Gmail@chucknorris.com');
             image.src = './assets/images/chuckNorris.jpeg';
-            quote.setHTML('Chuck Norris proved that we are alone in the universe. We weren\'t before his first space expedition');
+            norrisQuote.setHTML('Chuck Norris proved that we are alone in the universe. We weren\'t before his first space expedition');
         } else {
             let random = pokeList[Math.floor(Math.random() * pokeList.length)].name;
             renderPokemon(random);
