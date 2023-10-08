@@ -16,6 +16,7 @@ let norrisQuote = document.querySelector('#norris-quote')
 let norrisBtn = document.querySelector('#norris-button')
 let isAnimateActive = false;
 let recommendations = document.querySelector('#poke-recommendations');
+let pokeJournalBtn = document.querySelector('#poke-journal');
 
 // These functions are called so they are functional at page load.
 autoComplete();
@@ -23,6 +24,8 @@ randomPokemon();
 renderSearchHistory();
 renderMySquad();
 pokemon_of_the_day();
+renderJournal();
+
 
 //Access this variable to to make auto-complete
 console.log(pokeList);
@@ -396,3 +399,25 @@ function autoComplete() {
         // console.log(recommendations);
     }
 };
+
+function renderJournal() {
+  pokeJournalBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    pokeInfo.textContent = '';
+  
+    let textarea = document.createElement('textarea');
+    textarea.setAttribute('rows', '30');
+    textarea.setAttribute('cols', '31');
+    pokeInfo.appendChild(textarea);
+    console.log(pokeInfo);
+
+    let pokeJournal = localStorage.getItem('pokeJournal') || '';
+    textarea.textContent = pokeJournal;
+
+    textarea.addEventListener('keyup', function () {
+    localStorage.setItem('pokeJournal', textarea.value);
+
+    });
+  });
+}
