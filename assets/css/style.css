@@ -274,4 +274,5 @@ textarea {
     outline: none;
     font-size: 0.8rem;
     font-family: 'Press Start 2P';
+    max-width: 100%;
  }

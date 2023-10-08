@@ -407,8 +407,9 @@ function renderJournal() {
     pokeInfo.textContent = '';
   
     let textarea = document.createElement('textarea');
-    textarea.setAttribute('rows', '30');
-    textarea.setAttribute('cols', '31');
+    textarea.setAttribute('rows', '28');
+    textarea.setAttribute('cols', '50');
+    textarea.setAttribute('placeholder', 'Type notes here...');
     pokeInfo.appendChild(textarea);
     console.log(pokeInfo);
 
