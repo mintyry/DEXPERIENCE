@@ -265,3 +265,13 @@ img {
     border-radius: 25px;
     font-family: 'Press Start 2P';
 }
+
+textarea {
+    background-color: transparent;
+    resize: none;
+    border: none;
+    border-bottom: 1px black;
+    outline: none;
+    font-size: 0.8rem;
+    font-family: 'Press Start 2P';
+ }
