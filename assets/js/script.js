@@ -337,6 +337,7 @@ function randomPokemon() {
     })
 };
 
+//problem with this is its trying to use data, when we have list of names. the data accesses id number which doesnt always work.
 function pokemon_of_the_day() {
 
     const today = dayjs().format('MM/DD/YYYY');
