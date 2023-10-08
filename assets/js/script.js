@@ -19,12 +19,12 @@ let recommendations = document.querySelector('#poke-recommendations');
 let pokeJournalBtn = document.querySelector('#poke-journal');
 
 // These functions are called so they are functional at page load.
-autoComplete();
-randomPokemon();
-renderSearchHistory();
-renderMySquad();
-pokemon_of_the_day();
-renderJournal();
+autoComplete(); // When user types in search bar, they get recomendations of names based on what they type.
+randomPokemon(); // User clicks randomize, and page will render a random Pokemon.
+renderSearchHistory(); //Search history buttons with prior searches will be displayed
+renderMySquad(); // When user clicks MySquad button, it will show their team.
+pokemon_of_the_day(); //User clicks PotD button, it will render info for that Pokemon for an entire day.
+renderJournal(); // User clicks PokeJournal button, they now have access to notes that will autosave.
 
 
 //Access this variable to to make auto-complete
