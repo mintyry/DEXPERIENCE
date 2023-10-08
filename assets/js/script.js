@@ -142,11 +142,11 @@ function statCard(data) {
     statCardHTML +=
         // gave pokemon name in first p tag a span id so we can access name for mySquad dblclick event
         `<div class="stat-element">
-                <p><strong>NAME: </strong><span id = "squadName">${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</span></p><br>
-                <p><strong>HEIGHT: </strong>${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p><br>
-                <p><strong>WEIGHT: </strong>${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p><br>
-               <p><strong>ABILITIES: </strong>${renderAbilities(data.abilities)} </p><br>
-               <p><strong>TYPES: </strong><span id = "squadType">${renderTypes(data.types)}</span></p><br>
+                <p class= "statline"><strong>NAME: </strong><span id = "squadName">${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</span></p>
+                <p class= "statline"><strong>HEIGHT: </strong>${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p>
+                <p class= "statline"><strong>WEIGHT: </strong>${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p>
+               <p class= "statline"><strong>ABILITIES: </strong>${renderAbilities(data.abilities)} </p>
+               <p class= "statline"><strong>TYPES: </strong><span id = "squadType">${renderTypes(data.types)}</span></p>
                <ul id="pkmn-stats"><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
             </div>`
     pokeInfo.innerHTML= statCardHTML;
