@@ -34,15 +34,18 @@ console.log(pokeList);
 searchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     let input = document.querySelector('input').value.toLowerCase();
-    renderPokemon(input);
-    //why is norrisQuote clearing here? noticed that if user has pokemon info showing and searches empty search bar, it clears norris box while still showing pokemon info and img
-    norrisQuote.textContent = ''
-    search.reset();
+    if (input !== null) {
+        renderPokemon(input);
+        //why is norrisQuote clearing here? noticed that if user has pokemon info showing and searches empty search bar, it clears norris box while still showing pokemon info and img
+        norrisQuote.textContent = ''
+        search.reset();
+    }
 });
 
 // Pokemon API Section
 function renderPokemon(name) {
     let pokeUrl = `https://pokeapi.co/api/v2/pokemon/${name}`; //Pokemon API
+    console.log(name)
 
     fetch(pokeUrl)
         .then(function (response) {
@@ -149,7 +152,7 @@ function statCard(data) {
                <p class= "statline"><strong>TYPES: </strong><span id = "squadType">${renderTypes(data.types)}</span></p>
                <ul id="pkmn-stats"><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
             </div>`
-    pokeInfo.innerHTML= statCardHTML;
+    pokeInfo.innerHTML = statCardHTML;
 };
 
 // ===========================================
@@ -230,7 +233,7 @@ function renderMySquad() {
 
             pokeInfo.appendChild(squadList);
             squadList.appendChild(squadMember);
-            
+
 
             squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
 
@@ -326,7 +329,7 @@ function randomPokemon() {
         event.preventDefault();
         localStorage.setItem('ranClick', ranClick++);
         if (ranClick === 50) {
-            pokeInfo.innerHTML ='Chuck Norris email address is Gmail@chucknorris.com';
+            pokeInfo.innerHTML = 'Chuck Norris email address is Gmail@chucknorris.com';
             image.src = './assets/images/chuckNorris.jpeg';
             norrisQuote.innerHTML = 'Chuck Norris proved that we are alone in the universe. We weren\'t before his first space expedition';
         } else {
@@ -346,9 +349,9 @@ function pokemon_of_the_day() {
 
     if (pokemon) {
         pokemon = JSON.parse(pokemon);
-      } else {
+    } else {
         pokemon = null;
-      }
+    }
 
     if (pokemon === null) {
         console.log('Fetching new Pokemon...');
@@ -372,7 +375,7 @@ function pokemon_of_the_day() {
                 // Saving the Pokemon data to localStorage
                 localStorage.setItem(today, JSON.stringify(pokemonData));
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.error('There has been a problem with your fetch operation:', error);
             });
     } else {
@@ -401,24 +404,24 @@ function autoComplete() {
 };
 
 function renderJournal() {
-  pokeJournalBtn.addEventListener('click', function (event) {
-    event.preventDefault();
+    pokeJournalBtn.addEventListener('click', function (event) {
+        event.preventDefault();
 
-    pokeInfo.textContent = '';
-  
-    let textarea = document.createElement('textarea');
-    textarea.setAttribute('rows', '28');
-    textarea.setAttribute('cols', '50');
-    textarea.setAttribute('placeholder', 'Type notes here...');
-    pokeInfo.appendChild(textarea);
-    console.log(pokeInfo);
+        pokeInfo.textContent = '';
 
-    let pokeJournal = localStorage.getItem('pokeJournal') || '';
-    textarea.textContent = pokeJournal;
+        let textarea = document.createElement('textarea');
+        textarea.setAttribute('rows', '28');
+        textarea.setAttribute('cols', '50');
+        textarea.setAttribute('placeholder', 'Type notes here...');
+        pokeInfo.appendChild(textarea);
+        console.log(pokeInfo);
 
-    textarea.addEventListener('keyup', function () {
-    localStorage.setItem('pokeJournal', textarea.value);
+        let pokeJournal = localStorage.getItem('pokeJournal') || '';
+        textarea.textContent = pokeJournal;
 
+        textarea.addEventListener('keyup', function () {
+            localStorage.setItem('pokeJournal', textarea.value);
+
+        });
     });
-  });
 }
