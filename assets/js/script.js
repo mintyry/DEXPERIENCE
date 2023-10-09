@@ -211,8 +211,8 @@ function addMySquad() {
         ${mySquadName.textContent} was added to your MySquad.`;
         console.log(caught);
 
-        let fled = `Darn! The wild ${mySquadName.textContent} broke free!\n
-        ${mySquadName.textContent} fled. `;
+        let fled = `Darn! The wild ${mySquadName.textContent} broke out of the Pokéball!\n
+        ${mySquadName.textContent} ran away. `;
         console.log(fled);
 
         let outcome = [caught, fled];
