@@ -157,6 +157,17 @@ aside {
     font-size: 0.8em;
 }
 
+textarea {
+    background-color: transparent;
+    resize: none;
+    border: none;
+    border-bottom: 1px black;
+    outline: none;
+    font-size: 0.8rem;
+    font-family: 'Press Start 2P';
+    max-width: 100%;
+}
+
 @media screen and (max-width: 769px) {
     #stat-container {
         width: 70%;
@@ -299,15 +310,4 @@ img {
         font-size: 1em;
     }
 
-}
-
-textarea {
-    background-color: transparent;
-    resize: none;
-    border: none;
-    border-bottom: 1px black;
-    outline: none;
-    font-size: 0.8rem;
-    font-family: 'Press Start 2P';
-    max-width: 100%;
 }
