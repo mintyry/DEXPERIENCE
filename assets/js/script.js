@@ -100,6 +100,9 @@ function renderPokemon(name) {
 // Renders the Image for the current Pokemon
 function pokemonImg(data) {
     let imgUrl = data.sprites.front_default;
+    if (imgUrl === null) {
+        imgUrl = './assets/images/nullpokeball.png';
+    }
     image.setAttribute('src', imgUrl)
 }
 
