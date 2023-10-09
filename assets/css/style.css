@@ -364,8 +364,7 @@ img {
     .vertbar, .vertbar-r  {
         height: 104vh;
     }
-    
-    .vertbar-down {
+    .stage {
         top: 94%;
     }
 
@@ -375,8 +374,8 @@ img {
     .vertbar, .vertbar-r  {
         height: 95vh;
     }
-    
-    .vertbar-down {
+
+    .stage {
         top: 85%;
     }
 }
