@@ -34,27 +34,27 @@ header {
     width: 100%;
     background-color: transparent;
     color: white;
-    font-size: 1.8vw;
+    font-size: 1.5vw;
 
 }
 
-::placeholder {
+#search-bar::placeholder {
     color: rgb(255, 255, 255) !important;
     opacity: 1;
-    font-size: 1.8vw;
+    font-size: 1.5vw;
     /* Firefox */
 }
 
-::-ms-input-placeholder {
+#search-bar::-ms-input-placeholder {
     color: white !important;
-    font-size: 1.8vw;
+    font-size: 1.5vw;
     /* Edge 12-18 */
 }
 
 #search-button,
 #random-button {
     flex-basis: 50%;
-    font-size: 1.6vw;
+    font-size: 1.5vw;
 }
 
 
@@ -191,9 +191,6 @@ textarea {
 
 }
 
-
-
-
 figure {
     /* outline: 2px dashed rgb(255, 0, 144); */
     margin-left: auto;
@@ -260,7 +257,7 @@ img {
 } */
 
 #norris-fact {
-    font-size: 3vw;
+    font-size: 2vw;
     border-radius: 25px;
     background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
     /* border-radius: 25px; */
@@ -297,7 +294,7 @@ img {
 
 #norris-quote {
     /* background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2)); */
-    font-size: 2vw;
+    font-size: 1.5vw;
     border-radius: 25px;
     font-family: 'Press Start 2P';
 }
