@@ -23,7 +23,7 @@ header {
     width: 100%;
     position: relative;
     z-index: 1;
-    
+
 }
 
 #search-bar,
@@ -76,6 +76,8 @@ header {
 
 main {
     /* outline: white 3px solid; */
+    position: relative;
+    z-index: 1;
 }
 
 aside {
@@ -303,8 +305,58 @@ img {
     #did-you-know {
         font-size: 1.5em;
     }
+
     #norris-quote {
         font-size: 1em;
     }
 
+}
+
+
+.vertbar {
+    display: flex;
+    /* background-color: lightsalmon; */
+    background-image: linear-gradient(lightsalmon, lightsalmon, rgb(254, 189, 163));
+    height: 112.5vh;
+    width: 5vw;
+    position: absolute;
+    top: 0%;
+    left: 20%;
+    z-index: 0;
+
+}
+
+
+.vertbar-r {
+    display: flex;
+    background-color: lightsalmon;
+    background-image: linear-gradient(lightsalmon, lightsalmon, rgb(254, 189, 163));
+    height: 112.5vh;
+    width: 5vw;
+    position: absolute;
+    top: 0%;
+    left: 75%;
+    z-index: 0;
+
+}
+
+
+@media screen and (max-width: 769px) {
+    .vertbar {
+        height: 85vh;
+    }
+    
+    .vertbar-r {
+        height: 85vh;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    .vertbar {
+        height: 83vh;
+    }
+    
+    .vertbar-r {
+        height: 83vh;
+    }
 }
