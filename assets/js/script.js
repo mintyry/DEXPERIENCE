@@ -37,14 +37,15 @@ searchBtn.addEventListener('click', function (event) {
     let input = document.querySelector('input').value.toLowerCase();
     renderPokemon(input);
     //why is norrisQuote clearing here? noticed that if user has pokemon info showing and searches empty search bar, it clears norris box while still showing pokemon info and img
-    norrisQuote.textContent = ''
+    // norrisQuote.textContent = ''
     search.reset();
 });
+
+
 
 // Pokemon API Section
 function renderPokemon(name) {
     let pokeUrl = `https://pokeapi.co/api/v2/pokemon/${name}`; //Pokemon API
-
     fetch(pokeUrl)
         .then(function (response) {
             // Checks if response is ok in data OR if an empty input box was searched
@@ -91,7 +92,11 @@ function renderPokemon(name) {
             statCard(data); // DISPLAY pokemon info
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
             norrisBox.setAttribute('style', 'display:flex'); //removes norris box from hiding
-            norrisFact(name); //displays norris-pokemon fact
+            // norrisFact(name); //displays norris-pokemon fact
+            norrisBtn.addEventListener('click', function (event) {
+                event.preventDefault();
+                norrisFact(name);
+            });
             renderSearchHistory(); //adds search history button
             addMySquad(); // allows for double clicking to add to mySquad in local storage;
         });
@@ -231,7 +236,7 @@ function addMySquad() {
             }
             addSquadPkmn.push(mySquadName.textContent.toLowerCase() + ' - ' + mySquadType.textContent);
             localStorage.setItem('mySquad', JSON.stringify(addSquadPkmn));
-        } 
+        }
 
     });
 }
@@ -305,14 +310,18 @@ function norrisFact(name) {
             if (cnQuote.match(possessiveNorris)) {
                 norrisQuote.textContent = ''
                 function typeWriter() {
+                    norrisBtn.disabled = true
                     isAnimateActive = true;
                     console.log(isAnimateActive);
                     if (i < pkmnPossessive.length) {
                         norrisQuote.textContent += pkmnPossessive.charAt(i);
                         i++
                         setTimeout(typeWriter, 20);
-                    } else {
+                    }
+
+                    else {
                         isAnimateActive = false;
+                        norrisBtn.disabled = false
                         console.log(isAnimateActive);
                     }
                 };
@@ -326,6 +335,7 @@ function norrisFact(name) {
                 norrisQuote.textContent = ''
                 function typeWriter() {
                     isAnimateActive = true;
+                    norrisBtn.disabled = true
                     console.log(isAnimateActive);
                     if (i < pkmnQuote.length) {
                         norrisQuote.textContent += pkmnQuote.charAt(i);
@@ -333,8 +343,8 @@ function norrisFact(name) {
                         setTimeout(typeWriter, 20);
                     } else {
                         isAnimateActive = false;
+                        norrisBtn.disabled = false
                         console.log(isAnimateActive);
-
                     }
                 };
 
