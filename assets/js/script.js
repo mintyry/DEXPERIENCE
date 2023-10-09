@@ -18,13 +18,14 @@ let isAnimateActive = false;
 let recommendations = document.querySelector('#poke-recommendations');
 let pokeJournalBtn = document.querySelector('#poke-journal');
 
+
 // These functions are called so they are functional at page load.
-autoComplete();
-randomPokemon();
-renderSearchHistory();
-renderMySquad();
-pokemon_of_the_day();
-renderJournal();
+autoComplete(); // When user types in search bar, they get recomendations of names based on what they type.
+randomPokemon(); // User clicks randomize, and page will render a random Pokemon.
+renderSearchHistory(); //Search history buttons with prior searches will be displayed
+renderMySquad(); // When user clicks MySquad button, it will show their team.
+pokemon_of_the_day(); //User clicks PotD button, it will render info for that Pokemon for an entire day.
+renderJournal(); // User clicks PokeJournal button, they now have access to notes that will autosave.
 
 
 //Access this variable to to make auto-complete
@@ -46,7 +47,8 @@ function renderPokemon(name) {
 
     fetch(pokeUrl)
         .then(function (response) {
-            if (!response.ok) {
+            // Checks if response is ok in data OR if an empty input box was searched
+            if (!response.ok || name === '') {
                 pokeInfo.textContent = ''
                 body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);')
                 let errorMsg =
@@ -98,6 +100,9 @@ function renderPokemon(name) {
 // Renders the Image for the current Pokemon
 function pokemonImg(data) {
     let imgUrl = data.sprites.front_default;
+    if (imgUrl === null) {
+        imgUrl = './assets/images/nullpokeball.png';
+    }
     image.setAttribute('src', imgUrl)
 }
 
@@ -142,14 +147,14 @@ function statCard(data) {
     statCardHTML +=
         // gave pokemon name in first p tag a span id so we can access name for mySquad dblclick event
         `<div class="stat-element">
-                <p><strong>NAME: </strong><span id = "squadName">${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</span></p><br>
-                <p><strong>HEIGHT: </strong>${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p><br>
-                <p><strong>WEIGHT: </strong>${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p><br>
-               <p><strong>ABILITIES: </strong>${renderAbilities(data.abilities)} </p><br>
-               <p><strong>TYPES: </strong><span id = "squadType">${renderTypes(data.types)}</span></p><br>
-               <ul><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
+                <p class= "statline"><strong>NAME: </strong><span id = "squadName">${(data.name).charAt(0).toUpperCase() + (data.name).slice(1)}</span></p>
+                <p class= "statline"><strong>HEIGHT: </strong>${(((data.height * 0.1) * 39.4) / 12).toFixed(1)} ft</p>
+                <p class= "statline"><strong>WEIGHT: </strong>${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p>
+               <p class= "statline"><strong>ABILITIES: </strong>${renderAbilities(data.abilities)} </p>
+               <p class= "statline"><strong>TYPES: </strong><span id = "squadType">${renderTypes(data.types)}</span></p>
+               <ul id="pkmn-stats"><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
             </div>`
-    pokeInfo.innerHTML= statCardHTML;
+    pokeInfo.innerHTML = statCardHTML;
 };
 
 // ===========================================
@@ -199,15 +204,35 @@ function addMySquad() {
     let addSquadPkmn = JSON.parse(localStorage.getItem('mySquad')) || [];
 
     // This is what the double click event triggers
-    statContainer.addEventListener('dblclick', function (event) {
+    document.querySelector('.stat-element').addEventListener('dblclick', function (event) {
         event.preventDefault();
+        // Following code is the double-click mini-game feature to catch a Pokemon -- essentially a 50/50 chance to catch and add to MySquad.
+        let caught = `You caught a wild ${mySquadName.textContent}!\n
+        ${mySquadName.textContent} was added to your MySquad.`;
+        console.log(caught);
 
-        // Add double-clicked pokemon to array, if team is full, removes first pokemon
-        if (addSquadPkmn.length >= 6) {
-            addSquadPkmn.shift();
-        }
-        addSquadPkmn.push(mySquadName.textContent.toLowerCase() + ' - ' + mySquadType.textContent);
-        localStorage.setItem('mySquad', JSON.stringify(addSquadPkmn));
+        let fled = `Darn! The wild ${mySquadName.textContent} broke out of the Pokéball!\n
+        ${mySquadName.textContent} ran away. `;
+        console.log(fled);
+
+        let outcome = [caught, fled];
+
+        let outcomeIndex = (Math.floor(Math.random() * outcome.length));
+
+        let result = outcome[outcomeIndex];
+
+        pokeInfo.textContent = result;
+        console.log(result);
+
+        if (result === caught) {
+            // Add double-clicked pokemon to array, if team is full, removes first pokemon
+            if (addSquadPkmn.length >= 6) {
+                addSquadPkmn.shift();
+            }
+            addSquadPkmn.push(mySquadName.textContent.toLowerCase() + ' - ' + mySquadType.textContent);
+            localStorage.setItem('mySquad', JSON.stringify(addSquadPkmn));
+        } 
+
     });
 }
 
@@ -230,7 +255,7 @@ function renderMySquad() {
 
             pokeInfo.appendChild(squadList);
             squadList.appendChild(squadMember);
-            
+
 
             squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
 
@@ -326,7 +351,7 @@ function randomPokemon() {
         event.preventDefault();
         localStorage.setItem('ranClick', ranClick++);
         if (ranClick === 50) {
-            pokeInfo.innerHTML ='Chuck Norris email address is Gmail@chucknorris.com';
+            pokeInfo.innerHTML = 'Chuck Norris email address is Gmail@chucknorris.com';
             image.src = './assets/images/chuckNorris.jpeg';
             norrisQuote.innerHTML = 'Chuck Norris proved that we are alone in the universe. We weren\'t before his first space expedition';
         } else {
@@ -336,6 +361,7 @@ function randomPokemon() {
     })
 };
 
+//problem with this is its trying to use data, when we have list of names. the data accesses id number which doesnt always work.
 function pokemon_of_the_day() {
 
     const today = dayjs().format('MM/DD/YYYY');
@@ -346,9 +372,9 @@ function pokemon_of_the_day() {
 
     if (pokemon) {
         pokemon = JSON.parse(pokemon);
-      } else {
+    } else {
         pokemon = null;
-      }
+    }
 
     if (pokemon === null) {
         console.log('Fetching new Pokemon...');
@@ -372,7 +398,7 @@ function pokemon_of_the_day() {
                 // Saving the Pokemon data to localStorage
                 localStorage.setItem(today, JSON.stringify(pokemonData));
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.error('There has been a problem with your fetch operation:', error);
             });
     } else {
@@ -401,23 +427,24 @@ function autoComplete() {
 };
 
 function renderJournal() {
-  pokeJournalBtn.addEventListener('click', function (event) {
-    event.preventDefault();
+    pokeJournalBtn.addEventListener('click', function (event) {
+        event.preventDefault();
 
-    pokeInfo.textContent = '';
-  
-    let textarea = document.createElement('textarea');
-    textarea.setAttribute('rows', '30');
-    textarea.setAttribute('cols', '31');
-    pokeInfo.appendChild(textarea);
-    console.log(pokeInfo);
+        pokeInfo.textContent = '';
 
-    let pokeJournal = localStorage.getItem('pokeJournal') || '';
-    textarea.textContent = pokeJournal;
+        let textarea = document.createElement('textarea');
+        textarea.setAttribute('rows', '28');
+        textarea.setAttribute('cols', '50');
+        textarea.setAttribute('placeholder', 'Type notes here...');
+        pokeInfo.appendChild(textarea);
+        console.log(pokeInfo);
 
-    textarea.addEventListener('keyup', function () {
-    localStorage.setItem('pokeJournal', textarea.value);
+        let pokeJournal = localStorage.getItem('pokeJournal') || '';
+        textarea.textContent = pokeJournal;
 
+        textarea.addEventListener('keyup', function () {
+            localStorage.setItem('pokeJournal', textarea.value);
+
+        });
     });
-  });
 }
