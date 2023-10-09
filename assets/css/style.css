@@ -291,6 +291,16 @@ img {
     font-family: 'Press Start 2P';
 }
 
+@media screen and (max-width: 530px) {
+    #did-you-know {
+        font-size: 1.5em;
+    }
+    #norris-quote {
+        font-size: 1em;
+    }
+
+}
+
 textarea {
     background-color: transparent;
     resize: none;
