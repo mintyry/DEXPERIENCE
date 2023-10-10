@@ -30,10 +30,10 @@ renderJournal();
 
 // Pokemon functions
 function renderPokemon(name) {
-    let pokeUrl = `https://pokeapi.co/api/v2/pokemon/${name}`; 
+    let pokeUrl = `https://pokeapi.co/api/v2/pokemon/${name}`;
 
     fetch(pokeUrl)
-        .then(function (response) {            
+        .then(function (response) {
             if (!response.ok || name === '') {
                 body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);');
                 document.querySelector('img').src = './assets/images/MissingNo.1.webp';
@@ -46,7 +46,7 @@ function renderPokemon(name) {
                 return response.json();
             }
         })
-        .then(function (data) {           
+        .then(function (data) {
             let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
             if (pkmnArr.includes(data.name)) {
                 let index = pkmnArr.indexOf(data.name);
@@ -54,12 +54,12 @@ function renderPokemon(name) {
             }
             pkmnArr.unshift(data.name);
             localStorage.setItem('pokemon', JSON.stringify(pkmnArr));
-            statCard(data); 
-            pokemonImg(data); 
-            norrisBox.setAttribute('style', 'display:flex'); 
-            norrisFact(name); 
-            renderSearchHistory(); 
-            addMySquad(); 
+            statCard(data);
+            pokemonImg(data);
+            norrisBox.setAttribute('style', 'display:flex');
+            norrisFact(name);
+            renderSearchHistory();
+            addMySquad();
         });
 }
 
@@ -124,11 +124,11 @@ function pokemon_of_the_day() {
     } else {
         pokemon = null;
     }
-    if (pokemon === null) {    
-        let pod = pokeList[Math.floor(Math.random() * pokeList.length)].name;    
+    if (pokemon === null) {
+        let pod = pokeList[Math.floor(Math.random() * pokeList.length)].name;
         localStorage.setItem(today, JSON.stringify(pod));
     } else {
-        
+
     }
 }
 
@@ -163,7 +163,7 @@ function addMySquad() {
     let mySquadType = document.querySelector('#squadType');
     let addSquadPkmn = JSON.parse(localStorage.getItem('mySquad')) || [];
     image.addEventListener('dblclick', function (event) {
-        event.preventDefault();   
+        event.preventDefault();
         let caught = `You caught a wild ${mySquadName.textContent}!\n
         ${mySquadName.textContent} was added to your MySquad.`;
         let fled = `Darn! The wild ${mySquadName.textContent} broke out of the Pokéball!\n
@@ -172,7 +172,7 @@ function addMySquad() {
         let outcomeIndex = (Math.floor(Math.random() * outcome.length));
         let result = outcome[outcomeIndex];
         pokeInfo.textContent = result;
-        if (result === caught) {       
+        if (result === caught) {
             if (addSquadPkmn.length >= 6) {
                 addSquadPkmn.shift();
             }
@@ -185,29 +185,33 @@ function addMySquad() {
 function renderMySquad() {
     mySquadBtn.addEventListener('click', function (event) {
         event.preventDefault();
-        // statContainer.setAttribute('style', 'cursor: auto');
 
         let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
+        console.log(mySquadArr.length);
 
-        pokeInfo.innerHTML='';
+        if (mySquadArr.length < 1) {
+            pokeInfo.textContent = 'Double-click on a Pokémon itself in order to catch and add it to your MySquad!'
+        } else {
+            pokeInfo.innerHTML = '';
 
-        for (let i = 0; i < mySquadArr.length && i < 6; i++) {
-            let squadList = document.createElement('ul');
-            squadList.classList.add('squad-card');
-            let squadMember = document.createElement('li');
-            squadMember.classList.add('squad-mon');
-            squadMember.setAttribute('style', 'margin-bottom: 1%');
-            pokeInfo.appendChild(squadList);
-            squadList.appendChild(squadMember);
-            squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
-            squadMember.addEventListener('click', function (event) {
-                event.preventDefault();
-                let listedPkmn = squadMember.textContent;
-                listedPkmn = listedPkmn.split(' -');
-                listedPkmn = listedPkmn[0].toLowerCase();
-                renderPokemon(listedPkmn);
-            })
-        };
+            for (let i = 0; i < mySquadArr.length && i < 6; i++) {
+                let squadList = document.createElement('ul');
+                squadList.classList.add('squad-card');
+                let squadMember = document.createElement('li');
+                squadMember.classList.add('squad-mon');
+                squadMember.setAttribute('style', 'margin-bottom: 1%');
+                pokeInfo.appendChild(squadList);
+                squadList.appendChild(squadMember);
+                squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
+                squadMember.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    let listedPkmn = squadMember.textContent;
+                    listedPkmn = listedPkmn.split(' -');
+                    listedPkmn = listedPkmn[0].toLowerCase();
+                    renderPokemon(listedPkmn);
+                })
+            };
+        }
     });
 };
 
