@@ -29,7 +29,7 @@ renderMySquad();
 pokemon_of_the_day();
 renderJournal();
 
-// Pokemon functions
+// POKEMON FUNCTIONS
 
 // Renders all the Pokemon info
 function renderPokemon(name) {
@@ -151,6 +151,7 @@ function pokemon_of_the_day() {
 // Renders the names of user's last three searches into the corresponding search history buttons on left of page.
 function renderSearchHistory() {
     let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
+
     // For loop limits array and text content for buttons to three Pokemon names.
     for (let i = 0; i < pkmnArr.length && i < 3; i++) {
         historySection.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + pkmnArr[i].slice(1);
@@ -183,6 +184,7 @@ function addMySquad() {
 
         pokeInfo.textContent = result;
         if (result === caught) {
+            // Limits team to 6 like in the actual Pokemon series
             if (addSquadPkmn.length >= 6) {
                 addSquadPkmn.shift();
             }
@@ -249,7 +251,8 @@ function renderJournal() {
         let pokeJournal = localStorage.getItem('pokeJournal') || '';
 
         textarea.textContent = pokeJournal;
-        // Autossaves what user types!
+        
+        // Autosaves what user types!
         textarea.addEventListener('keyup', function () {
             localStorage.setItem('pokeJournal', textarea.value);
         });
@@ -265,7 +268,7 @@ function autoComplete() {
     }
 };
 
-// Chuck Norris Function - renders Norris Fact to page
+// CHUCK NORRIS FUNCTION - renders Norris Fact to page
 function norrisFact(name) {
     let catUrl = `https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random?category=${getRandomCategory()}`;
     const options = {
@@ -298,7 +301,7 @@ function norrisFact(name) {
         });
 };
 
-// Event Listeners
+// EVENT LISTENERS
 
 //Listens for click on search button at top; renders Pokemon
 searchBtn.addEventListener('click', function (event) {
