@@ -374,6 +374,7 @@ function pokemon_of_the_day() {
 
     let pokemon = localStorage.getItem(today);
     console.log(pokemon);
+    console.log(typeof pokemon);
 
     if (pokemon) {
         pokemon = JSON.parse(pokemon);
@@ -383,42 +384,25 @@ function pokemon_of_the_day() {
 
     if (pokemon === null) {
         console.log('Fetching new Pokemon...');
-        const randomId = Math.floor(Math.random() * pokeList.length);
-        const url = `https://pokeapi.co/api/v2/pokemon/${randomId}/`;
+        let pod = pokeList[Math.floor(Math.random() * pokeList.length)].name;
 
-        fetch(url)
-            .then(function (res) {
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                }
-                return res.json();
-            })
-            .then(function (data) {
-                const pokemonData = {
-                    name: data.name,
-                    id: data.id,
-                };
-                console.log(pokemonData);
 
-                // Saving the Pokemon data to localStorage
-                localStorage.setItem(today, JSON.stringify(pokemonData));
-            })
-            .catch(function (error) {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
+        // Saving the Pokemon data to localStorage
+        localStorage.setItem(today, JSON.stringify(pod));
     } else {
         console.log('Pokemon already created:', pokemon);
     }
 }
 
+
 pod.addEventListener('click', function () {
     const today = dayjs().format('MM/DD/YYYY');
     // console.log(today);
 
-    let pokemon = JSON.parse(localStorage.getItem(today)) || [];
+    let pokemon = JSON.parse(localStorage.getItem(today)) || '';
     console.log(pokemon)
     // console .log (pokemon.name)
-    renderPokemon(pokemon.name);
+    renderPokemon(pokemon);
 });
 
 function autoComplete() {
