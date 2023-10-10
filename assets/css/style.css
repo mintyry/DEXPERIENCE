@@ -1,10 +1,5 @@
-/* CSS TODO List: 
-
-/* toggle outlines on and off to see where each table is positioned */
-/* by toggle, i mean comment in and out */
+/* Universal selector sets these for every element unless otherwise specified */
 * {
-    /* outline: 1px dashed blue;    */
-    /* outline: 2px solid red;    */
     margin: 0;
     padding: 0;
 }
@@ -15,7 +10,6 @@ body {
     background-image: url(../images/city-landscape.webp);
     background-position: 25% 75%;
     background-attachment: fixed;
-    background-size: cover;
     min-height: 100vh;
 }
 
@@ -24,9 +18,9 @@ header {
     width: 100%;
     position: relative;
     z-index: 1;
-
 }
 
+/* Styles the search input box; Bulma has default hover/focus/active styles that we have to override */
 #search-bar,
 #search-bar:hover,
 #search-bar:focus,
@@ -38,27 +32,26 @@ header {
     font-size: 2vw;
 
 }
-
+/* styles the placeholder text for the search-bar */
 #search-bar::placeholder {
     color: rgb(255, 255, 255) !important;
     opacity: 1;
     font-size: 2vw;
     /* Firefox */
 }
-
 #search-bar::-ms-input-placeholder {
     color: white !important;
     font-size: 2vw;
     /* Edge 12-18 */
 }
-
+/* allows for flexibility in sizing for buttons */
 #search-button,
 #random-button {
     flex-basis: 50%;
     font-size: 2vw;
 }
 
-
+/* styles app name, Dexperience in top left corner */
 #brand {
     text-wrap: nowrap;
     font-size: 5vw !important;
@@ -73,22 +66,19 @@ header {
     flex: 1;
 }
 
-/* ================================= */
-
+/* Main container holding both sides of buttons and Pokemon stat page */
 main {
-    /* outline: white 3px solid; */
     position: relative;
     z-index: 1;
 }
 
+/* Container for buttons */
 aside {
     width: 25%;
     position: relative;
     top: 45px;
-    /* width: 13% !important; */
-    /* background-color: antiquewhite; */
 }
-
+/* Styles buttons */
 .side-btn,
 .side-btn:focus,
 .button[disabled] {
@@ -98,17 +88,17 @@ aside {
     height: 18vh;
     border: #d2d2d2 double 2px;
     margin-top: 1%;
-    /* text-align: center; */
     white-space: normal;
     padding: 2rem;
 
 }
-
+/* Had to override the disabled button styles from Bulma */
 .button[disabled] {
     opacity: 1;
     color: rgb(91, 107, 89)
 }
 
+/* Following code gives color and angled appearance to buttons */
 #search-history {
     transform: skew(0deg, -20deg);
 }
@@ -125,29 +115,27 @@ aside {
     background-image: linear-gradient(to left, rgb(195, 230, 190), rgba(160, 188, 156, 1), rgb(127, 150, 124));
 }
 
+/* The main container for stat-page */
 #stat-container {
     width: 50%;
     border: 2vw solid;
     border-image: linear-gradient(#d2d2d2, #ffffff, #d2d2d2);
     border-image-slice: 1;
-    /* z-index: 1; */
     background-image: radial-gradient(rgba(160, 188, 156, 0.8), rgba(160, 188, 156, 0.8), rgba(160, 188, 156, 0.8), rgba(203, 203, 203, 0.8));
 }
-
+/* Where Pokemon info will render */
 #stat-page {
     background-color: transparent;
     font-family: 'Press Start 2P';
     white-space: normal;
 }
-
+/* This styles each stat line for a Pokemon's page */
 .statline {
     margin-bottom: 2%;
 }
 
-#pkmn-stats {
-    margin-bottom: 20%;
-}
-
+/* OTHER FEATURES STYLES, rendered in stat-page */
+/* This styles each Pokemon added in MySquad (rendered via js) */
 .squad-mon {
     list-style: none;
     background-color: rgb(171, 200, 167);
@@ -160,6 +148,7 @@ aside {
     font-size: 0.8em;
 }
 
+/* This is the styling for the user's journal entry */
 textarea {
     background-color: transparent;
     resize: none;
@@ -171,13 +160,14 @@ textarea {
     max-width: 100%;
 }
 
+/* Media query at 769px for corresponding elements */
 @media screen and (max-width: 769px) {
     #stat-container {
         width: 70%;
     }
 
     #stat-page {
-        font-size: 0.8em;
+        font-size: 0.9em;
     }
 
     .side-btn {
@@ -188,13 +178,11 @@ textarea {
         width: 15%;
         position: relative;
         top: 30px;
-        /* width: 13% !important; */
-        /* background-color: antiquewhite; */
     }
 }
 
+/* Styling for container holding image */
 figure {
-    /* outline: 2px dashed rgb(255, 0, 144); */
     margin-left: auto;
     margin-right: auto;
     z-index: 2;
@@ -202,21 +190,9 @@ figure {
     width: 350px;
     margin-left: auto;
     margin-right: auto;
-
-
 }
 
-@media screen and (max-width: 410px) {
-
-    figure {
-        bottom: 155px;
-    }
-
-    #norris-container {
-        margin-top: -295px;
-    }
-}
-
+/* Style to have pokemon image float */
 img {
     animation-name: float;
     animation-duration: 6000ms;
@@ -226,7 +202,6 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
-
 @keyframes float {
     0% {
         transform: translate(0, 0);
@@ -241,36 +216,24 @@ img {
     }
 }
 
+/* Norris Container where Norris fact renders with Pokemon's name replacing Norris */
 #norris-container {
     z-index: 3;
     position: relative;
     margin-top: -315px;
-    /* outline: 2px dashed red; */
     display: none;
 }
-
-/* @media screen and (max-width: 760px) {
-
-    #norris-container {
-        width: 550px;
-        margin-left: 0;
-        margin-right: 0;
-    }
-} */
-
 #norris-fact {
     font-size: 2vw;
     border-radius: 25px;
     background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
-    /* border-radius: 25px; */
     font-family: 'Press Start 2P';
     border-image: url(https://luttje.github.io/css-pokemon-gameboy/styles/images/frame-hd.png) 42 round;
     border-width: 21px;
     border-style: solid;
     padding: 1em;
-    /* margin: 1em 0 0 0; */
 }
-
+/* Styles a blinking button */
 #norris-fact button {
     justify-content: flex-end;
     background: none;
@@ -278,39 +241,25 @@ img {
     border: none;
     padding: 0;
     font: inherit;
-    /* cursor: pointer; */
     font-family: 'Press Start 2P';
-    /* animation: blinking .5s steps(2, start) infinite; */
 }
-
 #norris-fact button span {
     animation: blinking .5s steps(2, start) infinite;
 }
-
-
 @keyframes blinking {
     to {
         visibility: hidden;
     }
 }
-
+/* Styles the actual Norris quote */
 #norris-quote {
-    /* background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2)); */
     font-size: 1.5vw;
     border-radius: 25px;
     font-family: 'Press Start 2P';
 }
 
-@media screen and (max-width: 769px) {
-    #did-you-know {
-        font-size: 2em;
-    }
+/* MEDIA QUERIES FOR BOTTOM HALF OF APP - IMG AND NORRIS */
 
-    #norris-quote {
-        font-size: 1.5em;
-    }
-
-}
 @media screen and (max-width: 375px) {
     #norris-container {
     position: absolute;
@@ -327,6 +276,25 @@ img {
     }
 }
 
+@media screen and (max-width: 410px) {
+    figure {
+        bottom: 155px;
+    }
+    #norris-container {
+        margin-top: -295px;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    #did-you-know {
+        font-size: 2em;
+    }
+    #norris-quote {
+        font-size: 1.5em;
+    }
+}
+
+/* Tooltip to help user know how to add Pokemon to MySquad */
 figure:hover::after {
     content: "Double-click to catch this Pokémon!";
     position: absolute;
@@ -344,36 +312,25 @@ figure:hover::after {
     z-index: 2;
   }
 
-
-.vertbar {
+/* The aesthetic behind all the other elements */
+.vertbar, .vertbar-r {
     display: flex;
-    /* background-color: lightsalmon; */
     background-image: linear-gradient(lightsalmon, lightsalmon, rgb(165 121 104));
     height: 100vh;
     width: 5vw;
     position: absolute;
     top: 0%;
-    left: 20%;
     z-index: 0;
-
 }
-
+.vertbar {
+    left: 20%;
+}
 .vertbar-r {
-    display: flex;
-    background-color: lightsalmon;
-    background-image: linear-gradient(lightsalmon, lightsalmon, rgb(165 121 104));
-    height: 100vh;
-    width: 5vw;
-    position: absolute;
-    top: 0%;
     left: 75%;
-    z-index: 0;
-
 }
 
 .stage {
     display: flex;
-    /* background-color: lightsalmon; */
     background-image: linear-gradient(rgb(165 121 104), lightsalmon, rgba(254, 189, 163), rgba(249, 210, 194, 0.3), transparent);
     height: 69vh;
     width: 75vw;
@@ -384,9 +341,7 @@ figure:hover::after {
     transform: perspective(53em) rotateX(60deg);
   }
 
-
  @media screen and (min-width: 1000px) {
-
     .stage {
         top: 78%;
     }
