@@ -36,8 +36,8 @@ searchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     let input = document.querySelector('input').value.toLowerCase();
     renderPokemon(input);
-    //why is norrisQuote clearing here? noticed that if user has pokemon info showing and searches empty search bar, it clears norris box while still showing pokemon info and img
-    norrisQuote.textContent = ''
+
+    
     search.reset();
 });
 
@@ -50,6 +50,7 @@ function renderPokemon(name) {
             // Checks if response is ok in data OR if an empty input box was searched
             if (!response.ok || name === '') {
                 pokeInfo.textContent = ''
+                norrisQuote.textContent = ''
                 body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);')
                 let errorMsg =
                     `Oak's words echoed... "There's a time and place for everything but not now!"`;
@@ -194,7 +195,7 @@ historySection.addEventListener('click', function (event) {
 // mySquad feature
 function addMySquad() {
     //this enables the cursor to switch to cell icon to indicate user can now add to team
-    statContainer.setAttribute('style', 'cursor: cell');
+    image.setAttribute('style', 'cursor: cell');
 
     // I set a span id for the pokemon's name in statCard function so we can access whatever name is in stat-page
     let mySquadName = document.querySelector('#squadName');
@@ -204,7 +205,7 @@ function addMySquad() {
     let addSquadPkmn = JSON.parse(localStorage.getItem('mySquad')) || [];
 
     // This is what the double click event triggers
-    document.querySelector('.stat-element').addEventListener('dblclick', function (event) {
+    image.addEventListener('dblclick', function (event) {
         event.preventDefault();
         // Following code is the double-click mini-game feature to catch a Pokemon -- essentially a 50/50 chance to catch and add to MySquad.
         let caught = `You caught a wild ${mySquadName.textContent}!\n
@@ -231,7 +232,7 @@ function addMySquad() {
             }
             addSquadPkmn.push(mySquadName.textContent.toLowerCase() + ' - ' + mySquadType.textContent);
             localStorage.setItem('mySquad', JSON.stringify(addSquadPkmn));
-        } 
+        }
 
     });
 }
@@ -244,10 +245,14 @@ function renderMySquad() {
 
         let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
 
-        pokeInfo.innerHTML = '';
-        console.log('this works');
+        if (!pokeInfo.querySelector('.squad-mon')) {
+            pokeInfo.innerHTML = 'Double-click the Pokémon itself to try to catch it and add it to your MySquad!';
+            console.log('sigh')
+        }
+        pokeInfo.innerHTML='';
 
         for (let i = 0; i < mySquadArr.length && i < 6; i++) {
+            console.log('woohoo')
             let squadList = document.createElement('ul');
             let squadMember = document.createElement('li');
             squadMember.classList.add('squad-mon');
@@ -369,6 +374,7 @@ function pokemon_of_the_day() {
 
     let pokemon = localStorage.getItem(today);
     console.log(pokemon);
+    console.log(typeof pokemon);
 
     if (pokemon) {
         pokemon = JSON.parse(pokemon);
@@ -378,42 +384,25 @@ function pokemon_of_the_day() {
 
     if (pokemon === null) {
         console.log('Fetching new Pokemon...');
-        const randomId = Math.floor(Math.random() * pokeList.length);
-        const url = `https://pokeapi.co/api/v2/pokemon/${randomId}/`;
+        let pod = pokeList[Math.floor(Math.random() * pokeList.length)].name;
 
-        fetch(url)
-            .then(function (res) {
-                if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                }
-                return res.json();
-            })
-            .then(function (data) {
-                const pokemonData = {
-                    name: data.name,
-                    id: data.id,
-                };
-                console.log(pokemonData);
 
-                // Saving the Pokemon data to localStorage
-                localStorage.setItem(today, JSON.stringify(pokemonData));
-            })
-            .catch(function (error) {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
+        // Saving the Pokemon data to localStorage
+        localStorage.setItem(today, JSON.stringify(pod));
     } else {
         console.log('Pokemon already created:', pokemon);
     }
 }
 
+
 pod.addEventListener('click', function () {
     const today = dayjs().format('MM/DD/YYYY');
     // console.log(today);
 
-    let pokemon = JSON.parse(localStorage.getItem(today)) || [];
+    let pokemon = JSON.parse(localStorage.getItem(today)) || '';
     console.log(pokemon)
     // console .log (pokemon.name)
-    renderPokemon(pokemon.name);
+    renderPokemon(pokemon);
 });
 
 function autoComplete() {
