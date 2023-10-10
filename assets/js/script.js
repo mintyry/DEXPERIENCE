@@ -22,7 +22,6 @@ let norrisBox = document.querySelector('#norris-container');
 const getRandomCategory = () => ['animal', 'career', 'celebrity', 'dev', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'science', 'sport', 'travel'][Math.floor(Math.random() * 13)];
 
 autoComplete();
-randomPokemon();
 renderSearchHistory();
 renderMySquad();
 pokemon_of_the_day();
@@ -132,21 +131,6 @@ function pokemon_of_the_day() {
     }
 }
 
-function randomPokemon() {
-    ranBtn.addEventListener('click', function (event) {
-        event.preventDefault();
-        localStorage.setItem('ranClick', ranClick++);
-        if (ranClick === 5) {
-            pokeInfo.innerHTML = 'Chuck Norris email address is Gmail@chucknorris.com';
-            image.src = './assets/images/chuckNorris.jpeg';
-            norrisQuote.innerHTML = 'Chuck Norris proved that we are alone in the universe. We weren\'t before his first space expedition';
-        } else {
-            let random = pokeList[Math.floor(Math.random() * pokeList.length)].name;
-            renderPokemon(random);
-        }
-    })
-};
-
 function renderSearchHistory() {
     let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
     for (let i = 0; i < pkmnArr.length && i < 3; i++) {
@@ -162,6 +146,7 @@ function addMySquad() {
     let mySquadName = document.querySelector('#squadName');
     let mySquadType = document.querySelector('#squadType');
     let addSquadPkmn = JSON.parse(localStorage.getItem('mySquad')) || [];
+
     image.addEventListener('dblclick', function (event) {
         event.preventDefault();
         let caught = `You caught a wild ${mySquadName.textContent}!\n
@@ -218,13 +203,17 @@ function renderMySquad() {
 function renderJournal() {
     pokeJournalBtn.addEventListener('click', function (event) {
         event.preventDefault();
+
         pokeInfo.textContent = '';
+        
         let textarea = document.createElement('textarea');
         textarea.setAttribute('rows', '28');
         textarea.setAttribute('cols', '50');
         textarea.setAttribute('placeholder', 'Type notes here...');
         pokeInfo.appendChild(textarea);
+
         let pokeJournal = localStorage.getItem('pokeJournal') || '';
+
         textarea.textContent = pokeJournal;
         textarea.addEventListener('keyup', function () {
             localStorage.setItem('pokeJournal', textarea.value);
@@ -287,5 +276,18 @@ historySection.addEventListener('click', function (event) {
     if (event.target.matches('.button')) {
         let searchedPkmn = event.target.textContent.toLowerCase();
         renderPokemon(searchedPkmn);
+    }
+});
+
+ranBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.setItem('ranClick', ranClick++);
+    if (ranClick === 50) {
+        pokeInfo.innerHTML = 'Chuck Norris email address is Gmail@chucknorris.com';
+        image.src = './assets/images/chuckNorris.jpeg';
+        norrisQuote.innerHTML = 'Chuck Norris proved that we are alone in the universe. We weren\'t before his first space expedition';
+    } else {
+        let random = pokeList[Math.floor(Math.random() * pokeList.length)].name;
+        renderPokemon(random);
     }
 });
