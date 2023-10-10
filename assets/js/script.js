@@ -136,7 +136,7 @@ function randomPokemon() {
     ranBtn.addEventListener('click', function (event) {
         event.preventDefault();
         localStorage.setItem('ranClick', ranClick++);
-        if (ranClick === 50) {
+        if (ranClick === 5) {
             pokeInfo.innerHTML = 'Chuck Norris email address is Gmail@chucknorris.com';
             image.src = './assets/images/chuckNorris.jpeg';
             norrisQuote.innerHTML = 'Chuck Norris proved that we are alone in the universe. We weren\'t before his first space expedition';

@@ -15,6 +15,7 @@ body {
     background-image: url(../images/city-landscape.webp);
     background-position: 25% 75%;
     background-attachment: fixed;
+    background-size: cover;
     min-height: 100vh;
 }
 
@@ -329,6 +330,8 @@ img {
 figure:hover::after {
     content: "Double-click to catch this Pokémon!";
     position: absolute;
+    top: 5px;
+    right: 105%;
     left: 60%;
     bottom: 70%;
     min-width: 45%;
@@ -346,7 +349,7 @@ figure:hover::after {
     display: flex;
     /* background-color: lightsalmon; */
     background-image: linear-gradient(lightsalmon, lightsalmon, rgb(165 121 104));
-    height: 125vh;
+    height: 100vh;
     width: 5vw;
     position: absolute;
     top: 0%;
@@ -359,7 +362,7 @@ figure:hover::after {
     display: flex;
     background-color: lightsalmon;
     background-image: linear-gradient(lightsalmon, lightsalmon, rgb(165 121 104));
-    height: 125vh;
+    height: 100vh;
     width: 5vw;
     position: absolute;
     top: 0%;
@@ -370,41 +373,21 @@ figure:hover::after {
 
 .stage {
     display: flex;
-    /* background-color: rgb(67, 67, 67); */
-    background-image: linear-gradient(rgb(165 121 104), lightsalmon, rgba(254, 189, 163, 0.7), rgba(249, 210, 194, 0.3), transparent);
-    height: 27.5vh;
-    width: 99vw;
+    /* background-color: lightsalmon; */
+    background-image: linear-gradient(rgb(165 121 104), lightsalmon, rgba(254, 189, 163), rgba(249, 210, 194, 0.3), transparent);
+    height: 69vh;
+    width: 75vw;
     position: absolute;
-    top: 115%;
-    left: 0%;
+    top: 68%;
+    left: 12%;
     z-index: 0;
-    transform: perspective(10em) rotateX(60deg);
-    box-shadow: rgba(22, 31, 39, 0.42) 0px 60px 123px -25px,
-      rgba(19, 26, 32, 0.08) 0px 35px 75px -35px;
-    border-radius: 10px;
-    /* border: 1px solid;
-    border-color: rgb(213, 220, 226) rgb(213, 220, 226) rgb(184, 194, 204); */
+    transform: perspective(53em) rotateX(60deg);
   }
 
 
-
-
-@media screen and (max-width: 769px) {
-    .vertbar, .vertbar-r  {
-        height: 104vh;
-    }
-    .stage {
-        top: 94%;
-    }
-
-}
-
-@media screen and (max-width: 510px) {
-    .vertbar, .vertbar-r  {
-        height: 95vh;
-    }
+ @media screen and (min-width: 1000px) {
 
     .stage {
-        top: 85%;
+        top: 78%;
     }
-}
+ }
