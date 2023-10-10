@@ -18,7 +18,7 @@ body {
 .vertbar-r {
     display: flex;
     background-image: linear-gradient(lightsalmon, lightsalmon, rgb(165 121 104));
-    height: 100vh;
+    height: 116vh;
     width: 5vw;
     position: absolute;
     top: 0%;
@@ -36,13 +36,15 @@ body {
 .stage {
     display: flex;
     background-image: linear-gradient(rgb(165 121 104), lightsalmon, rgba(254, 189, 163), rgba(249, 210, 194, 0.3), transparent);
-    height: 69vh;
-    width: 75vw;
+    height: 40.5vh;
+    width: 88vw;
     position: absolute;
-    top: 68%;
-    left: 12%;
+    top: 98%;
+    left: 6%;
     z-index: 0;
-    transform: perspective(83em) rotateX(60deg);
+    transform: perspective(63em) rotateX(60deg);
+    box-shadow: rgba(22, 31, 39, 0.42) 0px 60px 123px -25px, rgba(19, 26, 32, 0.08) 0px 35px 75px -35px;
+    border-radius: 10px;
 }
 
 header {
@@ -316,7 +318,7 @@ img {
 
 @media screen and (max-width: 410px) {
     figure {
-        bottom: 155px;
+        bottom: 212px;
     }
 
     #norris-container {
@@ -358,6 +360,6 @@ img {
 
 @media screen and (min-width: 1000px) {
     .stage {
-        top: 78%;
+        top: 103%;
     }
 }

@@ -3,8 +3,10 @@
 ## Description
 
 Our motivation was to provide the user a personal experience with the Pokédex.  
+Thus, we created DEXPERIENCE.  
+  
 Pokédexes can feel so automated, but our app adds a bit more of a personal flare that makes it fun, such as silly fun facts generated that were originally Chuck Norris facts, along with a mini-game and a journal.  
-Accordingly, we combined the usage of two APIs to achieve this -- PokeAPI and a Chuck Norris one.  
+Accordingly, we combined the usage of two APIs to achieve this -- PokeAPI and a Chuck Norris one. Additionally, we implemented the Bulma CSS framework for some layout assistance and the use of local storage to save pertinent information for the user's personal experience.
   
 Motivation also came from all of the knowledge we had acquired so far and wanting to implement them in useful and creative ways. In being driven to achieve this, we also learned plenty of things along the way!  
 
@@ -26,12 +28,74 @@ Our app contains the following features we enjoyed building and hope the user en
 
 
 ## Usage
-
 Provide instructions and examples for use. Include screenshots as needed.
 
 To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
 
-![alt text](assets/images/screenshot.png)
+![alt text](assets/images/screenshot.png)  
+
+Upon page load, many features are accessible to the user.  
+Much is a blank canvas for the user to experience and personalize with their Pokédex interaction.
+  
+![First-time visiting app](./assets/images/pageload.png)  
+
+A lot of the action intially begins with a simple search of a Pokémon name.
+A dropdown list is rendered to help suggest what the Pokêmon the user may be interested in looking up and will autocomplete at the user's click.  
+Additionally, should the user not have any specific Pokémon to research, they can also simply randomize their search to render a totally random Pokémon.  
+The creator of this feature added an Easter egg for the user after a certain amount of clicks...  
+
+![Search with dropdown](./assets/images/searchdropdown.png)  
+
+Once the search is executed, the Pokémon will render as an image, along with a page about itself, including name, height, weight, abilities, type, and actual stats (HP, Attack, Defense, Special Attack, Special Defense, and Speed).  
+
+The Did-you-know table will also render with a fun fact you never knew about that Pokémon!  
+(Jokes; it's just a "Chuck Norris fact" with his name replaced by the given Pokémon.)  
+Additionally, the user's last three searches will render on the left-hand side buttons, with the latest search appearing on top.  
+  
+![Search results rendered](./assets/images/renderedpokemon.png)  
+
+Oftentimes, you will hear about how it is "National Donut Day," "National Child Day," "National Book Day"; well, in the user's Dexperience, every Pokémon gets a day! Every day features a new specific Pokémon in the "Pokémon of the Day" feature, which is accessed with a simple click of a button.
+
+![Pokémon of the day](./assets/images/pod.png)  
+
+The MySquad feature further allows the user to have a personal DEXPERIENCE by trying to catch Pokémon and adding them to their MySquad team!  
+Akin to the video game and television series, the user can only have a maximum of six Pokémon on their team.  
+In order to catch a Pokémon, the user must double-click on the Pokémon itself in order to have a chance to catch it.  
+
+![MySquad How-to](./assets/images/mysquadinstrux.png)  
+  
+When the user hovers over a Pokémon, the cursor will change into a plus symbol to help indicate that they can now attempt to catch a Pokémon with a simple double-click!  
+
+Unfortunately, however, there is a chance the user will not be successful in their catch attempt, because the Pokémon may flee just as they do in the games and series.
+  
+![Unsuccessful catch attempt](./assets/images/mysqaudfled.png)  
+
+But should the user catch some good luck, they may capture the Pokémon!  
+  
+![Successful catch attempt](./assets/images/pokemoncaught.png)  
+  
+Once the Pokémon is caught, they will be rendered into user's MySquad team, displaying their name and type!  
+With the maximum being six Pokémon, if more are caught, the first Pokémon listed will be released back out into the wild!  
+Additionally, once the team list is rendered, user can click on that Pokémon's name to view their page again.  
+  
+![MySquad Team](./assets/images/mysquad.png)  
+
+Furthering the personalized user DEXPERIENCE, the user can click on PokéJournal to keep notes about anything --
+Pokémon, the games, the TV show, and of course, simply life itself! It is the user's personal journal entry.  
+Whatever the user types will be successfully autosaved for them and will display when they come back to the page by clicking on PokéJournal.  
+  
+![Initial Pokéjournal](./assets/images/pokejournalinitial.png)  
+  
+![Pokéjournal autosaves](./assets/images/pokejournalautosave.png)  
+  
+The hidden feature implemented includes another Easter egg from the original Pokémon games.  
+Should the user search an invalid word in the search bar, they will enter glitch city, with the city background being glitched out, the infamous glitch Pokémon rendering, Professor Oak's infamous words of warning, and a Did-you-know fact alerting the user that they did not search a Pokémon.  
+All will go back to normal once the user searches a valid Pokémon again.  
+  
+![Glitch City](./assets/images/glitchcity.png)  
+
+We hope you enjoy your personalized DEXPERIENCE!
+
 
 ## Credits
 
@@ -53,3 +117,7 @@ Third-party Assets:
 [MySquad Pokéball marker](https://www.dreamstime.com/isolated-vector-ball-sign-pokeball-symbol-popular-pokemon-game-concept-icon-web-icon-popular-app-pokemon-ball-line-icon-game-team-image187435285)  
 [Chuck Norris image](https://thumbnails.texastribune.org/KYEV1fajbzd6ke87wdE80JjmlyI=/450x300/https://static.texastribune.org/media/images/chuck-norris1.jpg)  
 [Pokémon border frame](https://github.com/luttje/css-pokemon-gameboy/blob/main/src/images/frame-hd.png)
+
+## Deployed Link
+
+Please enjoy your very own [DEXPERIENCE](!
