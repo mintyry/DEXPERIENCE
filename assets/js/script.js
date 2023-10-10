@@ -17,6 +17,7 @@ let norrisBtn = document.querySelector('#norris-button')
 let isAnimateActive = false;
 let recommendations = document.querySelector('#poke-recommendations');
 let pokeJournalBtn = document.querySelector('#poke-journal');
+let typewriterTime;
 
 
 // These functions are called so they are functional at page load.
@@ -36,7 +37,7 @@ searchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     let input = document.querySelector('input').value.toLowerCase();
     renderPokemon(input);
-
+    isAnimateActive = false;
     
     search.reset();
 });
@@ -65,7 +66,7 @@ function renderPokemon(name) {
                         pokeInfo.textContent += errorMsg.charAt(i);
                         norrisQuote.textContent += errorLol.charAt(i)
                         i++
-                        setTimeout(typeWriter, 20);
+                        typewriterTime = setTimeout(typeWriter, 20);
                     };
                 };
                 typeWriter();
@@ -183,6 +184,7 @@ function renderSearchHistory() {
 // corresponding Pokemon's information.
 
 historySection.addEventListener('click', function (event) {
+    clearTimeout(typewriterTime);
     if (event.target.matches('.button')) {
         let searchedPkmn = event.target.textContent.toLowerCase();
 
@@ -241,11 +243,11 @@ function addMySquad() {
 function renderMySquad() {
     mySquadBtn.addEventListener('click', function (event) {
         event.preventDefault();
-        statContainer.setAttribute('style', 'cursor: auto');
+        // statContainer.setAttribute('style', 'cursor: auto');
 
         let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
 
-        if (!pokeInfo.querySelector('.squad-mon')) {
+        if (!pokeInfo.querySelector('.squad-card')) {
             pokeInfo.innerHTML = 'Double-click the Pokémon itself to try to catch it and add it to your MySquad!';
             console.log('sigh')
         }
@@ -254,6 +256,7 @@ function renderMySquad() {
         for (let i = 0; i < mySquadArr.length && i < 6; i++) {
             console.log('woohoo')
             let squadList = document.createElement('ul');
+            squadList.classList.add('squad-card');
             let squadMember = document.createElement('li');
             squadMember.classList.add('squad-mon');
             squadMember.setAttribute('style', 'margin-bottom: 1%');
@@ -315,7 +318,7 @@ function norrisFact(name) {
                     if (i < pkmnPossessive.length) {
                         norrisQuote.textContent += pkmnPossessive.charAt(i);
                         i++
-                        setTimeout(typeWriter, 20);
+                        typewriterTime = setTimeout(typeWriter, 20);
                     } else {
                         isAnimateActive = false;
                         console.log(isAnimateActive);
@@ -335,7 +338,7 @@ function norrisFact(name) {
                     if (i < pkmnQuote.length) {
                         norrisQuote.textContent += pkmnQuote.charAt(i);
                         i++
-                        setTimeout(typeWriter, 20);
+                        typewriterTime = setTimeout(typeWriter, 20);
                     } else {
                         isAnimateActive = false;
                         console.log(isAnimateActive);
