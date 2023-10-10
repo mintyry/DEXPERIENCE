@@ -310,6 +310,36 @@ img {
     }
 
 }
+@media screen and (max-width: 375px) {
+    #norris-container {
+    position: absolute;
+    margin-top: -279px;
+    }
+    .image {
+        height: 277px;
+        width: auto;
+        margin-top: 93px;
+    }
+    .image img {
+        height: auto;
+        width: auto;
+    }
+}
+
+figure:hover::after {
+    content: "Double-click to catch this Pokémon!";
+    position: absolute;
+    left: 60%;
+    bottom: 70%;
+    min-width: 45%;
+    border: 1px #aaaaaa solid;
+    border-radius: 10px;
+    background-color: rgba(48, 48, 48, 0.5);
+    padding: 12px;
+    color: #fff;
+    font-size: 80%;
+    z-index: 2;
+  }
 
 
 .vertbar {

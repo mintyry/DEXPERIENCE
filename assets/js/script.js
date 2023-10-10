@@ -185,13 +185,15 @@ function addMySquad() {
 function renderMySquad() {
     mySquadBtn.addEventListener('click', function (event) {
         event.preventDefault();
-        statContainer.setAttribute('style', 'cursor: auto');
+        // statContainer.setAttribute('style', 'cursor: auto');
+
         let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
-        if (!pokeInfo.querySelector('.squad-mon')) {
-            pokeInfo.innerHTML = 'Double-click the Pokémon itself to try to catch it and add it to your MySquad!';
-        }     
+
+        pokeInfo.innerHTML='';
+
         for (let i = 0; i < mySquadArr.length && i < 6; i++) {
             let squadList = document.createElement('ul');
+            squadList.classList.add('squad-card');
             let squadMember = document.createElement('li');
             squadMember.classList.add('squad-mon');
             squadMember.setAttribute('style', 'margin-bottom: 1%');
@@ -256,8 +258,6 @@ function norrisFact(name) {
             let possessiveNorris = /chuck's|chuck norris's|chuck norris'|norris's|norris'/ig
             let pkmnPossessive = cnQuote.replaceAll(/chuck's|chuck norris's|chuck norris'|norris's|norris'/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
             if (cnQuote.match(possessiveNorris)) {
-                console.log(cnQuote)
-                console.log(pkmnPossessive)
                 norrisQuote.textContent = pkmnPossessive
             } else {
                 norrisQuote.textContent = pkmnQuote
