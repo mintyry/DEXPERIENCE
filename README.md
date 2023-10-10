@@ -120,4 +120,4 @@ Third-party Assets:
 
 ## Deployed Link
 
-Please enjoy your very own [DEXPERIENCE](!
+Please enjoy your very own [DEXPERIENCE](https://clyderitchie.github.io/dexperience/)!
