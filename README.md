@@ -50,4 +50,6 @@ Third-party Assets:
 
 [MissingNo image](https://static.wikia.nocookie.net/fcoc-vs-battles/images/e/e0/MissingNo.1.png/revision/latest?cb=20200404195127)  
 [Null Pokéball image](https://i.ebayimg.com/images/g/cccAAOSwVgtgT~Wf/s-l1200.jpg)  
-[MySquad Pokéball marker](https://www.dreamstime.com/isolated-vector-ball-sign-pokeball-symbol-popular-pokemon-game-concept-icon-web-icon-popular-app-pokemon-ball-line-icon-game-team-image187435285)
+[MySquad Pokéball marker](https://www.dreamstime.com/isolated-vector-ball-sign-pokeball-symbol-popular-pokemon-game-concept-icon-web-icon-popular-app-pokemon-ball-line-icon-game-team-image187435285)  
+[Chuck Norris image](https://thumbnails.texastribune.org/KYEV1fajbzd6ke87wdE80JjmlyI=/450x300/https://static.texastribune.org/media/images/chuck-norris1.jpg)  
+[Pokémon border frame](https://github.com/luttje/css-pokemon-gameboy/blob/main/src/images/frame-hd.png)
