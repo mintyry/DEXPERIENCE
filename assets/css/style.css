@@ -251,26 +251,6 @@ img {
     font-family: 'Press Start 2P';
 }
 
-
-
-/* Tooltip to help user know how to add Pokemon to MySquad */
-figure:hover::after {
-    content: "Double-click to catch this Pokémon!";
-    position: absolute;
-    top: 5px;
-    right: 105%;
-    left: 60%;
-    bottom: 70%;
-    min-width: 45%;
-    border: 1px #aaaaaa solid;
-    border-radius: 10px;
-    background-color: rgba(48, 48, 48, 0.5);
-    padding: 12px;
-    color: #fff;
-    font-size: 80%;
-    z-index: 2;
-}
-
 /* The aesthetic behind all the other elements */
 .vertbar,
 .vertbar-r {
