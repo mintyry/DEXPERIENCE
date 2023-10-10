@@ -14,7 +14,6 @@ let image = document.querySelector('#pkmn-img');
 let search = document.querySelector('#search')
 let norrisQuote = document.querySelector('#norris-quote')
 let norrisBtn = document.querySelector('#norris-button')
-let isAnimateActive = false;
 let recommendations = document.querySelector('#poke-recommendations');
 let pokeJournalBtn = document.querySelector('#poke-journal');
 
@@ -29,19 +28,37 @@ renderJournal(); // User clicks PokeJournal button, they now have access to note
 
 
 //Access this variable to to make auto-complete
-console.log(pokeList);
+// console.log(pokeList);
 
 // event listener for clicking search button
 searchBtn.addEventListener('click', function (event) {
     event.preventDefault();
     let input = document.querySelector('input').value.toLowerCase();
     renderPokemon(input);
-    //why is norrisQuote clearing here? noticed that if user has pokemon info showing and searches empty search bar, it clears norris box while still showing pokemon info and img
-    // norrisQuote.textContent = ''
     search.reset();
 });
 
+// Event listener that listens for user's click on specific button in order to render
+// corresponding Pokemon's information.
 
+historySection.addEventListener('click', function (event) {
+    if (event.target.matches('.button')) {
+        let searchedPkmn = event.target.textContent.toLowerCase();
+
+        // when the click goes through, we render pokemon info on stat-page.
+        renderPokemon(searchedPkmn);
+    }
+});
+
+pod.addEventListener('click', function () {
+    const today = dayjs().format('MM/DD/YYYY');
+    // console.log(today);
+
+    let pokemon = JSON.parse(localStorage.getItem(today)) || [];
+    // console.log(pokemon)
+    // console .log (pokemon.name)
+    renderPokemon(pokemon.name);
+});
 
 // Pokemon API Section
 function renderPokemon(name) {
@@ -50,28 +67,13 @@ function renderPokemon(name) {
         .then(function (response) {
             // Checks if response is ok in data OR if an empty input box was searched
             if (!response.ok || name === '') {
-                pokeInfo.textContent = ''
-                body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);')
-                let errorMsg =
-                    `Oak's words echoed... "There's a time and place for everything but not now!"`;
-                // pokeInfo.setHTML(errorMsg);
+                body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);');
                 document.querySelector('img').src = './assets/images/MissingNo.1.webp';
                 norrisBox.setAttribute('style', 'display:flex');
-                // document.querySelector('#norris-quote').textContent = 'That\'s not a Pokémon, LOL.';
-                let errorLol = 'That\'s not a Pokémon, LOL.';
-                let i = 0;
-                function typeWriter() {
-                    if (i < errorMsg.length) {
-                        pokeInfo.textContent += errorMsg.charAt(i);
-                        norrisQuote.textContent += errorLol.charAt(i)
-                        i++
-                        setTimeout(typeWriter, 20);
-                    };
-                };
-                typeWriter();
+                pokeInfo.textContent = `Oak's words echoed... "There's a time and place for everything but not now!"`;
+                norrisQuote.textContent = 'That\'s not a Pokémon, LOL.';
                 return;
             } else {
-                document.querySelector('#norris-quote').textContent = '';
                 body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
                 return response.json();
             }
@@ -92,11 +94,7 @@ function renderPokemon(name) {
             statCard(data); // DISPLAY pokemon info
             pokemonImg(data); //DISPLAY IMAGE for current pokemon
             norrisBox.setAttribute('style', 'display:flex'); //removes norris box from hiding
-            // norrisFact(name); //displays norris-pokemon fact
-            norrisBtn.addEventListener('click', function (event) {
-                event.preventDefault();
-                norrisFact(name);
-            });
+            norrisFact(name); //displays norris-pokemon fact
             renderSearchHistory(); //adds search history button
             addMySquad(); // allows for double clicking to add to mySquad in local storage;
         });
@@ -122,7 +120,6 @@ function renderAbilities(abilitiesArr) {
     }
     return HTML;
 }
-
 
 // Renders the different types of the Pokemon
 function renderTypes(typesArr) {
@@ -183,18 +180,6 @@ function renderSearchHistory() {
     }
 }
 
-// Event listener that listens for user's click on specific button in order to render
-// corresponding Pokemon's information.
-
-historySection.addEventListener('click', function (event) {
-    if (event.target.matches('.button')) {
-        let searchedPkmn = event.target.textContent.toLowerCase();
-
-        // when the click goes through, we render pokemon info on stat-page.
-        renderPokemon(searchedPkmn);
-    }
-});
-
 // ===========================================
 // mySquad feature
 function addMySquad() {
@@ -214,11 +199,11 @@ function addMySquad() {
         // Following code is the double-click mini-game feature to catch a Pokemon -- essentially a 50/50 chance to catch and add to MySquad.
         let caught = `You caught a wild ${mySquadName.textContent}!\n
         ${mySquadName.textContent} was added to your MySquad.`;
-        console.log(caught);
+        // console.log(caught);
 
         let fled = `Darn! The wild ${mySquadName.textContent} broke out of the Pokéball!\n
         ${mySquadName.textContent} ran away. `;
-        console.log(fled);
+        // console.log(fled);
 
         let outcome = [caught, fled];
 
@@ -227,7 +212,7 @@ function addMySquad() {
         let result = outcome[outcomeIndex];
 
         pokeInfo.textContent = result;
-        console.log(result);
+        // console.log(result);
 
         if (result === caught) {
             // Add double-clicked pokemon to array, if team is full, removes first pokemon
@@ -250,7 +235,7 @@ function renderMySquad() {
         let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
 
         pokeInfo.innerHTML = '';
-        console.log('this works');
+        // console.log('this works');
 
         for (let i = 0; i < mySquadArr.length && i < 6; i++) {
             let squadList = document.createElement('ul');
@@ -302,55 +287,14 @@ function norrisFact(name) {
             let pokeName = `${name}`;
             let cnQuote = data.value;
             let pkmnQuote = cnQuote.replaceAll(/chuck norris|chuck|norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
-            let possessiveNorris = /chuck's|chuck norris'|chuck norris's|norris's/ig
-            let pkmnPossessive = cnQuote.replaceAll(/chuck's|chuck norris'|chuck norris's|norris's/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
-
-            let i = 0;
-
+            let possessiveNorris = /chuck's|chuck norris's|chuck norris'|norris's|norris'/ig
+            let pkmnPossessive = cnQuote.replaceAll(/chuck's|chuck norris's|chuck norris'|norris's|norris'/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
             if (cnQuote.match(possessiveNorris)) {
-                norrisQuote.textContent = ''
-                function typeWriter() {
-                    norrisBtn.disabled = true
-                    isAnimateActive = true;
-                    console.log(isAnimateActive);
-                    if (i < pkmnPossessive.length) {
-                        norrisQuote.textContent += pkmnPossessive.charAt(i);
-                        i++
-                        setTimeout(typeWriter, 20);
-                    }
-
-                    else {
-                        isAnimateActive = false;
-                        norrisBtn.disabled = false
-                        console.log(isAnimateActive);
-                    }
-                };
-
-                if (!isAnimateActive) {
-                    typeWriter();
-                }
-
+                console.log(cnQuote)
+                console.log(pkmnPossessive)
+                norrisQuote.textContent = pkmnPossessive
             } else {
-                console.log(isAnimateActive);
-                norrisQuote.textContent = ''
-                function typeWriter() {
-                    isAnimateActive = true;
-                    norrisBtn.disabled = true
-                    console.log(isAnimateActive);
-                    if (i < pkmnQuote.length) {
-                        norrisQuote.textContent += pkmnQuote.charAt(i);
-                        i++
-                        setTimeout(typeWriter, 20);
-                    } else {
-                        isAnimateActive = false;
-                        norrisBtn.disabled = false
-                        console.log(isAnimateActive);
-                    }
-                };
-
-                if (!isAnimateActive) {
-                    typeWriter();
-                }
+                norrisQuote.textContent = pkmnQuote
             };
         });
 };
@@ -375,10 +319,10 @@ function randomPokemon() {
 function pokemon_of_the_day() {
 
     const today = dayjs().format('MM/DD/YYYY');
-    console.log(today);
+    // console.log(today);
 
     let pokemon = localStorage.getItem(today);
-    console.log(pokemon);
+    // console.log(pokemon);
 
     if (pokemon) {
         pokemon = JSON.parse(pokemon);
@@ -387,7 +331,7 @@ function pokemon_of_the_day() {
     }
 
     if (pokemon === null) {
-        console.log('Fetching new Pokemon...');
+        // console.log('Fetching new Pokemon...');
         const randomId = Math.floor(Math.random() * pokeList.length);
         const url = `https://pokeapi.co/api/v2/pokemon/${randomId}/`;
 
@@ -403,28 +347,18 @@ function pokemon_of_the_day() {
                     name: data.name,
                     id: data.id,
                 };
-                console.log(pokemonData);
+                // console.log(pokemonData);
 
                 // Saving the Pokemon data to localStorage
                 localStorage.setItem(today, JSON.stringify(pokemonData));
             })
             .catch(function (error) {
-                console.error('There has been a problem with your fetch operation:', error);
+                // console.error('There has been a problem with your fetch operation:', error);
             });
     } else {
-        console.log('Pokemon already created:', pokemon);
+        // console.log('Pokemon already created:', pokemon);
     }
 }
-
-pod.addEventListener('click', function () {
-    const today = dayjs().format('MM/DD/YYYY');
-    // console.log(today);
-
-    let pokemon = JSON.parse(localStorage.getItem(today)) || [];
-    console.log(pokemon)
-    // console .log (pokemon.name)
-    renderPokemon(pokemon.name);
-});
 
 function autoComplete() {
     for (let i = 0; i < pokeList.length; i++) {
@@ -447,7 +381,7 @@ function renderJournal() {
         textarea.setAttribute('cols', '50');
         textarea.setAttribute('placeholder', 'Type notes here...');
         pokeInfo.appendChild(textarea);
-        console.log(pokeInfo);
+        // console.log(pokeInfo);
 
         let pokeJournal = localStorage.getItem('pokeJournal') || '';
         textarea.textContent = pokeJournal;
