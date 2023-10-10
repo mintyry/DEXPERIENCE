@@ -7,10 +7,42 @@
 /* to make sure background color fills up the entire page. Found out that bulma uses some properties that disallows this by default */
 html,
 body {
-    background-image: url(../images/city-landscape.webp);
+    background-image: url("../images/city-landscape.webp");
     background-position: 25% 75%;
     background-attachment: fixed;
     min-height: 100vh;
+}
+
+/* The aesthetic behind all the other elements */
+.vertbar,
+.vertbar-r {
+    display: flex;
+    background-image: linear-gradient(lightsalmon, lightsalmon, rgb(165 121 104));
+    height: 100vh;
+    width: 5vw;
+    position: absolute;
+    top: 0%;
+    z-index: 0;
+}
+
+.vertbar {
+    left: 20%;
+}
+
+.vertbar-r {
+    left: 75%;
+}
+
+.stage {
+    display: flex;
+    background-image: linear-gradient(rgb(165 121 104), lightsalmon, rgba(254, 189, 163), rgba(249, 210, 194, 0.3), transparent);
+    height: 69vh;
+    width: 75vw;
+    position: absolute;
+    top: 68%;
+    left: 12%;
+    z-index: 0;
+    transform: perspective(83em) rotateX(60deg);
 }
 
 header {
@@ -79,7 +111,7 @@ main {
 aside {
     width: 25%;
     position: relative;
-    top: 45px;
+    top: 61px;
 }
 
 /* Styles buttons */
@@ -217,7 +249,7 @@ img {
     border-radius: 25px;
     background-image: radial-gradient(rgba(141, 255, 236, 0.5), rgba(141, 255, 236, 0.4), rgba(141, 255, 236, 0.3), rgba(255, 255, 255, 0.2));
     font-family: 'Press Start 2P';
-    border-image: url(https://luttje.github.io/css-pokemon-gameboy/styles/images/frame-hd.png) 42 round;
+    border-image: url("https://luttje.github.io/css-pokemon-gameboy/styles/images/frame-hd.png") 42 round;
     border-width: 21px;
     border-style: solid;
     padding: 1em;
@@ -249,38 +281,6 @@ img {
     font-size: 1.5vw;
     border-radius: 25px;
     font-family: 'Press Start 2P';
-}
-
-/* The aesthetic behind all the other elements */
-.vertbar,
-.vertbar-r {
-    display: flex;
-    background-image: linear-gradient(lightsalmon, lightsalmon, rgb(165 121 104));
-    height: 100vh;
-    width: 5vw;
-    position: absolute;
-    top: 0%;
-    z-index: 0;
-}
-
-.vertbar {
-    left: 20%;
-}
-
-.vertbar-r {
-    left: 75%;
-}
-
-.stage {
-    display: flex;
-    background-image: linear-gradient(rgb(165 121 104), lightsalmon, rgba(254, 189, 163), rgba(249, 210, 194, 0.3), transparent);
-    height: 69vh;
-    width: 75vw;
-    position: absolute;
-    top: 68%;
-    left: 12%;
-    z-index: 0;
-    transform: perspective(83em) rotateX(60deg);
 }
 
 /* Media Queries */
