@@ -173,6 +173,10 @@ aside {
     margin-bottom: 2%;
 }
 
+#poke-stats {
+    margin-bottom: 20%;
+}
+
 /* OTHER FEATURES STYLES, rendered in stat-page */
 /* This styles each Pokemon added in MySquad (rendered via js) */
 .squad-mon {
@@ -337,6 +341,10 @@ img {
         width: 15%;
         position: relative;
         top: 30px;
+    }
+
+    #poke-stats {
+        margin-bottom: 33%;
     }
 
     #did-you-know {

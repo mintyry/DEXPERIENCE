@@ -124,7 +124,7 @@ function statCard(data) {
                 <p class= "statline"><strong>WEIGHT: </strong>${((data.weight * 0.1) * 2.205).toFixed(1)} lbs</p>
                <p class= "statline"><strong>ABILITIES: </strong>${renderAbilities(data.abilities)} </p>
                <p class= "statline"><strong>TYPES: </strong><span id = "squadType">${renderTypes(data.types)}</span></p>
-               <ul><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
+               <ul id= "poke-stats"><strong>STATS: </strong>${renderBaseStat(data.stats)}</ul><br>
             </div>`
     pokeInfo.innerHTML = statCardHTML;
 };
@@ -251,7 +251,7 @@ function renderJournal() {
         let pokeJournal = localStorage.getItem('pokeJournal') || '';
 
         textarea.textContent = pokeJournal;
-        
+
         // Autosaves what user types!
         textarea.addEventListener('keyup', function () {
             localStorage.setItem('pokeJournal', textarea.value);
