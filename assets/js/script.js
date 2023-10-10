@@ -247,10 +247,6 @@ function renderMySquad() {
 
         let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
 
-        if (!pokeInfo.querySelector('.squad-card')) {
-            pokeInfo.innerHTML = 'Double-click the Pokémon itself to try to catch it and add it to your MySquad!';
-            console.log('sigh')
-        }
         pokeInfo.innerHTML='';
 
         for (let i = 0; i < mySquadArr.length && i < 6; i++) {
