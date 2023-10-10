@@ -33,48 +33,27 @@ function renderPokemon(name) {
     let pokeUrl = `https://pokeapi.co/api/v2/pokemon/${name}`; 
 
     fetch(pokeUrl)
-        .then(function (response) {
-            
+        .then(function (response) {            
             if (!response.ok || name === '') {
-                pokeInfo.textContent = ''
-                norrisQuote.textContent = ''
-                body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);')
-                let errorMsg =
-                    `Oak's words echoed... "There's a time and place for everything but not now!"`;
+                body.setAttribute('style', 'background-image: url(./assets/images/city-landscapeglitch.webp);');
                 document.querySelector('img').src = './assets/images/MissingNo.1.webp';
                 norrisBox.setAttribute('style', 'display:flex');
-    
-                let errorLol = 'That\'s not a Pokémon, LOL.';
-                let i = 0;
-                function typeWriter() {
-                    if (i < errorMsg.length) {
-                        pokeInfo.textContent += errorMsg.charAt(i);
-                        norrisQuote.textContent += errorLol.charAt(i)
-                        i++
-                        setTimeout(typeWriter, 20);
-                    };
-                };
-                typeWriter();
+                pokeInfo.textContent = `Oak's words echoed... "There's a time and place for everything but not now!"`;
+                norrisQuote.textContent = 'That\'s not a Pokémon, LOL.';
                 return;
             } else {
-                document.querySelector('#norris-quote').textContent = '';
                 body.setAttribute('style', 'background-image: url(./assets/images/city-landscape.webp);')
                 return response.json();
             }
         })
-        .then(function (data) {
-           
+        .then(function (data) {           
             let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
-
             if (pkmnArr.includes(data.name)) {
                 let index = pkmnArr.indexOf(data.name);
                 pkmnArr.splice(index, 1);
             }
             pkmnArr.unshift(data.name);
             localStorage.setItem('pokemon', JSON.stringify(pkmnArr));
-
-            
-
             statCard(data); 
             pokemonImg(data); 
             norrisBox.setAttribute('style', 'display:flex'); 
@@ -103,6 +82,7 @@ function renderAbilities(abilitiesArr) {
     return HTML;
 }
 
+// Renders the different types of the Pokemon
 function renderTypes(typesArr) {
     let HTML = '';
     for (let i = 0; i < typesArr.length; i++) {
@@ -137,25 +117,15 @@ function statCard(data) {
 };
 
 function pokemon_of_the_day() {
-
     const today = dayjs().format('MM/DD/YYYY');
-    
-
     let pokemon = localStorage.getItem(today);
-    
-
     if (pokemon) {
         pokemon = JSON.parse(pokemon);
     } else {
         pokemon = null;
     }
-
-    if (pokemon === null) {
-        
-        let pod = pokeList[Math.floor(Math.random() * pokeList.length)].name;
-
-
-        
+    if (pokemon === null) {    
+        let pod = pokeList[Math.floor(Math.random() * pokeList.length)].name;    
         localStorage.setItem(today, JSON.stringify(pod));
     } else {
         
@@ -179,53 +149,36 @@ function randomPokemon() {
 
 function renderSearchHistory() {
     let pkmnArr = JSON.parse(localStorage.getItem('pokemon')) || [];
-
     for (let i = 0; i < pkmnArr.length && i < 3; i++) {
         historySection.children[i].textContent = pkmnArr[i].charAt(0).toUpperCase() + pkmnArr[i].slice(1)
         historySection.children[i].removeAttribute('disabled');
     }
 }
 
+// ===========================================
+// mySquad feature
 function addMySquad() {
     image.setAttribute('style', 'cursor: cell');
-
-    
     let mySquadName = document.querySelector('#squadName');
     let mySquadType = document.querySelector('#squadType');
-
-   
     let addSquadPkmn = JSON.parse(localStorage.getItem('mySquad')) || [];
-
-    
     image.addEventListener('dblclick', function (event) {
-        event.preventDefault();
-        
+        event.preventDefault();   
         let caught = `You caught a wild ${mySquadName.textContent}!\n
         ${mySquadName.textContent} was added to your MySquad.`;
-        
-
         let fled = `Darn! The wild ${mySquadName.textContent} broke out of the Pokéball!\n
         ${mySquadName.textContent} ran away. `;
-      
-
         let outcome = [caught, fled];
-
         let outcomeIndex = (Math.floor(Math.random() * outcome.length));
-
         let result = outcome[outcomeIndex];
-
         pokeInfo.textContent = result;
-       
-
-        if (result === caught) {
-            
+        if (result === caught) {       
             if (addSquadPkmn.length >= 6) {
                 addSquadPkmn.shift();
             }
             addSquadPkmn.push(mySquadName.textContent.toLowerCase() + ' - ' + mySquadType.textContent);
             localStorage.setItem('mySquad', JSON.stringify(addSquadPkmn));
         }
-
     });
 }
 
@@ -233,61 +186,42 @@ function renderMySquad() {
     mySquadBtn.addEventListener('click', function (event) {
         event.preventDefault();
         statContainer.setAttribute('style', 'cursor: auto');
-
         let mySquadArr = JSON.parse(localStorage.getItem('mySquad')) || [];
-
-        
         if (!pokeInfo.querySelector('.squad-mon')) {
             pokeInfo.innerHTML = 'Double-click the Pokémon itself to try to catch it and add it to your MySquad!';
-        } 
-
-        // pokeInfo.innerHTML='';
-        
+        }     
         for (let i = 0; i < mySquadArr.length && i < 6; i++) {
             let squadList = document.createElement('ul');
             let squadMember = document.createElement('li');
             squadMember.classList.add('squad-mon');
             squadMember.setAttribute('style', 'margin-bottom: 1%');
-
             pokeInfo.appendChild(squadList);
             squadList.appendChild(squadMember);
-
-
             squadMember.textContent = mySquadArr[i].charAt(0).toUpperCase() + mySquadArr[i].slice(1);
-
             squadMember.addEventListener('click', function (event) {
                 event.preventDefault();
-
                 let listedPkmn = squadMember.textContent;
                 listedPkmn = listedPkmn.split(' -');
                 listedPkmn = listedPkmn[0].toLowerCase();
-
                 renderPokemon(listedPkmn);
             })
-
         };
- 
     });
 };
 
 function renderJournal() {
     pokeJournalBtn.addEventListener('click', function (event) {
         event.preventDefault();
-
         pokeInfo.textContent = '';
-
         let textarea = document.createElement('textarea');
         textarea.setAttribute('rows', '28');
         textarea.setAttribute('cols', '50');
         textarea.setAttribute('placeholder', 'Type notes here...');
         pokeInfo.appendChild(textarea);
-
         let pokeJournal = localStorage.getItem('pokeJournal') || '';
         textarea.textContent = pokeJournal;
-
         textarea.addEventListener('keyup', function () {
             localStorage.setItem('pokeJournal', textarea.value);
-
         });
     });
 }
@@ -319,44 +253,14 @@ function norrisFact(name) {
             let pokeName = `${name}`;
             let cnQuote = data.value;
             let pkmnQuote = cnQuote.replaceAll(/chuck norris|chuck|norris/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1));
-            let possessiveNorris = /chuck's|chuck norris'|chuck norris's|norris's/ig
-            let pkmnPossessive = cnQuote.replaceAll(/chuck's|chuck norris'|chuck norris's|norris's/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
-
-            let i = 0;
-
+            let possessiveNorris = /chuck's|chuck norris's|chuck norris'|norris's|norris'/ig
+            let pkmnPossessive = cnQuote.replaceAll(/chuck's|chuck norris's|chuck norris'|norris's|norris'/ig, pokeName.trim().charAt(0).toUpperCase() + pokeName.slice(1) + `'s`);
             if (cnQuote.match(possessiveNorris)) {
-                norrisQuote.textContent = ''
-                function typeWriter() {
-                    isAnimateActive = true;
-                    if (i < pkmnPossessive.length) {
-                        norrisQuote.textContent += pkmnPossessive.charAt(i);
-                        i++
-                        setTimeout(typeWriter, 20);
-                    } else {
-                        isAnimateActive = false;
-                    }
-                };
-
-                if (!isAnimateActive) {
-                    typeWriter();
-                }
-
+                console.log(cnQuote)
+                console.log(pkmnPossessive)
+                norrisQuote.textContent = pkmnPossessive
             } else {
-                norrisQuote.textContent = ''
-                function typeWriter() {
-                    isAnimateActive = true;
-                    if (i < pkmnQuote.length) {
-                        norrisQuote.textContent += pkmnQuote.charAt(i);
-                        i++
-                        setTimeout(typeWriter, 20);
-                    } else {
-                        isAnimateActive = false;
-                    }
-                };
-
-                if (!isAnimateActive) {
-                    typeWriter();
-                }
+                norrisQuote.textContent = pkmnQuote
             };
         });
 };
@@ -381,8 +285,3 @@ historySection.addEventListener('click', function (event) {
         renderPokemon(searchedPkmn);
     }
 });
-
-
-
-
-
