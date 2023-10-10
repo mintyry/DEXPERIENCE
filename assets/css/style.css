@@ -32,6 +32,7 @@ header {
     font-size: 2vw;
 
 }
+
 /* styles the placeholder text for the search-bar */
 #search-bar::placeholder {
     color: rgb(255, 255, 255) !important;
@@ -39,11 +40,13 @@ header {
     font-size: 2vw;
     /* Firefox */
 }
+
 #search-bar::-ms-input-placeholder {
     color: white !important;
     font-size: 2vw;
     /* Edge 12-18 */
 }
+
 /* allows for flexibility in sizing for buttons */
 #search-button,
 #random-button {
@@ -78,6 +81,7 @@ aside {
     position: relative;
     top: 45px;
 }
+
 /* Styles buttons */
 .side-btn,
 .side-btn:focus,
@@ -92,6 +96,7 @@ aside {
     padding: 2rem;
 
 }
+
 /* Had to override the disabled button styles from Bulma */
 .button[disabled] {
     opacity: 1;
@@ -123,12 +128,14 @@ aside {
     border-image-slice: 1;
     background-image: radial-gradient(rgba(160, 188, 156, 0.8), rgba(160, 188, 156, 0.8), rgba(160, 188, 156, 0.8), rgba(203, 203, 203, 0.8));
 }
+
 /* Where Pokemon info will render */
 #stat-page {
     background-color: transparent;
     font-family: 'Press Start 2P';
     white-space: normal;
 }
+
 /* This styles each stat line for a Pokemon's page */
 .statline {
     margin-bottom: 2%;
@@ -160,27 +167,6 @@ textarea {
     max-width: 100%;
 }
 
-/* Media query at 769px for corresponding elements */
-@media screen and (max-width: 769px) {
-    #stat-container {
-        width: 70%;
-    }
-
-    #stat-page {
-        font-size: 0.9em;
-    }
-
-    .side-btn {
-        font-size: 0.6em;
-    }
-
-    aside {
-        width: 15%;
-        position: relative;
-        top: 30px;
-    }
-}
-
 /* Styling for container holding image */
 figure {
     margin-left: auto;
@@ -202,6 +188,7 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
+
 @keyframes float {
     0% {
         transform: translate(0, 0);
@@ -222,7 +209,9 @@ img {
     position: relative;
     margin-top: -315px;
     display: none;
+    width: 100%;
 }
+
 #norris-fact {
     font-size: 2vw;
     border-radius: 25px;
@@ -233,6 +222,7 @@ img {
     border-style: solid;
     padding: 1em;
 }
+
 /* Styles a blinking button */
 #norris-fact button {
     justify-content: flex-end;
@@ -243,14 +233,17 @@ img {
     font: inherit;
     font-family: 'Press Start 2P';
 }
+
 #norris-fact button span {
     animation: blinking .5s steps(2, start) infinite;
 }
+
 @keyframes blinking {
     to {
         visibility: hidden;
     }
 }
+
 /* Styles the actual Norris quote */
 #norris-quote {
     font-size: 1.5vw;
@@ -258,41 +251,7 @@ img {
     font-family: 'Press Start 2P';
 }
 
-/* MEDIA QUERIES FOR BOTTOM HALF OF APP - IMG AND NORRIS */
 
-@media screen and (max-width: 375px) {
-    #norris-container {
-    position: absolute;
-    margin-top: -279px;
-    }
-    .image {
-        height: 277px;
-        width: auto;
-        margin-top: 93px;
-    }
-    .image img {
-        height: auto;
-        width: auto;
-    }
-}
-
-@media screen and (max-width: 410px) {
-    figure {
-        bottom: 155px;
-    }
-    #norris-container {
-        margin-top: -295px;
-    }
-}
-
-@media screen and (max-width: 769px) {
-    #did-you-know {
-        font-size: 2em;
-    }
-    #norris-quote {
-        font-size: 1.5em;
-    }
-}
 
 /* Tooltip to help user know how to add Pokemon to MySquad */
 figure:hover::after {
@@ -310,10 +269,11 @@ figure:hover::after {
     color: #fff;
     font-size: 80%;
     z-index: 2;
-  }
+}
 
 /* The aesthetic behind all the other elements */
-.vertbar, .vertbar-r {
+.vertbar,
+.vertbar-r {
     display: flex;
     background-image: linear-gradient(lightsalmon, lightsalmon, rgb(165 121 104));
     height: 100vh;
@@ -322,9 +282,11 @@ figure:hover::after {
     top: 0%;
     z-index: 0;
 }
+
 .vertbar {
     left: 20%;
 }
+
 .vertbar-r {
     left: 75%;
 }
@@ -338,11 +300,76 @@ figure:hover::after {
     top: 68%;
     left: 12%;
     z-index: 0;
-    transform: perspective(53em) rotateX(60deg);
-  }
+    transform: perspective(83em) rotateX(60deg);
+}
 
- @media screen and (min-width: 1000px) {
+/* Media Queries */
+@media screen and (max-width: 375px) {
+
+    .side-btn,
+    .side-btn:focus,
+    .button[disabled] {
+        padding: 1.5rem;
+    }
+
+    #norris-container {
+        position: absolute;
+        margin-top: -279px;
+        left: 15px;
+    }
+
+    .image {
+        height: 277px;
+        width: auto;
+        margin-top: 93px;
+    }
+
+    .image img {
+        height: auto;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 410px) {
+    figure {
+        bottom: 155px;
+    }
+
+    #norris-container {
+        margin-top: -295px;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    #stat-container {
+        width: 70%;
+    }
+
+    #stat-page {
+        font-size: 0.9em;
+    }
+
+    .side-btn {
+        font-size: 0.6em;
+    }
+
+    aside {
+        width: 15%;
+        position: relative;
+        top: 30px;
+    }
+
+    #did-you-know {
+        font-size: 2em;
+    }
+
+    #norris-quote {
+        font-size: 1.5em;
+    }
+}
+
+@media screen and (min-width: 1000px) {
     .stage {
         top: 78%;
     }
- }
+}
