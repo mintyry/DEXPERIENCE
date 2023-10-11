@@ -23,7 +23,7 @@ Our app contains the following features we enjoyed building and hope the user en
 <ins>Pokémon of the Day</ins> -- There's always a national day for something, be it donuts, pizza, books, etc. Well, now each Pokémon gets a day, and with this feature you can see the featured Pokémon for that day.  
 <ins>MySquad</ins> -- A mini-game feature where user can double-click a Pokémon to catch them and add them to their personal team!  
 <ins>PokéJournal</ins> -- A journal text entry section for the user to type notes about Pokémon or any thing else they want to write out. This adds to the user's personal experience.  
-<ins>Search History</ins> -- The last three searches will render on the left side buttons of the page for the user to back to when they desire.  
+<ins>Search History</ins> -- The last three searches will render on the left side buttons of the page for the user to go back to when they desire.  
 <ins>Did You Know?</ins> -- Renders a silly fun fact about the Pokémon they're viewing; originally derived from Chuck Norris facts.  
 
 
@@ -35,7 +35,7 @@ Much is a blank canvas for the user to experience and personalize with their Pok
 ![First-time visiting app](./assets/images/pageload.png)  
 
 A lot of the action intially begins with a simple search of a Pokémon name.
-A dropdown list is rendered to help suggest what the Pokêmon the user may be interested in looking up and will autocomplete at the user's click.  
+A dropdown list is rendered to help suggest what Pokémon the user may be interested in looking up and will autocomplete at the user's click.  
 Additionally, should the user not have any specific Pokémon to research, they can also simply randomize their search to render a totally random Pokémon.  
 The creator of this feature added an Easter egg for the user after a certain amount of clicks...  
 
@@ -49,7 +49,7 @@ Additionally, the user's last three searches will render on the left-hand side b
   
 ![Search results rendered](./assets/images/renderedpokemon.png)  
 
-Oftentimes, you will hear about how it is "National Donut Day," "National Child Day," "National Book Day"; well, in the user's Dexperience, every Pokémon gets a day! Every day features a new specific Pokémon in the "Pokémon of the Day" feature, which is accessed with a simple click of a button.
+Oftentimes, you will hear about how it is "National Donut Day," "National Child Day," "National Book Day"; well, in the user's DEXPERIENCE, every Pokémon gets a day! Every day features a new specific Pokémon in "Pokémon of the Day," which is accessed by a simple click of a button.
 
 ![Pokémon of the day](./assets/images/pod.png)  
 
@@ -84,7 +84,7 @@ Whatever the user types will be successfully autosaved for them and will display
 ![Pokéjournal autosaves](./assets/images/pokejournalautosave.png)  
   
 The hidden feature implemented includes another Easter egg from the original Pokémon games.  
-Should the user search an invalid word in the search bar, they will enter glitch city, with the city background being glitched out, the infamous glitch Pokémon rendering, Professor Oak's infamous words of warning, and a Did-you-know fact alerting the user that they did not search a Pokémon.  
+Should the user search an invalid word in the search bar, they will enter glitch city, with the city background being glitched out, the infamous glitch Pokémon rendering along with Professor Oak's infamous words of warning, and a Did-you-know fact alerting the user that they did not search a Pokémon.  
 All will go back to normal once the user searches a valid Pokémon again.  
   
 ![Glitch City](./assets/images/glitchcity.png)  
