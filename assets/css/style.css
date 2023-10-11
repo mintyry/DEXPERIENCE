@@ -314,6 +314,11 @@ img {
         height: auto;
         width: auto;
     }
+
+    .vertbar, .vertbar-r {
+        height: 111vh;
+    }
+    
 }
 
 @media screen and (max-width: 410px) {
@@ -361,5 +366,31 @@ img {
 @media screen and (min-width: 1000px) {
     .stage {
         top: 103%;
+    }
+}
+
+/* meant for ipads/tablets in portrait mode */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+
+    .vertbar, .vertbar-r {
+        height: 88vh;
+    }
+    .stage {
+        top: 73%;
+    }
+}
+
+/* meant for ipads/tablets in landscape mode */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+    .vertbar, .vertbar-r {
+        height: 97vh;
+    }
+    .stage {
+        top: 85%;
     }
 }
