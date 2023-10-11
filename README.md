@@ -28,11 +28,6 @@ Our app contains the following features we enjoyed building and hope the user en
 
 
 ## Usage
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
-
-![alt text](assets/images/screenshot.png)  
 
 Upon page load, many features are accessible to the user.  
 Much is a blank canvas for the user to experience and personalize with their Pokédex interaction.
