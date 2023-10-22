@@ -117,4 +117,4 @@ styles.css : [Stack Overflow](https://stackoverflow.com/questions/14381556/css3-
 
 ## Deployed Link
 
-Please enjoy your very own [DEXPERIENCE](https://clyderitchie.github.io/dexperience/)!
+Please enjoy your very own [DEXPERIENCE](https://mintyry.github.io/DEXPERIENCE/)!
