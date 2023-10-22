@@ -316,15 +316,34 @@ img {
         width: auto;
     }
 
-    .vertbar, .vertbar-r {
+    .vertbar,
+    .vertbar-r {
         height: 111vh;
     }
-    
+
 }
 
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 415px) {
+
+    #search-bar,
+    #search-bar:hover,
+    #search-bar:focus,
+    #search-bar:active,
+    #search-bar::placeholder {
+        font-size: 2.7vw;
+    }
+
+    #search-bar::-ms-input-placeholder {
+        font-size: 2.7vw;
+    }
+
+    #search-button,
+    #random-button {
+        font-size: 2.7vw;
+    }
+
     figure {
-        bottom: 212px;
+        bottom: 170px;
     }
 
     #norris-container {
@@ -371,26 +390,26 @@ img {
 }
 
 /* meant for ipads/tablets in portrait mode */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
 
-    .vertbar, .vertbar-r {
+    .vertbar,
+    .vertbar-r {
         height: 88vh;
     }
+
     .stage {
         top: 73%;
     }
 }
 
 /* meant for ipads/tablets in landscape mode */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px)
-and (orientation : landscape) {
-    .vertbar, .vertbar-r {
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+
+    .vertbar,
+    .vertbar-r {
         height: 97vh;
     }
+
     .stage {
         top: 85%;
     }
