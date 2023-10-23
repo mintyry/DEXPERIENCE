@@ -204,6 +204,9 @@ textarea {
     font-family: 'Press Start 2P';
     max-width: 100%;
 }
+textarea::placeholder {
+    color: white;
+}
 
 /* Styling for container holding image */
 figure {
