@@ -318,7 +318,7 @@ img {
 
     .vertbar,
     .vertbar-r {
-        height: 111vh;
+        height: 109vh;
     }
 
 }
@@ -352,6 +352,15 @@ img {
 }
 
 @media screen and (max-width: 769px) {
+    .vertbar,
+    .vertbar-r {
+        height: 94vh;
+    }
+
+    .stage {
+        top: 82%;
+    }
+
     #stat-container {
         width: 66%;
     }
@@ -360,7 +369,9 @@ img {
         font-size: 0.9em;
     }
 
-    .side-btn {
+    .side-btn,
+    .side-btn:focus,
+    .button[disabled] {
         font-size: 0.9em;
     }
 
@@ -385,7 +396,7 @@ img {
 
 @media screen and (min-width: 1000px) {
     .stage {
-        top: 103%;
+        top: 85%;
     }
 }
 
@@ -398,7 +409,7 @@ img {
     }
 
     .stage {
-        top: 73%;
+        top: 76%;
     }
 }
 
