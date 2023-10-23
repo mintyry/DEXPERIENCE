@@ -346,6 +346,7 @@ img {
 
     figure {
         bottom: 170px;
+        width: 300px;
     }
 
     #norris-container {
