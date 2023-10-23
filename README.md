@@ -113,7 +113,9 @@ Third-party Assets:
 [Chuck Norris image](https://thumbnails.texastribune.org/KYEV1fajbzd6ke87wdE80JjmlyI=/450x300/https://static.texastribune.org/media/images/chuck-norris1.jpg)  
 [Pokémon border frame](https://github.com/luttje/css-pokemon-gameboy/blob/main/src/images/frame-hd.png)  
 
-styles.css : [Stack Overflow](https://stackoverflow.com/questions/14381556/css3-media-queries-to-target-specific-device), lines 373-375, 386-389
+styles.css : 
+[Stack Overflow - media queries for specific devices](https://stackoverflow.com/questions/14381556/css3-media-queries-to-target-specific-device), lines 406, 419
+[Stack Overflow - translate 3D for z-indexing & safari](https://stackoverflow.com/questions/40895387/z-index-not-working-on-safari-fine-on-firefox-and-chrome), lines 217, 252
 
 ## Deployed Link
 
