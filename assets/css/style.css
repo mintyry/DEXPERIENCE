@@ -18,7 +18,7 @@ body {
 .vertbar-r {
     display: flex;
     background-image: linear-gradient(lightsalmon, lightsalmon, rgb(165 121 104));
-    height: 116vh;
+    height: 114vh;
     width: 5vw;
     position: absolute;
     top: 0%;
@@ -396,7 +396,7 @@ img {
 
 @media screen and (min-width: 1000px) {
     .stage {
-        top: 85%;
+        top: 102%;
     }
 }
 
