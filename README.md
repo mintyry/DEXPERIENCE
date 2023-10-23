@@ -114,7 +114,7 @@ Third-party Assets:
 [Pokémon border frame](https://github.com/luttje/css-pokemon-gameboy/blob/main/src/images/frame-hd.png)  
 
 styles.css : 
-[Stack Overflow - media queries for specific devices](https://stackoverflow.com/questions/14381556/css3-media-queries-to-target-specific-device), lines 406, 419
+[Stack Overflow - media queries for specific devices](https://stackoverflow.com/questions/14381556/css3-media-queries-to-target-specific-device), lines 407, 420  
 [Stack Overflow - translate 3D for z-indexing & safari](https://stackoverflow.com/questions/40895387/z-index-not-working-on-safari-fine-on-firefox-and-chrome), lines 217, 252
 
 ## Deployed Link
