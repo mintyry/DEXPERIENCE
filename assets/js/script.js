@@ -189,10 +189,8 @@ function addMySquad() {
                 addSquadPkmn.shift();
             }
             addSquadPkmn.push(mySquadName.textContent.toLowerCase() + ' - ' + mySquadType.textContent);
-            localStorage.setItem('mySquad', JSON.stringify(addSquadPkmn));
-        } else {
-            return addSquadPkmn;
         }
+        localStorage.setItem('mySquad', JSON.stringify(addSquadPkmn));
     });
 }
 
